@@ -8,6 +8,7 @@ const LeftSidebar = styled.nav`
   margin: 8px;
   display: block;
   width: 164px;
+  height: 100vh;
   margin: 0;
   padding: 0;
   border: 0;
@@ -17,7 +18,7 @@ const LeftSidebar = styled.nav`
 
   .sidebar-container {
     > li {
-      padding: 10px 2px 10px 2px;
+      padding: 20px 2px 20px 2px;
       list-style-type: none;
       text-align: left;
       font-size: 20px;
@@ -32,7 +33,7 @@ const LeftSidebar = styled.nav`
   }
 `;
 
-const Nav = () => {
+const Sidebar = () => {
   const [currentTab, setCurrentTab] = useState(0);
 
   const selectMenuHandler = (index) => {
