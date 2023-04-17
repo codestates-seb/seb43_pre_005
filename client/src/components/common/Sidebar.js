@@ -1,6 +1,13 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { IoEarth } from "react-icons/io5";
+
+export const Menu = {
+  home: "/",
+  questions: "/questions",
+  tags: "/tags",
+  users: "/users",
+};
 
 const LeftSidebar = styled.nav`
   padding-inline-start: 1px;
@@ -34,37 +41,39 @@ const LeftSidebar = styled.nav`
 `;
 
 const Sidebar = () => {
-  const [currentTab, setCurrentTab] = useState(0);
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const currentTab = pathname;
 
-  const selectMenuHandler = (index) => {
-    setCurrentTab(index);
+  const selectMenuHandler = (path) => {
+    navigate(path);
   };
 
   return (
     <LeftSidebar>
       <ul className="sidebar-container">
         <li
-          className={currentTab === 0 ? "sidemenu-clicked" : ""}
-          onClick={() => selectMenuHandler(0)}
+          className={currentTab === Menu.home ? "sidemenu-clicked" : ""}
+          onClick={() => selectMenuHandler(Menu.home)}
         >
           <span> Home</span>
         </li>
         <li
-          className={currentTab === 1 ? "sidemenu-clicked" : ""}
-          onClick={() => selectMenuHandler(1)}
+          className={currentTab === Menu.questions ? "sidemenu-clicked" : ""}
+          onClick={() => selectMenuHandler(Menu.questions)}
         >
           <span>Question</span>
           <IoEarth />
         </li>
         <li
-          className={currentTab === 2 ? "sidemenu-clicked" : ""}
-          onClick={() => selectMenuHandler(2)}
+          className={currentTab === Menu.tags ? "sidemenu-clicked" : ""}
+          onClick={() => selectMenuHandler(Menu.tags)}
         >
           <span>Tags</span>
         </li>
         <li
-          className={currentTab === 3 ? "sidemenu-clicked" : ""}
-          onClick={() => selectMenuHandler(3)}
+          className={currentTab === Menu.users ? "sidemenu-clicked" : ""}
+          onClick={() => selectMenuHandler(Menu.users)}
         >
           <span>Users</span>
         </li>

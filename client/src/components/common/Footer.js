@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ReactComponent as FooterLogo } from "../assets/images/footerlogo.svg";
+import { ReactComponent as FooterLogo } from "../../assets/images/footerlogo.svg";
 import { Link } from "react-router-dom";
 
 const FooterContainer = styled.footer`
