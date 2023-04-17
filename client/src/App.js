@@ -8,6 +8,7 @@ function App() {
     <BrowserRouter>
       <Sidebar />
       <Routes>
+        <Route path="/tags" element={<Tags />}></Route>
         <Route path="/" element={<Footer />}></Route>
       </Routes>
     </BrowserRouter>
