@@ -1,11 +1,10 @@
-package com.potatos.stackoverflow.tags.controller;
+package com.potatos.stackoverflow.domain.tags.controller;
 
 
-import com.potatos.stackoverflow.tags.dto.TagPostDto;
-import com.potatos.stackoverflow.tags.entity.Tag;
-import com.potatos.stackoverflow.tags.mapper.TagMapper;
-import com.potatos.stackoverflow.tags.response.TagResponse;
-import com.potatos.stackoverflow.tags.service.TagService;
+import com.potatos.stackoverflow.domain.tags.dto.TagPostDto;
+import com.potatos.stackoverflow.domain.tags.entity.Tag;
+import com.potatos.stackoverflow.domain.tags.mapper.TagMapper;
+import com.potatos.stackoverflow.domain.tags.service.TagService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+
+//pageNation import
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.data.domain.Page;
 
 @Controller
 @RequestMapping("stackOverflow/tags")
@@ -40,14 +43,21 @@ public class TagController {
         return new ResponseEntity<>(mapper.tagResponseToDto(response), HttpStatus.CREATED);
     }
 
-    @GetMapping
+    /*@GetMapping
     public ResponseEntity getTags(){
 
         List<Tag> tags = tagService.findTags();
         return new ResponseEntity<List<Tag>>(tags, HttpStatus.OK);
+    }*/
+
+    @GetMapping
+    public ResponseEntity getTagsPage(@RequestParam(value = "page", defaultValue = "0")int page){
+        Page<Tag> paging = this.tagService.getTags(page);
+
+        List<Tag> response = paging.getContent();
+
+        return new ResponseEntity<List<Tag>>(response, HttpStatus.OK);
     }
-
-
 
 
 }

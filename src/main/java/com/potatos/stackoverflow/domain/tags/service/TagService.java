@@ -1,16 +1,16 @@
-package com.potatos.stackoverflow.tags.service;
+package com.potatos.stackoverflow.domain.tags.service;
 
-import com.potatos.stackoverflow.tags.dto.TagPostDto;
-import com.potatos.stackoverflow.tags.mapper.TagMapper;
-import com.potatos.stackoverflow.tags.repository.TagRepository;
-import com.potatos.stackoverflow.tags.response.TagResponse;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.potatos.stackoverflow.domain.tags.repository.TagRepository;
+import com.potatos.stackoverflow.domain.tags.mapper.TagMapper;
 import org.springframework.stereotype.Service;
-import com.potatos.stackoverflow.tags.entity.Tag;
+import com.potatos.stackoverflow.domain.tags.entity.Tag;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
+//pageNation import
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class TagService {
@@ -35,6 +35,10 @@ public class TagService {
         return tags;
     }
 
+    public Page<Tag> getTags(int page){
+        Pageable pageable = PageRequest.of(page, 10);
+        return this.tagRepository.findAll(pageable);
+    }
 }
 
 
