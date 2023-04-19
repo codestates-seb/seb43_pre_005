@@ -1,4 +1,4 @@
-package com.potatos.stackoverflow.tags.response;
+package com.potatos.stackoverflow.domain.tags.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

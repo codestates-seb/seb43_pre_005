@@ -1,8 +1,8 @@
-package com.potatos.stackoverflow.tags.mapper;
+package com.potatos.stackoverflow.domain.tags.mapper;
 
-import com.potatos.stackoverflow.tags.dto.TagPostDto;
-import com.potatos.stackoverflow.tags.entity.Tag;
-import com.potatos.stackoverflow.tags.response.TagResponse;
+import com.potatos.stackoverflow.domain.tags.dto.TagPostDto;
+import com.potatos.stackoverflow.domain.tags.entity.Tag;
+import com.potatos.stackoverflow.domain.tags.response.TagResponse;
 import org.springframework.stereotype.Component;
 
 @Component

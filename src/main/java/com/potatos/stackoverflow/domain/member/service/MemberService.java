@@ -1,9 +1,9 @@
-package com.potatos.stackoverflow.member.service;
+package com.potatos.stackoverflow.domain.member.service;
 
-import com.potatos.stackoverflow.member.dto.MemberPostDto;
-import com.potatos.stackoverflow.member.dto.MemberResponseDto;
-import com.potatos.stackoverflow.member.entity.Member;
-import com.potatos.stackoverflow.member.repository.MemberRepository;
+import com.potatos.stackoverflow.domain.member.repository.MemberRepository;
+import com.potatos.stackoverflow.domain.member.dto.MemberPostDto;
+import com.potatos.stackoverflow.domain.member.dto.MemberResponseDto;
+import com.potatos.stackoverflow.domain.member.entity.Member;
 import org.springframework.stereotype.Service;
 
 @Service
