@@ -15,11 +15,10 @@ import java.util.stream.Collectors;
 @Service
 public class TagService {
 
-
     TagRepository tagRepository;
     TagMapper mapper;
 
-    public TagService(TagRepository tagRepository, Tag tag){
+    public TagService(TagRepository tagRepository, TagMapper mapper){
         this.tagRepository = tagRepository;
         this.mapper = mapper;
 
@@ -29,6 +28,11 @@ public class TagService {
     //테스트 API로 실제로 사용하지 않습니다
     public Tag createTag(Tag tag){
         return tagRepository.save(tag);
+    }
+
+    public List<Tag> findTags(){
+        List<Tag> tags = tagRepository.findAll();
+        return tags;
     }
 
 }

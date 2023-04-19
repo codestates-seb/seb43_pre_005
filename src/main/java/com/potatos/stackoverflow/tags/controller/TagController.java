@@ -29,13 +29,13 @@ public class TagController {
     }
 
 
-    //테스트 API로 실제로 사용하지 않습니다(POST)
+    //테스트 API로 실제로 사용하지 않습니다(POST), DB에 테스트 데이터 적재용입니다.
     @PostMapping
     public ResponseEntity postTag(@RequestBody TagPostDto tagDto){
 
-        Tag tag = mapper.postTagDtoToEntity(tagDto); //entity가 된다
+        Tag tag = mapper.postTagDtoToEntity(tagDto);
 
-        Tag response = tagService.createTag(tag); //entity를 비즈니스 로직 돌림
+        Tag response = tagService.createTag(tag);
 
         return new ResponseEntity<>(mapper.tagResponseToDto(response), HttpStatus.CREATED);
     }
@@ -43,10 +43,9 @@ public class TagController {
     @GetMapping
     public ResponseEntity getTags(){
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        List<Tag> tags = tagService.findTags();
+        return new ResponseEntity<List<Tag>>(tags, HttpStatus.OK);
     }
-
-    //dddddddddddddd//
 
 
 
