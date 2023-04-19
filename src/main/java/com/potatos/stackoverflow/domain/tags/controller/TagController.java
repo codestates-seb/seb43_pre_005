@@ -43,13 +43,6 @@ public class TagController {
         return new ResponseEntity<>(mapper.tagResponseToDto(response), HttpStatus.CREATED);
     }
 
-    /*@GetMapping
-    public ResponseEntity getTags(){
-
-        List<Tag> tags = tagService.findTags();
-        return new ResponseEntity<List<Tag>>(tags, HttpStatus.OK);
-    }*/
-
     @GetMapping
     public ResponseEntity getTagsPage(@RequestParam(value = "page", defaultValue = "0")int page){
         Page<Tag> paging = this.tagService.getTags(page);

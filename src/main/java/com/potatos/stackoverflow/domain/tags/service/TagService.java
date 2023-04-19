@@ -30,11 +30,6 @@ public class TagService {
         return tagRepository.save(tag);
     }
 
-    public List<Tag> findTags(){
-        List<Tag> tags = tagRepository.findAll();
-        return tags;
-    }
-
     public Page<Tag> getTags(int page){
         Pageable pageable = PageRequest.of(page, 10);
         return this.tagRepository.findAll(pageable);
