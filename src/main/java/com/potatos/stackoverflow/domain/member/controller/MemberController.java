@@ -1,10 +1,9 @@
-package com.potatos.stackoverflow.member.controller;
+package com.potatos.stackoverflow.domain.member.controller;
 
-import com.potatos.stackoverflow.member.dto.MemberPostDto;
-import com.potatos.stackoverflow.member.dto.MemberResponseDto;
-import com.potatos.stackoverflow.member.service.MemberService;
+import com.potatos.stackoverflow.domain.member.service.MemberService;
+import com.potatos.stackoverflow.domain.member.dto.MemberPostDto;
+import com.potatos.stackoverflow.domain.member.dto.MemberResponseDto;
 import com.potatos.stackoverflow.util.UriCreator;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

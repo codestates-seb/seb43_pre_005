@@ -1,4 +1,4 @@
-package com.potatos.stackoverflow.member.dto;
+package com.potatos.stackoverflow.domain.member.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,8 +6,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
-public class MemberResponseDto {
+public class MemberPostDto {
+
     String displayName;
     String email;
     String password;
