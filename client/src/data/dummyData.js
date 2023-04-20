@@ -1,95 +1,21 @@
 const dummyData = [
   {
-    id: 1,
-    name: "javascript",
-
-    questions: 2489901,
-    asked: 427,
-    content: "im content",
-  },
-  {
-    id: 2,
-    name: "python",
-    questions: 22,
-    asked: 8000,
-    content: "im content",
-  },
-  {
-    id: 3,
-    name: "java",
-    questions: 145566,
-    asked: 1235,
-    content: "im content",
-  },
-  {
-    id: 4,
-    name: "c+",
-    questions: 11324245,
-    asked: 235346,
-    content: "im content",
-  },
-  {
-    id: 5,
-    name: "php",
-    questions: 123123123468,
-    asked: 11232466666,
-    content: "im content",
-  },
-  {
-    id: 6,
-    name: "android",
-    questions: 78888875,
-    asked: 1553,
-    content: "im content",
-  },
-  {
-    id: 7,
-    name: "as",
-    questions: 78888875,
-    asked: 1553,
-    content: "im content",
-  },
-  {
-    id: 8,
-    name: "ad",
-    questions: 78888875,
-    asked: 1553,
-    content: "im content",
-  },
-  {
-    id: 9,
-    name: "df",
-    questions: 78888875,
-    asked: 1553,
-    content: "im content",
-  },
-  {
-    id: 10,
-    name: "fg",
-    questions: 78888875,
-    asked: 13,
-    content: "im content",
-  },
-  {
     id: 11,
-    name: "hjjj",
-    questions: 3557,
-    asked: 755,
-    content: "im content",
+    name: "jav2a",
+    description:
+      "Java is a high-level object-oriented programming language. Use this tag when you're having problems using or understanding the language itself. This tag is frequently used alongside other tags for libraries and/or frameworks used by Java developers.",
   },
   {
     id: 12,
-    name: "awwweeerr",
-    questions: 1311,
-    asked: 55,
-    content: "im content",
+    name: "jav2a",
+    description:
+      "Java is a high-level object-oriented programming language. Use this tag when you're having problems using or understanding the language itself. This tag is frequently used alongside other tags for libraries and/or frameworks used by Java developers.",
   },
   {
     id: 13,
-    name: "qgggg",
-    questions: 94,
-    asked: 3,
-    content: "im content",
+    name: "jav2a",
+    description:
+      "Java is a high-level object-oriented programming language. Use this tag when you're having problems using or understanding the language itself. This tag is frequently used alongside other tags for libraries and/or frameworks used by Java developers.",
   },
 ];
 

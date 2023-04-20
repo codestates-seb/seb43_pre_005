@@ -1,22 +1,54 @@
 import styled from "styled-components";
 
 const TagContainer = styled.div`
-  border: solid 1px red;
+  border: solid 1px gray;
+  border-radius: 5px;
   margin: 1rem;
-  width: 20vw;
+  width: 21vw;
   height: 20vh;
+
+  .tag-name {
+    border-radius: 10px;
+    padding-right: 3px;
+    padding-left: 10px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    background-color: #e1ecf4;
+    width: 50px;
+    display: flex;
+    margin-top: 0.9rem;
+    margin-left: 1rem;
+    height: 100%;
+    font-size: 1.1rem;
+    font-weight: normal;
+    font-color: #5050ff;
+    text-align: center;
+
+    &:hover {
+      background-color: #ddd;
+      cursor: pointer;
+    }
+  }
+  .tag-content {
+    display: flex;
+    align-items: center;
+    margin-left: 0.4rem;
+    margin-top: 1rem;
+  }
 `;
 
 const Tag = ({ tag }) => {
   //   const parsedDate = new Date(tag.createdAt).toLocaleDateString("ko-kr");
-
+  const description =
+    tag.description.length > 100
+      ? tag.description.slice(0, 150) + "..."
+      : tag.description;
   return (
     <TagContainer>
-      {/* <div className="tag-id">{tag.id}</div> */}
-      <div className="tag-name">{tag.name}</div>
-      <div className="tag-content">{tag.content}</div>
-      <div className="tag-questions">{tag.questions}</div>
-      <div className="tag-asked">{tag.asked}</div>
+      <div className="tag-id">
+        <div className="tag-name">{tag.name}</div>
+        <div className="tag-content">{description}</div>
+      </div>
     </TagContainer>
   );
 };
