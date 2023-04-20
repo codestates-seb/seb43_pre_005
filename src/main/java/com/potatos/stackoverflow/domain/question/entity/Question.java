@@ -1,26 +1,22 @@
 package com.potatos.stackoverflow.domain.question.entity;
 
 
-import lombok.AllArgsConstructor;
+import com.potatos.stackoverflow.domain.member.entity.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.lang.reflect.Member;
 import java.time.LocalDateTime;
-
-
-//@Entity
+@NoArgsConstructor
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity
 public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable = false)
     private String title;
@@ -34,5 +30,8 @@ public class Question {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    public void setMember(Member member){
+        this.member = member;
+    }
 
 }
