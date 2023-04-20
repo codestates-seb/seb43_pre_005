@@ -62,16 +62,20 @@ const Tags = () => {
   };
 
   const handleChangeInput = (e) => {
-    setInputValue(e.target.value);
-    const tag = {
-      id: count,
-      name: "di",
-      description: "something",
-    };
-    //input으로 입력할때마다 tag가 생김 (이럼안되지!)
-    setTags([...tags, tag]);
-    setCount(count + 1);
+    const inputValue = e.target.value;
+    setInputValue(inputValue);
+
+    // Get the filtered tags array
+    const filteredTags = dummyData.filter((tag) => {
+      const words = inputValue.toLowerCase().split(" ");
+      return words.every((word) => {
+        return tag.name.toLowerCase().includes(word);
+      });
+    });
+
+    setTags(filteredTags);
   };
+
   console.log(tags);
 
   return (
