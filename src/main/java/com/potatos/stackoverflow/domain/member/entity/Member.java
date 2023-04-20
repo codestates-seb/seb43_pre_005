@@ -1,8 +1,7 @@
-package com.potatos.stackoverflow.member.entity;
+package com.potatos.stackoverflow.domain.member.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
