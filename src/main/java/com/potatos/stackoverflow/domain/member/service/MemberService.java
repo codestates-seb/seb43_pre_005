@@ -1,10 +1,19 @@
 package com.potatos.stackoverflow.domain.member.service;
 
+import com.potatos.stackoverflow.domain.member.dto.MembersPageDto;
 import com.potatos.stackoverflow.domain.member.repository.MemberRepository;
 import com.potatos.stackoverflow.domain.member.dto.MemberPostDto;
 import com.potatos.stackoverflow.domain.member.dto.MemberResponseDto;
 import com.potatos.stackoverflow.domain.member.entity.Member;
 import org.springframework.stereotype.Service;
+
+//pageNation import
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MemberService {
@@ -32,5 +41,17 @@ public class MemberService {
                 member.getMemberStatus().getStrStatus());
 
         return memberResponseDto;
+    }
+
+
+    public List<MembersPageDto> getMembersPage(int page) {
+        Pageable pageable = PageRequest.of(page, 10);
+
+        Page<Member> response = this.memberRepository.findAll(pageable);
+
+        return response.stream()
+                .map(member -> new MembersPageDto(member.getId(), member.getDisplayName()))
+                .collect(Collectors.toList());
+
     }
 }
