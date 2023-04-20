@@ -4,6 +4,7 @@ import { useCallback } from "react";
 import styled from "styled-components";
 import Tag from "../components/common/Tag";
 import dummyData from "../data/dummyData";
+import Pagination from "../components/Pagination";
 
 const HeadContainer = styled.div`
   .header-content {
@@ -21,20 +22,13 @@ const HeadContainer = styled.div`
     flex-direction: column;
   }
 
-  .box-content {
-    margin: 0.4rem;
-    border: 1px solid black;
-    /* width: 100vw;
-    height: 100vh; */
-  }
-
   .tag-container {
-    border: 1px solid black;
-    width: 80vw;
+    width: 30vw;
     height: 80vh;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1px;
+    transform: scale(0.9);
   }
 
   > input {
@@ -46,19 +40,42 @@ const HeadContainer = styled.div`
 const Tags = () => {
   const [tags, setTags] = useState(dummyData);
   const [inputValue, setInputValue] = useState("");
-  const [count, setCount] = useState(11);
-  const handleChangeInput = (e) => {
-    setInputValue(e.target.value);
-    const tag = {
-      id: count,
-      name: "di",
-      questions: 1223,
-      asked: 1111,
-    };
-    //input으로 입력할때마다 tag가 생김 (이럼안되지!)
-    setTags([...tags, tag]);
-    setCount(count + 1);
+  const [count, setCount] = useState(14);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [tagsPerPage, setTagsPerPage] = useState(12);
+  //tagsPerPage는 tagbox기준! 페이지 버튼아님
+
+  // Calculate the index of the last tag on the current page
+  //마지막 페이지 계산 //9
+  const indexOfLastTag = currentPage * tagsPerPage;
+
+  // Calculate the index of the first tag on the current page
+  //첫 번째 페이지 : 마지막 페이지에서 tagsPerPage뺌 //0
+  const indexOfFirstTag = indexOfLastTag - tagsPerPage;
+
+  // Get the tags for the current page
+  const currentTags = tags.slice(indexOfFirstTag, indexOfLastTag);
+
+  // Change page
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
+
+  const handleChangeInput = (e) => {
+    const inputValue = e.target.value;
+    setInputValue(inputValue);
+
+    // Get the filtered tags array
+    const filteredTags = dummyData.filter((tag) => {
+      const words = inputValue.toLowerCase().split(" ");
+      return words.every((word) => {
+        return tag.name.toLowerCase().includes(word);
+      });
+    });
+
+    setTags(filteredTags);
+  };
+
   console.log(tags);
 
   return (
@@ -78,9 +95,19 @@ const Tags = () => {
           autoFocus
         />
         <div className="tag-container">
-          {tags.map((el) => (
+          {currentTags.map((el) => (
             <Tag key={el.id} tag={el} />
           ))}
+        </div>
+        <div>
+          {tags.length > tagsPerPage && (
+            <Pagination
+              tagsPerPage={tagsPerPage}
+              totalTags={tags.length}
+              paginate={paginate}
+              currentPage={currentPage}
+            />
+          )}
         </div>
       </HeadContainer>
     </Layout>
