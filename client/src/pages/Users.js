@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Layout from "../components/common/Layout";
 import SearchBox from "./searchbox.jsx";
 import { dummydata } from "./userdummydata.js";
-import axios from "axios";
+// import axios from "axios";
 
 const UserDesign = styled.div`
   padding: 24px;
