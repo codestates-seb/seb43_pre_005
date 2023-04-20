@@ -11,7 +11,7 @@ import java.lang.reflect.Member;
 import java.time.LocalDateTime;
 
 
-@Entity
+//@Entity
 @Getter
 @Setter
 @AllArgsConstructor
