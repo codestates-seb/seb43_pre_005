@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Home from "./Pages/Home";
-import Tags from "./Pages/Tags";
-import Users from "./Pages/Users";
+import Home from "./pages/Home";
+import Tags from "./pages/Tags";
+import Users from "./pages/Users";
 
 function App() {
   return (
