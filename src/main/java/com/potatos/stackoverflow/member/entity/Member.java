@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Entity(name = "members")
 @Getter
 @Setter
 public class Member {
