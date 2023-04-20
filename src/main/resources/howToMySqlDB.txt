@@ -25,4 +25,9 @@ docker exec -it <mysqlservername> bash
 
 
 
-5. 스프링 실행하기
+5. edit configurations 에서 환경변수 설정하기
+
+environment variables : SPRING_DATASOURCE_PASSWORD=1234;SPRING_DATASOURCE_USERNAME=root
+
+
+6. 스프링 실행하기
