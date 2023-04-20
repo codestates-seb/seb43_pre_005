@@ -1,0 +1,28 @@
+docker작업 (스프링 실행안한 상태에서 터미널에서 진행)
+
+1. docker에 mysql 이미지 받기
+
+docker pull mysql:8.0.17
+
+
+
+2. mysql image->container 실행하기
+
+docker run -d -p 3309:3306 -e MYSQL_ROOT_PASSWORD={mysql root 계정 비밀번호} --name {mysql 이미지명} mysql:8.0.17 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+
+
+3. mysql db 만들기
+
+docker exec -it <mysqlservername> bash
+> mysql -u root -p
+> 비밀번호 + 엔터
+> create database stackoverflowDB;
+
+
+
+4. application.yml 확인하기
+
+
+
+5. 스프링 실행하기
