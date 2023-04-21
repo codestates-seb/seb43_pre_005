@@ -16,7 +16,7 @@ const HeadContainer = styled.div`
 
     button {
       height: 5vh;
-      background-color: #1e82ff;
+      background-color: #0995ff;
       color: white;
       border: none;
       padding: 0.5rem 1rem;
@@ -51,14 +51,22 @@ const HeadContainer = styled.div`
       border-radius: 5px;
       cursor: pointer;
     }
-
     button:first-child {
+      &:hover {
+        opacity: 0.8;
+        background-color: #7878ff;
+      }
+    }
+
+    button:nth-child(2) {
       background-color: #7878ff;
     }
 
-    button:not(:first-child):hover {
-      opacity: 0.8;
-      background-color: #a696cd;
+    button:nth-child(3) {
+      &:hover {
+        opacity: 0.8;
+        background-color: #7878ff;
+      }
     }
   }
 
@@ -69,7 +77,7 @@ const HeadContainer = styled.div`
   }
 `;
 
-const Home = () => {
+const HomeWeek = () => {
   const [questions, setQuestions] = useState(qsdummydata);
 
   return (
@@ -80,14 +88,14 @@ const Home = () => {
           <button>Ask Question</button>
         </div>
         <div className="button-box">
-          <button>Hot</button>
           <button
             onClick={() => {
-              window.location.href = "/tab=week";
+              window.location.href = "/";
             }}
           >
-            Week
+            Hot
           </button>
+          <button>Week</button>
           <button
             onClick={() => {
               window.location.href = "/tab=month";
@@ -107,4 +115,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeWeek;

@@ -1,8 +1,8 @@
 import Layout from "../components/common/Layout";
 import styled from "styled-components";
+import Question from "../components/Question";
 import qsdummydata from "../data/qsdummyData";
 import { useState } from "react";
-import Question from "../components/Question";
 
 const HeadContainer = styled.div`
   .header-content {
@@ -16,7 +16,7 @@ const HeadContainer = styled.div`
 
     button {
       height: 5vh;
-      background-color: #1e82ff;
+      background-color: #0995ff;
       color: white;
       border: none;
       padding: 0.5rem 1rem;
@@ -34,32 +34,9 @@ const HeadContainer = styled.div`
 
   .questions-number {
     font-size: 1.5rem;
-    margin-left: 3rem;
-    margin-top: 1rem;
-  }
-
-  .button-box {
     display: flex;
     justify-content: right;
-    margin-right: 5rem;
-    button {
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      font-size: 1.2rem;
-      margin-left: 0.2rem;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    button:first-child {
-      background-color: #7878ff;
-    }
-
-    button:not(:first-child):hover {
-      opacity: 0.8;
-      background-color: #a696cd;
-    }
+    margin-right: 6rem;
   }
 
   .questions-box {
@@ -69,34 +46,17 @@ const HeadContainer = styled.div`
   }
 `;
 
-const Home = () => {
+const Questions = () => {
   const [questions, setQuestions] = useState(qsdummydata);
 
   return (
     <Layout>
       <HeadContainer>
         <div className="header-content">
-          Top Questions
+          All Questions
           <button>Ask Question</button>
         </div>
-        <div className="button-box">
-          <button>Hot</button>
-          <button
-            onClick={() => {
-              window.location.href = "/tab=week";
-            }}
-          >
-            Week
-          </button>
-          <button
-            onClick={() => {
-              window.location.href = "/tab=month";
-            }}
-          >
-            Month
-          </button>
-        </div>
-
+        <div className="questions-number">{qsdummydata.length} questions</div>
         <div className="questions-box">
           {questions.map((el) => (
             <Question key={el.id} question={el} />
@@ -107,4 +67,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Questions;
