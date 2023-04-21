@@ -31,7 +31,7 @@ public class TagService {
     }
 
     public Page<Tag> getTags(int page){
-        Pageable pageable = PageRequest.of(page, 10);
+        Pageable pageable = PageRequest.of(page, 12);
         return this.tagRepository.findAll(pageable);
     }
 }
