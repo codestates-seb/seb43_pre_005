@@ -16,7 +16,7 @@ const HeadContainer = styled.div`
 
     button {
       height: 5vh;
-      background-color: #1e82ff;
+      background-color: #0995ff;
       color: white;
       border: none;
       padding: 0.5rem 1rem;
@@ -42,6 +42,7 @@ const HeadContainer = styled.div`
     display: flex;
     justify-content: right;
     margin-right: 5rem;
+
     button {
       color: white;
       border: none;
@@ -51,12 +52,11 @@ const HeadContainer = styled.div`
       border-radius: 5px;
       cursor: pointer;
     }
-
-    button:first-child {
+    button:nth-child(3) {
       background-color: #7878ff;
     }
 
-    button:not(:first-child):hover {
+    button:not(:nth-child(3)):hover {
       opacity: 0.8;
       background-color: #a696cd;
     }
@@ -69,7 +69,7 @@ const HeadContainer = styled.div`
   }
 `;
 
-const Home = () => {
+const HomeMonth = () => {
   const [questions, setQuestions] = useState(qsdummydata);
 
   return (
@@ -80,7 +80,13 @@ const Home = () => {
           <button>Ask Question</button>
         </div>
         <div className="button-box">
-          <button>Hot</button>
+          <button
+            onClick={() => {
+              window.location.href = "/";
+            }}
+          >
+            Hot
+          </button>
           <button
             onClick={() => {
               window.location.href = "/tab=week";
@@ -88,13 +94,7 @@ const Home = () => {
           >
             Week
           </button>
-          <button
-            onClick={() => {
-              window.location.href = "/tab=month";
-            }}
-          >
-            Month
-          </button>
+          <button>Month</button>
         </div>
 
         <div className="questions-box">
@@ -107,4 +107,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeMonth;
