@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity
+@Entity(name="questions")
 public class Question {
 
     @Id
