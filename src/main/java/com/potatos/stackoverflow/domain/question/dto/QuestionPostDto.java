@@ -9,6 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 public class QuestionPostDto {
+
     @NotBlank(message = "제목을 입력해주세요.")
     private String title;
 
@@ -17,5 +18,6 @@ public class QuestionPostDto {
 
     private Long memberId;
 
+    private Long questionId;
    // private List<String> tags;
 }
