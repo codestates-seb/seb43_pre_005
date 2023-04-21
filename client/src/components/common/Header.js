@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import logo from "../../assets/images/logo.png";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -69,6 +70,12 @@ const ActionButton = styled.button`
 `;
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const selectMenuHandler = (path) => {
+    navigate(path);
+  };
+
   return (
     <HeaderContainer>
       <LogoImage src={logo} alt="Stack Overflow Logo" />
@@ -77,8 +84,12 @@ const Header = () => {
         <SearchButton type="submit">Search</SearchButton>
       </SearchContainer>
       <ActionContainer>
-        <ActionButton>Log in</ActionButton>
-        <ActionButton>Sign in</ActionButton>
+        <ActionButton onClick={() => selectMenuHandler("/users/login")}>
+          Log in
+        </ActionButton>
+        <ActionButton onClick={() => selectMenuHandler("/users/signup")}>
+          Sign up
+        </ActionButton>
       </ActionContainer>
     </HeaderContainer>
   );
