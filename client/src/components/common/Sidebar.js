@@ -7,6 +7,8 @@ export const Menu = {
   questions: "/questions",
   tags: "/tags",
   users: "/users",
+  month: "/tab=month",
+  week: "/tab=week",
 };
 
 const LeftSidebar = styled.nav`
@@ -53,7 +55,13 @@ const Sidebar = () => {
     <LeftSidebar>
       <ul className="sidebar-container">
         <li
-          className={currentTab === Menu.home ? "sidemenu-clicked" : ""}
+          className={
+            currentTab === Menu.home ||
+            currentTab === Menu.month ||
+            currentTab === Menu.week
+              ? "sidemenu-clicked"
+              : ""
+          }
           onClick={() => selectMenuHandler(Menu.home)}
         >
           <span> Home</span>
