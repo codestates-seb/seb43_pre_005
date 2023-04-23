@@ -1,18 +1,11 @@
 package com.potatos.stackoverflow.domain.search.controller;
 
 import com.potatos.stackoverflow.domain.question.entity.Question;
-import com.potatos.stackoverflow.domain.search.response.SearchResponse;
 import com.potatos.stackoverflow.domain.search.service.SearchService;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
