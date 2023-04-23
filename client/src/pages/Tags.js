@@ -10,11 +10,14 @@ const HeadContainer = styled.div`
   .header-content {
     font-size: 34px;
     margin: 0.5rem;
+    margin-left: 2rem;
+    margin-bottom: 1rem;
   }
 
   .main-content {
     font-size: 14px;
     margin: 0.4rem;
+    margin-left: 2rem;
   }
 
   .content-all {
@@ -33,14 +36,15 @@ const HeadContainer = styled.div`
 
   > input {
     margin-top: 1rem;
-    margin-left: 0.4rem;
+    margin-left: 2rem;
     height: 1.5rem;
+    height: 2rem;
   }
 `;
 const Tags = () => {
   const [tags, setTags] = useState(dummyData);
   const [inputValue, setInputValue] = useState("");
-  const [count, setCount] = useState(14);
+  const [count, setCount] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
   const [tagsPerPage, setTagsPerPage] = useState(12);
   //tagsPerPage는 tagbox기준! 페이지 버튼아님
@@ -48,7 +52,7 @@ const Tags = () => {
   // Calculate the index of the last tag on the current page
   //마지막 페이지 계산 //9
   const indexOfLastTag = currentPage * tagsPerPage;
-
+  // 12 0
   // Calculate the index of the first tag on the current page
   //첫 번째 페이지 : 마지막 페이지에서 tagsPerPage뺌 //0
   const indexOfFirstTag = indexOfLastTag - tagsPerPage;
@@ -61,10 +65,21 @@ const Tags = () => {
     setCurrentPage(pageNumber);
   };
 
+  // const handleChangeInput = (e) => {
+  //   setInputValue(e.target.value);
+  //   const tag = {
+  //     id: count,
+  //     name: "di",
+  //     questions: 1223,
+  //     asked: 1111,
+  //   };
+  //   setTags([...tags, tag]);
+  //   setCount(count + 1);
+  // };
+
   const handleChangeInput = (e) => {
     const inputValue = e.target.value;
     setInputValue(inputValue);
-
     // Get the filtered tags array
     const filteredTags = dummyData.filter((tag) => {
       const words = inputValue.toLowerCase().split(" ");

@@ -38,7 +38,7 @@ const TagContainer = styled.div`
 `;
 
 const Tag = ({ tag }) => {
-  //   const parsedDate = new Date(tag.createdAt).toLocaleDateString("ko-kr");
+  // const parsedDate = new Date(tag.createdAt).toLocaleDateString("ko-kr");
   const description =
     tag.description.length > 100
       ? tag.description.slice(0, 150) + "..."
