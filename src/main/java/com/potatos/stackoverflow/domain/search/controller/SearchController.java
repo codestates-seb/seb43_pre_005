@@ -23,10 +23,10 @@ public class SearchController {
     }
 
     @GetMapping
-    public ResponseEntity getSearchPage(@RequestParam(value = "word") String word, int page){
+    public ResponseEntity getSearchPage(@RequestParam(value = "searchWord") String searchWord, int page){
 
 
-        Page<Question> searchResult = this.searchService.searchList(page, word);
+        Page<Question> searchResult = this.searchService.searchList(page, searchWord);
         List<Question> response = searchResult.getContent();
 
 

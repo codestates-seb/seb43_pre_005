@@ -22,10 +22,10 @@ public class SearchService {
     }
 
 
-    public Page<Question> searchList(int page, String word){
+    public Page<Question> searchList(int page, String searchWord){
 
         Pageable pageable = PageRequest.of(page, 10);
-        Page<Question> searchList = questionRepository.findByTitleContaining(pageable, word);
+        Page<Question> searchList = questionRepository.findByTitleContaining(pageable, searchWord);
 
         return searchList;
     }

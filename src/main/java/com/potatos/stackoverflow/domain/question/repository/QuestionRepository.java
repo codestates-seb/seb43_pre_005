@@ -11,5 +11,5 @@ import java.util.List;
 public interface QuestionRepository  extends JpaRepository<Question, Long> {
 
     //search
-    Page<Question> findByTitleContaining(Pageable pageable, String word);
+    Page<Question> findByTitleContaining(Pageable pageable, String searchWord);
 }
