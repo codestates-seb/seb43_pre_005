@@ -7,7 +7,7 @@ const qsdummyData = [
       "Java is a high-level object-oriented programming language. Use this tag when you're having problems using or understanding the language itself. This tag is frequently used alongside other tags for libraries and/or frameworks used by Java developers.",
     name: "Mango",
     createdAt: "2023.4.21",
-    tag: "fruit",
+    tag: ["fruit", "watermelon", "sugar", "salt", "grape"],
   },
   {
     id: 12,
@@ -16,7 +16,6 @@ const qsdummyData = [
       "Java is a high-level object-oriented programming language. Use this tag when you're having problems using or understanding the language itself. This tag is frequently used alongside other tags for libraries and/or frameworks used by Java developers.",
     name: "Mango",
     createdAt: "2023.4.21",
-    tag: "fruit",
   },
   {
     id: 13,
@@ -26,7 +25,7 @@ const qsdummyData = [
       "Java is a high-level object-oriented programming language. Use this tag when you're having problems using or understanding the language itself. This tag is frequently used alongside other tags for libraries and/or frameworks used by Java developers.",
     name: "Mango",
     createdAt: "2023.4.21",
-    tag: "fruit",
+    tag: ["fruit", "watermelon", "mango"],
   },
   {
     id: 14,
@@ -35,7 +34,7 @@ const qsdummyData = [
       "Java is a high-level object-oriented programming language. Use this tag when you're having problems using or understanding the language itself. This tag is frequently used alongside other tags for libraries and/or frameworks used by Java developers.",
     name: "Mango",
     createdAt: "2023.4.21",
-    tag: "fruit",
+    tag: ["fruit", "watermelon"],
   },
   {
     id: 15,
@@ -44,7 +43,7 @@ const qsdummyData = [
       "Java is a high-level object-oriented programming language. Use this tag when you're having problems using or understanding the language itself. This tag is frequently used alongside other tags for libraries and/or frameworks used by Java developers.",
     name: "Mango",
     createdAt: "2023.4.21",
-    tag: "fruit",
+    tag: ["fruit", "watermelon"],
   },
   {
     id: 16,
@@ -53,7 +52,7 @@ const qsdummyData = [
       "Java is a high-level object-oriented programming language. Use this tag when you're having problems using or understanding the language itself. This tag is frequently used alongside other tags for libraries and/or frameworks used by Java developers.",
     name: "Mango",
     createdAt: "2023.4.21",
-    tag: "fruit",
+    tag: ["fruit", "watermelon"],
   },
   {
     id: 17,
@@ -62,7 +61,7 @@ const qsdummyData = [
       "Java is a high-level object-oriented programming language. Use this tag when you're having problems using or understanding the language itself. This tag is frequently used alongside other tags for libraries and/or frameworks used by Java developers.",
     name: "Mango",
     createdAt: "2023.4.21",
-    tag: "fruit",
+    tag: ["fruit", "watermelon"],
   },
   {
     id: 18,
@@ -71,7 +70,7 @@ const qsdummyData = [
       "Java is a high-level object-oriented programming language. Use this tag when you're having problems using or understanding the language itself. This tag is frequently used alongside other tags for libraries and/or frameworks used by Java developers.",
     name: "Mango",
     createdAt: "2023.4.21",
-    tag: "fruit",
+    tag: ["fruit", "watermelon"],
   },
   {
     id: 19,
@@ -81,7 +80,7 @@ const qsdummyData = [
       "Java is a high-level object-oriented programming language. Use this tag when you're having problems using or understanding the language itself. This tag is frequently used alongside other tags for libraries and/or frameworks used by Java developers.",
     name: "Mango",
     createdAt: "2023.4.21",
-    tag: "fruit",
+    tag: ["fruit", "watermelon"],
   },
   {
     id: 20,
@@ -90,7 +89,7 @@ const qsdummyData = [
       "Java is a high-level object-oriented programming language. Use this tag when you're having problems using or understanding the language itself. This tag is frequently used alongside other tags for libraries and/or frameworks used by Java developers.",
     name: "Mango",
     createdAt: "2023.4.21",
-    tag: "fruit",
+    tag: ["fruit", "watermelon"],
   },
 ];
 
