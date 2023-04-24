@@ -64,7 +64,6 @@ const QuestionsReadDesign = styled.div`
     height: 260px;
     display: grid;
     grid-template-columns: 5% 90%;
-    grid-template-rows: 1fr 1fr 1fr;
     grid-gap: 0px;
     margin-top: 20px;
     border: 1.3px solid #cccccc;
@@ -74,15 +73,20 @@ const QuestionsReadDesign = styled.div`
       grid-row: 3 / 4;
     }
     .questionperson {
-      grid-column: 5 / 8;
+      grid-column: 3 / 4;
       grid-row: 3 / 4;
     }
+
     .userimg {
       grid-column: 4 / 5;
       grid-row: 3 / 4;
       width: 20px;
       height: 20px;
       border: none;
+    }
+    .justgrid {
+      grid-column: 5 / 6;
+      grid-row: 3 / 4;
     }
   }
   .questionanswer {
@@ -99,8 +103,20 @@ const QuestionsReadDesign = styled.div`
     width: 80vw;
     height: 260px;
     display: flex;
+    flex-direction: wrap;
     margin-top: 20px;
     border: 1.3px solid #cccccc;
+  }
+  .anscre {
+    width: 80%;
+    height: 50%;
+    border: 1.3px solid blue;
+    margin-left: 5px;
+    margin-top: 5px;
+  }
+  .questiondelete {
+    margin-top: 200px;
+    margin-right: 40px;
   }
 `;
 
@@ -138,17 +154,17 @@ function QuestionsRead({ dummydata }) {
         <div className="questioncontent">
           <QuestionButtonDesign />
           <Content>{question.content}</Content>
-          <div className="questiontags">{question.tags}</div>
+          <div className="questiontags">tags</div>
           <img className="userimg" src={userimg} alt="userimg"></img>
           <div className="questionperson">{question.person}</div>
+          <div className="justgrid">ss</div>
         </div>
         <div className="questionanswer">
           <QuestionButtonDesign />
-          <div>alsjkdaodisjaosdi</div>
+          <div>{question.answer}</div>
         </div>
         <div className="questionanswercreated">
-          <div>asd</div>
-
+          <input className="anscre" type="text"></input>
           <button className="questiondelete">답변등록</button>
         </div>
       </QuestionsReadDesign>

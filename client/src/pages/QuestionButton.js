@@ -6,8 +6,11 @@ const QuestionButtonDesgin = styled.div`
   flex-direction: wrap;
   width: 40px;
   height: 40px;
-  margin-top: 100px;
-  margin-left: 20px;
+  margin-top: 80px;
+  margin-left: 10px;
+  font-size: 40px;
+
+  color: #888888;
 
   box-sizing: border-box;
   .questionbutton {
@@ -15,8 +18,13 @@ const QuestionButtonDesgin = styled.div`
     margin: 0;
     line-height: 0;
   }
+  div {
+    cursor: pointer;
+  }
   p {
-    margin-left: 1px;
+    margin-left: 3px;
+    color: black;
+    cursor: default;
   }
 `;
 function QuestionButton() {
@@ -33,9 +41,13 @@ function QuestionButton() {
   return (
     <QuestionButtonDesgin>
       <div className="questionbutton">
-        <div onClick={handleIncreaseClick}>▲</div>
+        <div className="upbutton" onClick={handleIncreaseClick}>
+          ▲
+        </div>
         <p>{number}</p>
-        <div onClick={handleDecreaseClick}>▼</div>
+        <div className="downbutton" onClick={handleDecreaseClick}>
+          ▼
+        </div>
       </div>
     </QuestionButtonDesgin>
   );

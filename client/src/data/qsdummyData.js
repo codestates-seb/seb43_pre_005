@@ -9,7 +9,7 @@ const qsdummyData = [
     look: 20,
     tags: ["qq", "ee"],
     person: "aria",
-    answered: " adasdadad",
+    answer: " adasdadad",
   },
   {
     id: 12,
