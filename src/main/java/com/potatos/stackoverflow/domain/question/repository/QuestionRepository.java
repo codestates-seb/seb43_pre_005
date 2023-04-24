@@ -9,4 +9,6 @@ public interface QuestionRepository  extends JpaRepository<Question, Long> {
 
     Page<Question> findAll(Pageable pageable);
 
+    Page<Question> findByTitleContaining(Pageable pageable, String searchWord);
+
 }

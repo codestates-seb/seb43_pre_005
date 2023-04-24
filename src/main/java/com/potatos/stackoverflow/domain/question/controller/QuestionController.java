@@ -19,13 +19,14 @@ import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Positive;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/questions")
@@ -50,15 +51,86 @@ public class QuestionController{
     public ResponseEntity<SingleResponseDto<QuestionResponseDto>> postQuestion(@RequestBody QuestionPostDto questionPostDto) throws ChangeSetPersister.NotFoundException {
 
 
-
-
         Question question = new Question();
             question.setTitle(questionPostDto.getTitle());
             question.setContent(questionPostDto.getContent());
 
-        Member member = memberService.findMember(questionPostDto.getMemberId());
-            question.setMember(member);
 
+       Member member = memberService.findMember(questionPostDto.getMemberId());
+            question.setMember(member);
+            question.setMemberName(member.getDisplayName());
+
+
+        Question savedQuestion = setQuestionTag(questionPostDto, question);
+        savedQuestion.setTags(savedQuestion.getQuestionTags().stream()
+                .map(questionTag -> questionTag.getTag().getName())
+                .collect(Collectors.toList()));
+
+        questionService.createQuestion(savedQuestion);
+
+        QuestionResponseDto responseDto = new QuestionResponseDto(savedQuestion);
+
+        return new ResponseEntity<>(new SingleResponseDto<>(responseDto), HttpStatus.CREATED);
+    }
+
+    /*
+     * 게시물 하나를 조회하는 메서드 입니다.
+     * 필요값 : questionId
+     * 아웃풋 : QuestionResponseDto
+     */
+    @GetMapping("/{questionId}")
+    public ResponseEntity<SingleResponseDto<QuestionResponseDto>> getQuestion(@PathVariable Long questionId) throws ChangeSetPersister.NotFoundException {
+
+        Question question = questionService.findVerifiedQuestion(questionId);
+
+        QuestionResponseDto questionResponseDto = new QuestionResponseDto(question);
+
+        return new ResponseEntity<>(new SingleResponseDto<>(questionResponseDto), HttpStatus.OK);
+    }
+
+
+    /*
+     * 게시물 조회하는 메서드 입니다.
+     * 필요값 : (Option) page={page_int)&size={size_int}
+     * 아웃풋 : multiResponseDto
+     */
+    @GetMapping
+    public ResponseEntity<MultiResponseDto<List<QuestionResponseDto>>> getQuestions(@Positive @RequestParam(required = false, defaultValue = "1") int page, @Positive @RequestParam(required = false, defaultValue = "10") int size){
+
+        Page<Question> questionPage = questionService.getQuestions(page-1, size);
+        List<Question> questionList = questionPage.getContent();
+
+        List<QuestionResponseDto> questionResponseDtoList = questionList.stream()
+                .map(QuestionResponseDto::new)
+                .collect(Collectors.toList());
+
+        MultiResponseDto<List<QuestionResponseDto>> multiResponseDto =
+                new MultiResponseDto<>(questionResponseDtoList, questionPage);
+
+        return new ResponseEntity<>(multiResponseDto, HttpStatus.OK);
+    }
+
+
+   /*
+    * 게시물 조회하는 메서드 입니다.
+    * 필요값 : questionId
+    * 아웃풋 : ResponseEntity - > 200, OK
+    */
+    @DeleteMapping("/{question-id}")
+    public ResponseEntity deleteQuestion(@PathVariable("question-id") @Positive Long questionId ){
+
+        questionService.deleteQuestion(questionId);
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+
+    /*
+     * 게시물과 태그를 연결시키기 위한 메서드 입니다. post 메서드가 지저분해서 분리했습니다.
+     * 필요값 : QuestionPostDto, question
+     * 아웃풋 : ResponseEntity - > 200, OK
+     */
+    public Question setQuestionTag(QuestionPostDto questionPostDto, Question question) throws ChangeSetPersister.NotFoundException {
 
         List<QuestionTag> questionTags = new ArrayList<>();
         for (Long tagId : questionPostDto.getTagIds()) {
@@ -73,58 +145,7 @@ public class QuestionController{
         }
         question.setQuestionTags(questionTags);
 
-        Question savedQuestion = questionRepository.save(question);
-
-       // Question createdQuestion = questionService.createQuestion(question);
-
-        QuestionResponseDto responseDto = new QuestionResponseDto(savedQuestion);
-        //responseDto.setTags(questionPostDto.getTagList());
-
-       // URI location = UriCreator.createUri(QUESTION_DEFAULT_URL, 1);
-
-        return new ResponseEntity<>(new SingleResponseDto<>(responseDto), HttpStatus.CREATED);
-    }
-
-    /*
-     * 게시물 조회하는 메서드 입니다.
-     * 필요값 : questionId
-     * 아웃풋 : QuestionResponseDto
-     */
-    @GetMapping("/{questionId}")
-    public ResponseEntity<SingleResponseDto<QuestionResponseDto>> getQuestion(@PathVariable Long questionId){
-
-        Question question = questionService.getQuestion(questionId);
-
-        QuestionResponseDto questionResponseDto = new QuestionResponseDto(question);
-
-        return new ResponseEntity<>(new SingleResponseDto<>(questionResponseDto), HttpStatus.OK);
-    }
-
-
-    /*
-     * 게시물 조회하는 메서드 입니다.
-     * 필요값 : questionId
-     * 아웃풋 : QuestionResponseDto
-     */
-    @GetMapping
-    public ResponseEntity getQuestions(@Positive @RequestParam(required = false, defaultValue = "1") int page, @Positive @RequestParam(required = false, defaultValue = "15") int size){
-
-        Page<Question> questionPage = questionService.getQuestions(page-1, size);
-
-        List<Question> questionList = questionPage.getContent();
-
-        return new ResponseEntity<>(new MultiResponseDto<>(questionList, questionPage), HttpStatus.OK);
-
-
-      /*  Page<Question> questionPage = questionService.getQuestions(page - 1, size);
-
-        PageInfo pageInfo = new PageInfo(page, size, (int) questionPage.getTotalElements(), questionPage.getTotalPages());
-
-        List<Question> questionList = questionPage.getContent();
-        List<QuestionResponseDto> questionResponseDtoList = questionMapper.questionToQuestionResponseList(questionList);
-
-        return new ResponseEntity<>(new MultiResponseDto<>(questionResponseDtoList, pageInfo), HttpStatus.OK);*/
-
+        return question;
     }
 
 

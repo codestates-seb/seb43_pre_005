@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "question_tags")
 @NoArgsConstructor
@@ -26,6 +28,5 @@ public class QuestionTag {
     @ManyToOne
     @JoinColumn(name = "tag_id")
     private Tag tag;
-
 
 }

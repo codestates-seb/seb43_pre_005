@@ -1,7 +1,6 @@
 package com.potatos.stackoverflow.domain.question.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.potatos.stackoverflow.domain.member.entity.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,11 +27,18 @@ public class Question {
     @Column(nullable = false)
     private String content;
 
+    @Column(nullable = false)
+    private String memberName;
+
+    @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @ElementCollection
+    private List<String> tags = new ArrayList<>();
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<QuestionTag> questionTags = new ArrayList<>();
