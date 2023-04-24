@@ -5,7 +5,7 @@ import com.potatos.stackoverflow.domain.tags.mapper.TagMapper;
 import org.springframework.stereotype.Service;
 import com.potatos.stackoverflow.domain.tags.entity.Tag;
 
-import java.util.List;
+import java.util.Optional;
 
 //pageNation import
 import org.springframework.data.domain.Page;
@@ -33,6 +33,10 @@ public class TagService {
     public Page<Tag> getTags(int page){
         Pageable pageable = PageRequest.of(page, 10);
         return this.tagRepository.findAll(pageable);
+    }
+
+    public Tag getTag(String tagName){
+        return tagRepository.findByName(tagName);
     }
 }
 
