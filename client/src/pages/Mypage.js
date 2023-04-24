@@ -1,6 +1,5 @@
 import Layout from "../components/common/Layout";
 import styled from "styled-components";
-import { useState } from "react";
 
 const HeadContainer = styled.div`
   border: 1px solid black;
