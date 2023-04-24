@@ -24,9 +24,8 @@ public class Tag{
     @Column(nullable = false)
     private String description;
 
-    public static Tag of(Long id, String name, String description){
+    public static Tag of(String name, String description){
         Tag tag = new Tag();
-        tag.id = 0L;
         tag.name = name;
         tag.description = description;
 
