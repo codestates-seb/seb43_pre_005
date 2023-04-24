@@ -72,7 +72,12 @@ const QuestionContainer = styled.div`
 const Question = ({ question }) => {
   const { title, content, tag, name, createdAt } = question;
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+  function handleDummyClick(id) {
+    const newUrl = `/questions/${id}`; // 경로와 id 값을 조합하여 새로운 URL 생성
+    navigate(newUrl); // useNavigate Hook을 사용하여 새로운 URL로 이동
+  }
+
 
   // const handleOneClick = () => {
   //   navigate(`/questions/question_id`);
@@ -82,7 +87,11 @@ const Question = ({ question }) => {
   // const createdAt = new Date().toLocaleString();
   return (
     <QuestionContainer>
-      <div className="question-id">
+      <div
+        className="question-id"
+        onClick={() => handleDummyClick(question.id)}
+      >
+
         <div className="question-title">{title}</div>
         <div className="question-content">{content}</div>
         <div className="name-box">

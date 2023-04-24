@@ -6,8 +6,11 @@ import Users from "./pages/Users";
 import Questions from "./pages/Questions";
 import HomeWeek from "./pages/HomeWeek";
 import HomeMonth from "./pages/HomeMonth";
+import TagSearch from "./pages/TagSearch";
 import UserCreate from "./pages/UserCreate";
 import UserLogin from "./pages/UserLogin";
+import qsdummyData from "./data/qsdummyData";
+import QuestionsRead from "./pages/QuestionsRead";
 import QuestionCreate from "./pages/QuestionCreate";
 import MyPage from "./pages/Mypage";
 
@@ -23,8 +26,16 @@ function App() {
         <Route path="/users/signup" element={<UserCreate />}></Route>
         <Route path="/users/login" element={<UserLogin />}></Route>
         <Route path="/questions" element={<Questions />}></Route>
+        <Route
+          path="/questions/:id"
+          element={<QuestionsRead dummydata={qsdummyData} />}
+        />
         <Route path="/questions/create" element={<QuestionCreate />} />
+
         <Route path="/members" element={<MyPage />} />
+
+        <Route path="/questions/tag_name" element={<TagSearch />}></Route>
+
       </Routes>
     </BrowserRouter>
   );
