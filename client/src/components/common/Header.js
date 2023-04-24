@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import logo from "../../assets/images/logo.png";
-import { useNavigate, useLocation } from "react-router-dom";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -29,7 +28,7 @@ const SearchContainer = styled.div`
 const SearchBar = styled.input`
   height: 100%;
   width: 100%;
-  padding: 5px 10px;
+  padding: 5px 10px;git
   border: none;
   background-color: transparent;
   font-size: 16px;
@@ -71,12 +70,6 @@ const ActionButton = styled.button`
 `;
 
 const Header = () => {
-  const navigate = useNavigate();
-
-  const selectMenuHandler = (path) => {
-    navigate(path);
-  };
-
   return (
     <HeaderContainer>
       <LogoImage
@@ -89,12 +82,8 @@ const Header = () => {
         <SearchButton type="submit">Search</SearchButton>
       </SearchContainer>
       <ActionContainer>
-        <ActionButton onClick={() => selectMenuHandler("/users/login")}>
-          Log in
-        </ActionButton>
-        <ActionButton onClick={() => selectMenuHandler("/users/signup")}>
-          Sign up
-        </ActionButton>
+        <ActionButton>Log in</ActionButton>
+        <ActionButton>Sign in</ActionButton>
       </ActionContainer>
     </HeaderContainer>
   );
