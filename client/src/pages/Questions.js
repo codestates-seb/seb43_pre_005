@@ -2,7 +2,9 @@ import Layout from "../components/common/Layout";
 import styled from "styled-components";
 import Question from "../components/Question";
 import qsdummydata from "../data/qsdummyData";
+import QuestionCreate from "./QuestionCreate";
 import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const HeadContainer = styled.div`
   .header-content {
@@ -48,13 +50,20 @@ const HeadContainer = styled.div`
 
 const Questions = () => {
   const [questions, setQuestions] = useState(qsdummydata);
+  const navigate = useNavigate();
+
+  const selectMenuHandler = (path) => {
+    navigate(path);
+  };
 
   return (
     <Layout>
       <HeadContainer>
         <div className="header-content">
           All Questions
-          <button>Ask Question</button>
+          <button onClick={() => selectMenuHandler("/questions/create")}>
+            Ask Question
+          </button>
         </div>
         <div className="questions-number">{qsdummydata.length} questions</div>
         <div className="questions-box">
