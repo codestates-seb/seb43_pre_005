@@ -119,3 +119,5 @@ export const dummydata = [
     language: "css",
   },
 ];
+
+export default dummydata;

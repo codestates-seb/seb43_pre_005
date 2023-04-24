@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Layout from "../components/common/Layout";
 import SearchBox from "./UserSearchbox.js";
-import { dummydata } from "../data/userdummydata.js";
+import { dummydata } from "../data/Userdummydata.js";
 import { useState } from "react";
 // import axios from "axios";
 

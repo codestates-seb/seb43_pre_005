@@ -12,8 +12,6 @@ import UserLogin from "./pages/UserLogin";
 import qsdummyData from "./data/qsdummyData";
 import QuestionsRead from "./pages/QuestionsRead";
 import QuestionCreate from "./pages/QuestionCreate";
-import qsdummyData from "./data/qsdummyData";
-import QuestionsRead from "./pages/QuestionsRead";
 
 function App() {
   return (
@@ -32,12 +30,6 @@ function App() {
           element={<QuestionsRead dummydata={qsdummyData} />}
         />
         <Route path="/questions/create" element={<QuestionCreate />} />
-        <Route path="/questions/tag_name" element={<TagSearch />}></Route>
-        <Route path="/questions/create" element={<QuestionCreate />} />
-        <Route
-          path="/questions/:id"
-          element={<QuestionsRead dummydata={qsdummyData} />}
-        />
         <Route path="/questions/tag_name" element={<TagSearch />}></Route>
       </Routes>
     </BrowserRouter>
