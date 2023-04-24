@@ -6,7 +6,9 @@ import com.potatos.stackoverflow.domain.member.dto.MemberPostDto;
 import com.potatos.stackoverflow.domain.member.dto.MemberResponseDto;
 import com.potatos.stackoverflow.domain.member.entity.Member;
 import com.potatos.stackoverflow.domain.member.response.MypageResponse;
+import com.potatos.stackoverflow.domain.question.entity.Question;
 import com.potatos.stackoverflow.domain.question.repository.QuestionRepository;
+import com.potatos.stackoverflow.domain.question.response.MyPageQuestion;
 import org.springframework.stereotype.Service;
 
 //pageNation import
@@ -17,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class MemberService {
@@ -72,18 +75,38 @@ public class MemberService {
         //2. user에 맵핑되어있는 questionId를 불러옴 > 출력2
         //List<Question> writeQuestions = questionRepository.findByMemberId(memberId);
 
+
         //3. questionId를 통해 count를 진행 > 출력3
+
+        List<Question> question =this.questionRepository.findByMemberId(memberId);
+
+        List<MyPageQuestion> myPageQuestions = MyPageQuestion.listOf(question);
+
+
+        //하나의 MyPageQuestion 채우기
+//        MyPageQuestion myPageQuestion = MyPageQuestion.of(
+//        //getId
+//
+//        //getTitle
+//        )
+
 
 
         //최종 출력 Response
-        MypageResponse mypageResponse = new MypageResponse(
+        MypageResponse mypageResponse = MypageResponse.of(
                 member.getDisplayName(),
                 member.getTitle(),
                 member.getIntroduce(),
                 member.getEmail(),
-                this.questionRepository.findByMemberId(memberId), //memberId를 통해 question를 List로 담아옴
-                //ㄴ> id, title만 들어가도록 조정 !
-                this.questionRepository.countByMemberId(memberId)); //question 개수
+                (MyPageQuestion) myPageQuestions,
+        this.questionRepository.countByMemberId(memberId));
+
+
+
+
+
+
+                //this.questionRepository.countByMemberId(memberId)); //question 개수
         //이렇게 하면 member 객체를 통해 담을 수 있는 값을 담고,
         //이제 setter로 접근해서 count값을 넣어주어야 response를 쓸 수 있을듯
         //아니다 위에 로직에서 count들을 다 계산해오자
@@ -92,4 +115,5 @@ public class MemberService {
         return mypageResponse;
 
     }
+
 }

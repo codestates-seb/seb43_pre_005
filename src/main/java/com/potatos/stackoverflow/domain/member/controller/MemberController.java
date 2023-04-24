@@ -29,7 +29,7 @@ public class MemberController {
 
         System.out.println("controller > create member");
 
-        MemberResponseDto responseDto=memberService.saveMember(memberPostDto);
+        MemberResponseDto responseDto = memberService.saveMember(memberPostDto);
         URI location = UriCreator.createUri("/users", 1);
 
         return ResponseEntity.created(location).build();
