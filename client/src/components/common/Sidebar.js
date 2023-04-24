@@ -9,6 +9,7 @@ export const Menu = {
   users: "/users",
   month: "/tab=month",
   week: "/tab=week",
+  tag_search: "/questions/tag_name",
 };
 
 const LeftSidebar = styled.nav`
@@ -67,7 +68,11 @@ const Sidebar = () => {
           <span> Home</span>
         </li>
         <li
-          className={currentTab === Menu.questions ? "sidemenu-clicked" : ""}
+          className={
+            currentTab === Menu.questions || currentTab === Menu.tag_search
+              ? "sidemenu-clicked"
+              : ""
+          }
           onClick={() => selectMenuHandler(Menu.questions)}
         >
           <span>Question</span>
