@@ -14,6 +14,7 @@ const HeaderContainer = styled.div`
 
 const LogoImage = styled.img`
   height: 30px;
+  cursor: pointer;
 `;
 
 const SearchContainer = styled.div`
@@ -78,7 +79,11 @@ const Header = () => {
 
   return (
     <HeaderContainer>
-      <LogoImage src={logo} alt="Stack Overflow Logo" />
+      <LogoImage
+        src={logo}
+        alt="Stack Overflow Logo"
+        onClick={() => selectMenuHandler("/")}
+      />
       <SearchContainer>
         <SearchBar type="text" placeholder="Search..." />
         <SearchButton type="submit">Search</SearchButton>
