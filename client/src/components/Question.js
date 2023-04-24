@@ -77,6 +77,7 @@ const Question = ({ question }) => {
     navigate(newUrl); // useNavigate Hook을 사용하여 새로운 URL로 이동
   }
 
+
   // const handleOneClick = () => {
   //   navigate(`/questions/question_id`);
   // };
@@ -89,6 +90,7 @@ const Question = ({ question }) => {
         className="question-id"
         onClick={() => handleDummyClick(question.id)}
       >
+
         <div className="question-title">{title}</div>
         <div className="question-content">{content}</div>
         <div className="name-box">
