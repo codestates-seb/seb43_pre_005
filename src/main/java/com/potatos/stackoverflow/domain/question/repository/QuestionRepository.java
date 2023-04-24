@@ -12,4 +12,9 @@ public interface QuestionRepository  extends JpaRepository<Question, Long> {
 
     //search
     Page<Question> findByTitleContaining(Pageable pageable, String searchWord);
+
+    //mypage
+    List<Question> findByMemberId(Long memberId);
+
+    Long countByMemberId(Long memberId);
 }

@@ -1,6 +1,7 @@
 package com.potatos.stackoverflow.domain.member.controller;
 
 import com.potatos.stackoverflow.domain.member.dto.MembersPageDto;
+import com.potatos.stackoverflow.domain.member.response.MypageResponse;
 import com.potatos.stackoverflow.domain.member.service.MemberService;
 import com.potatos.stackoverflow.domain.member.dto.MemberPostDto;
 import com.potatos.stackoverflow.domain.member.dto.MemberResponseDto;
@@ -42,4 +43,20 @@ public class MemberController {
 
         return new ResponseEntity(response, HttpStatus.OK);
     }
+
+
+        @GetMapping("/{member_id}")
+        public ResponseEntity getMyPage(@PathVariable("member_id")Long memberId){
+
+            MypageResponse response = memberService.readMyPage(memberId);
+            //1. User의 정보를 불러옴 > 출력1
+
+            //2. user에 맵핑되어있는 questionId를 불러옴 > 출력2
+
+            //3. questionId를 통해 count를 진행 > 출력3
+
+            //return ResponseEntity(null, HttpStatus.OK);
+
+            return new ResponseEntity<MypageResponse>(response, HttpStatus.OK);
+        }
 }

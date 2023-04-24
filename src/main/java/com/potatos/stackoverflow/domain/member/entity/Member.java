@@ -31,6 +31,13 @@ public class Member {
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    //mypage
+    @Column(nullable = true)
+    private String title;
+
+    @Column(nullable = true)
+    private String introduce;
+
     public enum MemberStatus{
         ACTIVE("활동",0),
         DORMANCY("휴면",1),
