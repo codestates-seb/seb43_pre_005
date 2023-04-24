@@ -71,16 +71,16 @@ const QuestionContainer = styled.div`
 const Question = ({ question }) => {
   const { title, content, tag, name, createdAt } = question;
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleOneClick = () => {
-    navigate(`/questions/question_id`);
-  };
+  // const handleOneClick = () => {
+  //   navigate(`/questions/question_id`);
+  // };
   const tags = Array.isArray(tag) ? tag.slice(0, 5) : [];
   //밑의 부분은 현재 시간을 가져오는 함수다. 심심해서 그냥 만들어봤따
   // const createdAt = new Date().toLocaleString();
   return (
-    <QuestionContainer onClick={handleOneClick}>
+    <QuestionContainer>
       <div className="question-id">
         <div className="question-title">{title}</div>
         <div className="question-content">{content}</div>

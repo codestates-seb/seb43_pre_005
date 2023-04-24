@@ -6,6 +6,7 @@ import Users from "./pages/Users";
 import Questions from "./pages/Questions";
 import HomeWeek from "./pages/HomeWeek";
 import HomeMonth from "./pages/HomeMonth";
+import TagSearch from "./pages/TagSearch";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/tags" element={<Tags />}></Route>
         <Route path="/users" element={<Users />}></Route>
         <Route path="/questions" element={<Questions />}></Route>
+        <Route path="/questions/tag_name" element={<TagSearch />}></Route>
       </Routes>
     </BrowserRouter>
   );
