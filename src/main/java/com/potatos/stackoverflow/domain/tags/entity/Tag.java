@@ -10,8 +10,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Entity
 @Component
+@Entity(name = "tags")
 public class Tag{
 
     @Id
