@@ -1,4 +1,4 @@
-export const dummydata = [
+export const userdummydata = [
   {
     id: 0,
     name: "showmethemoney",
@@ -119,3 +119,5 @@ export const dummydata = [
     language: "css",
   },
 ];
+
+export default userdummydata;
