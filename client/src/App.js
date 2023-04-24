@@ -9,6 +9,8 @@ import HomeMonth from "./pages/HomeMonth";
 import TagSearch from "./pages/TagSearch";
 import UserCreate from "./pages/UserCreate";
 import UserLogin from "./pages/UserLogin";
+import qsdummyData from "./data/qsdummyData";
+import QuestionsRead from "./pages/QuestionsRead";
 import QuestionCreate from "./pages/QuestionCreate";
 
 function App() {
@@ -23,6 +25,10 @@ function App() {
         <Route path="/users/signup" element={<UserCreate />}></Route>
         <Route path="/users/login" element={<UserLogin />}></Route>
         <Route path="/questions" element={<Questions />}></Route>
+        <Route
+          path="/questions/:id"
+          element={<QuestionsRead dummydata={qsdummyData} />}
+        />
         <Route path="/questions/create" element={<QuestionCreate />} />
         <Route path="/questions/tag_name" element={<TagSearch />}></Route>
       </Routes>

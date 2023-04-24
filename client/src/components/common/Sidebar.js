@@ -69,9 +69,7 @@ const Sidebar = () => {
         </li>
         <li
           className={
-            currentTab === Menu.questions || currentTab === Menu.tag_search
-              ? "sidemenu-clicked"
-              : ""
+            currentTab.startsWith(Menu.questions) ? "sidemenu-clicked" : ""
           }
           onClick={() => selectMenuHandler(Menu.questions)}
         >
@@ -79,13 +77,15 @@ const Sidebar = () => {
           <IoEarth />
         </li>
         <li
-          className={currentTab === Menu.tags ? "sidemenu-clicked" : ""}
+          className={currentTab.startsWith(Menu.tags) ? "sidemenu-clicked" : ""}
           onClick={() => selectMenuHandler(Menu.tags)}
         >
           <span>Tags</span>
         </li>
         <li
-          className={currentTab === Menu.users ? "sidemenu-clicked" : ""}
+          className={
+            currentTab.startsWith(Menu.users) ? "sidemenu-clicked" : ""
+          }
           onClick={() => selectMenuHandler(Menu.users)}
         >
           <span>Users</span>

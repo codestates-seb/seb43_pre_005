@@ -107,7 +107,7 @@ const Home = () => {
 
         <div className="questions-box">
           {questions.map((el) => (
-            <Question key={el.id} question={el} />
+            <Question key={el.id} question={el}></Question>
           ))}
         </div>
       </HeadContainer>
