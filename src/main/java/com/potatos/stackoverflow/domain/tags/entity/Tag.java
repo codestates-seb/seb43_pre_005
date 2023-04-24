@@ -30,9 +30,8 @@ public class Tag{
     @OneToMany(mappedBy = "tag")
     private List<QuestionTag> questionTags = new ArrayList<>();
 
-    public Tag(long l, String name, String description) {
-
-    }
+/*    public Tag(long l, String name, String description) {
+    }*/
 
 /*    public void addQuestionTag(QuestionTag questionTag) {
         this.questionTags.add(questionTag);
