@@ -119,5 +119,4 @@ export const userdummydata = [
     language: "css",
   },
 ];
-
 export default userdummydata;
