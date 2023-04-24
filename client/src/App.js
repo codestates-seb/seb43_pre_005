@@ -9,6 +9,7 @@ import HomeMonth from "./pages/HomeMonth";
 import UserCreate from "./pages/UserCreate";
 import UserLogin from "./pages/UserLogin";
 import QuestionCreate from "./pages/QuestionCreate";
+import MyPage from "./pages/Mypage";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/users/login" element={<UserLogin />}></Route>
         <Route path="/questions" element={<Questions />}></Route>
         <Route path="/questions/create" element={<QuestionCreate />} />
+        <Route path="/members" element={<MyPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 const QuestionContainer = styled.div`
+  position: relative;
   border: solid 1px gray;
   margin: 0.5rem;
   width: 50vw;
