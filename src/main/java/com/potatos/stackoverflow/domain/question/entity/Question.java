@@ -38,7 +38,7 @@ public class Question {
     private Member member;
 
     @ElementCollection
-    private List<String> tags = new ArrayList<>();
+    private List<String> tagNames = new ArrayList<>();
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<QuestionTag> questionTags = new ArrayList<>();

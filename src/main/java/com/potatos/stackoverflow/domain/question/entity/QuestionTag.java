@@ -1,15 +1,12 @@
 package com.potatos.stackoverflow.domain.question.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.potatos.stackoverflow.domain.tags.entity.Tag;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity(name = "question_tags")
 @NoArgsConstructor

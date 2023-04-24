@@ -2,15 +2,11 @@ package com.potatos.stackoverflow.domain.question.dto;
 
 
 import com.potatos.stackoverflow.domain.question.entity.Question;
-import com.potatos.stackoverflow.domain.question.entity.QuestionTag;
-import com.potatos.stackoverflow.domain.tags.entity.Tag;
 import lombok.*;
-
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -26,7 +22,7 @@ public class QuestionResponseDto {
     private LocalDateTime createdAt;
 
     @Size(max = 5)
-    private List<String > tagNames = new ArrayList<>();;
+    private List<String > tagNames = new ArrayList<>();
 
     private Long memberId;
     private String memberName;
@@ -38,7 +34,7 @@ public class QuestionResponseDto {
         this.memberId = question.getMember().getId();
         this.memberName = question.getMember().getDisplayName();
         this.createdAt = question.getCreatedAt();
-        this.tagNames = question.getTags();
+        this.tagNames = question.getTagNames();
     }
 
 }
