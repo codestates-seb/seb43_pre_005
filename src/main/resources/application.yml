@@ -16,10 +16,6 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.MySQL5Dialect
     defer-datasource-initialization: true
-    # 이 설정을 추가하면 create 이후의 데이터 sql문이 실행되면서 적용된다..?
-    # 초기화 순서~ 문제일수도 ㅇㅇ..
-    # hibernate 초기화 / scprit 기반 초기화 두가지
-    # 순서에 따라 ~~~
 
   sql:
     init:
@@ -27,7 +23,35 @@ spring:
       data-locations: classpath:data-init.sql
       #schema-locations: classpath:schema-init.sql
 
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${SPRING_OAUTH_CI}
+            client-secret: ${SPRING_OAUTH_CS}
+            scope:
+              - email # resource owner의 이메일 정보
+              - profile # resource owner의 프로필 정보
 
+  logging:
+    level:
+      org:
+        springframework:
+          orm:
+            jpa: DEBUG
+  server:
+    servlet:
+      encoding:
+        force-response: true
+  mail:
+    address:
+      admin: admin@gmail.com
+  jwt:
+    key:
+      secret: ${JWT_SECRET_KEY}               # 민감한 정보는 시스템 환경 변수에서 로드한다.
+    access-token-expiration-minutes: 30
+    refresh-token-expiration-minutes: 420
 
 
 
