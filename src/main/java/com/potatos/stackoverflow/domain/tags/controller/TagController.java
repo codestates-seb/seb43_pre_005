@@ -31,7 +31,7 @@ public class TagController {
 
 
     //테스트 API로 실제로 사용하지 않습니다(POST), DB에 테스트 데이터 적재용입니다.
-   // @PostMapping
+   //@PostMapping
     //public ResponseEntity postTag(@RequestBody TagPostDto tagDto){
 
         //Tag tag = mapper.postTagDtoToEntity(tagDto);
