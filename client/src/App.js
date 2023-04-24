@@ -28,6 +28,10 @@ function App() {
         <Route path="/users/signup" element={<UserCreate />}></Route>
         <Route path="/users/login" element={<UserLogin />}></Route>
         <Route path="/questions" element={<Questions />}></Route>
+        <Route
+          path="/questions/:id"
+          element={<QuestionsRead dummydata={qsdummyData} />}
+        />
         <Route path="/questions/create" element={<QuestionCreate />} />
         <Route path="/questions/tag_name" element={<TagSearch />}></Route>
         <Route
