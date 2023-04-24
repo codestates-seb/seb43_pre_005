@@ -9,7 +9,6 @@ export const Menu = {
   users: "/users",
   month: "/tab=month",
   week: "/tab=week",
-  tag_search: "/questions/tag_name",
 };
 
 const LeftSidebar = styled.nav`
