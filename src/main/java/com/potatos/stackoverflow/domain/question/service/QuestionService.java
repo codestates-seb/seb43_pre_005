@@ -1,11 +1,7 @@
 package com.potatos.stackoverflow.domain.question.service;
 
-import com.potatos.stackoverflow.domain.member.service.MemberService;
-import com.potatos.stackoverflow.domain.question.dto.QuestionPostDto;
-import com.potatos.stackoverflow.domain.question.dto.QuestionResponseDto;
 import com.potatos.stackoverflow.domain.question.entity.Question;
 import com.potatos.stackoverflow.domain.question.repository.QuestionRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.data.domain.Page;
@@ -60,6 +56,16 @@ public class QuestionService {
         PageRequest pageRequest = PageRequest.of(page, size, Sort.by("questionId").descending());
 
         return questionRepository.findAll(pageRequest);
+    }
+
+    /*
+     * 게시물 Update method 입니다.
+     * 입력값 : Question
+     * 출력값 : Question
+     */
+    public Question updateQuestion(Question question){
+
+        return questionRepository.save(question);
     }
 
     /*
