@@ -45,7 +45,7 @@ public class QuestionController{
 
     /* POST
      * 게시물 생성하는 메서드 입니다.
-     * 필요값 : memberId, QuestionPostDto
+     * 필요값 : QuestionPostDto
      * 출력값 : SingleResponseDto-QuestionResponseDto, 201.CREATED
      */
     @PostMapping("/ask")
