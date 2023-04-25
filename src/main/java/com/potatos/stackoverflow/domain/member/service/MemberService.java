@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -57,7 +58,6 @@ public class MemberService {
 
     }
 
-
     public Member findMember(Long memberId){
         return findVerifiedMember(memberId);
     }
@@ -65,6 +65,4 @@ public class MemberService {
     private Member findVerifiedMember(Long memberId) {
         return memberRepository.findById(memberId).orElseThrow();
     }
-
-
 }
