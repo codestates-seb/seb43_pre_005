@@ -25,6 +25,8 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 public class SecurityConfiguration3 {
+
+
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
     private final MemberService memberService;
@@ -42,15 +44,17 @@ public class SecurityConfiguration3 {
         http
                 .headers().frameOptions().sameOrigin()
                 .and()
-                .csrf().disable()
-                .cors(withDefaults())
+                .csrf().disable() //CSRF 공격에 대한 spring security 설정 비활성화
+                .cors(withDefaults()) //CORS 설정 추가 : corsConfigurationSource라는 이름으로 등록된 bean을 이용한다
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                //세션을 생성하지 않도록 설정한다.
+                //ALWAYS : 항상 생성 / NEVER : 생성X, 만약 이미 생성된 세션있으면 사용 / IF_REQUIRED : 필요한 경우 생성 / STATELESS : 생성X
                 .and()
-                .formLogin().disable()
-                .httpBasic().disable()
+                .formLogin().disable() //폼 로그인 인증 방식 :SSR 방식 / Json포맷으로 할거라서 비활성화 시킨다 :CSR 방식
+                .httpBasic().disable() //request 전송할때마다 username/password 정보를 http header에 실어서 인증하는 방식 : 비활성화
                 .exceptionHandling()  // 추가
-                .authenticationEntryPoint(new MemberAuthenticationEntryPoint())  // handler패키지
-                .accessDeniedHandler(new MemberAccessDeniedHandler())            // handler패키지
+                .authenticationEntryPoint(new MemberAuthenticationEntryPoint())  //인증이 되지 않은 유저가 요청을 했을 때 동작된다.
+                .accessDeniedHandler(new MemberAccessDeniedHandler())            //서버에 요청을 할 때 액세스가 가능한지 권한을 체크 후 액세스 할 수 없는 요청을 했을 시 동작된다.
                 .and()
                 .apply(new CustomFilterConfigurer())  // 하단에서 선언한 메서드
                 .and()
@@ -60,15 +64,16 @@ public class SecurityConfiguration3 {
 //                        .antMatchers(HttpMethod.GET, "/*/members").hasRole("ADMIN")  // OAuth 2로 로그인하므로 회원 정보 수정 필요 없음.
 //                        .antMatchers(HttpMethod.GET, "/*/members/**").hasAnyRole("USER", "ADMIN")  // OAuth 2로 로그인하므로 회원 정보 수정 필요 없음.
 //                        .antMatchers(HttpMethod.DELETE, "/*/members/**").hasRole("USER") // OAuth 2로 로그인하므로 회원 정보 수정 필요 없음.
-                                .antMatchers(HttpMethod.POST, "/*/coffees").hasRole("ADMIN")
-                                .antMatchers(HttpMethod.PATCH, "/*/coffees/**").hasRole("ADMIN")
-                                .antMatchers(HttpMethod.GET, "/*/coffees/**").hasAnyRole("USER", "ADMIN")
-                                .antMatchers(HttpMethod.GET, "/*/coffees").permitAll()
-                                .antMatchers(HttpMethod.DELETE, "/*/coffees").hasRole("ADMIN")
-                                .antMatchers(HttpMethod.POST, "/*/orders").hasRole("USER")
-                                .antMatchers(HttpMethod.PATCH, "/*/orders").hasAnyRole("USER", "ADMIN")
-                                .antMatchers(HttpMethod.GET, "/*/orders/**").hasAnyRole("USER", "ADMIN")
-                                .antMatchers(HttpMethod.DELETE, "/*/orders").hasRole("USER")
+                                //순서가 좀 중요하다.
+                                .antMatchers(HttpMethod.DELETE, "/*/users/*").hasRole("USER") //유저 삭제 (본인)
+                                .antMatchers(HttpMethod.POST, "/*/logout/*").hasRole("USER") //유저 로그아웃 (본인)
+                                .antMatchers(HttpMethod.POST, "/*/members/edit/*").hasRole("USER") //마이페이지 수정 (본인)
+                                .antMatchers(HttpMethod.POST, "/*/questions/*").hasRole("USER") //질문/답변 작성 (본인)
+                                .antMatchers(HttpMethod.PATCH, "/*/questions/*").hasRole("USER") //질문 수정 (본인)
+                                .antMatchers(HttpMethod.DELETE, "/*/questions/*").hasRole("USER") //질문 삭제 (본인)
+                                .antMatchers(HttpMethod.GET, "/*/questions").permitAll()
+                                .antMatchers(HttpMethod.POST, "/*/users").permitAll()
+                                .antMatchers(HttpMethod.POST, "/*/members").permitAll()
                                 .anyRequest().permitAll()
                 )
                 .oauth2Login(oauth2 -> oauth2
@@ -86,7 +91,7 @@ public class SecurityConfiguration3 {
         configuration.setAllowedOrigins(Arrays.asList("*"));
         configuration.setAllowedMethods(Arrays.asList("GET","POST", "PATCH", "DELETE"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration); // 주의 사항: 컨텐츠 표시 오류로 인해 '/**'를 '\/**'로 표기했으니 실제 코드 구현 시에는 '\(역슬래시)'를 빼 주세요.
+        source.registerCorsConfiguration("/**", configuration);
 
         return source;
     }

@@ -27,14 +27,6 @@ public class CustomAuthorityUtils {
         return USER_ROLES;
     }
 
-    // DB에 저장된 Role을 기반으로 권한 정보 생성
-    public List<GrantedAuthority> createAuthorities(List<String> roles) {
-        List<GrantedAuthority> authorities = roles.stream()
-                .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
-                .collect(Collectors.toList());
-        return authorities;
-    }
-
     // DB 저장 용
     public List<String> createRoles(String email) {
         if (email.equals(adminMailAddress)) {
@@ -42,4 +34,18 @@ public class CustomAuthorityUtils {
         }
         return USER_ROLES_STRING;
     }
+
+    // 위에 이거 다 필요없는 거 같은데?
+
+
+    // DB에 저장된 Role을 기반으로 권한 정보 생성
+    public List<GrantedAuthority> createAuthorities(List<String> roles) {
+        //스트림으로
+        List<GrantedAuthority> authorities = roles.stream()
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+                .collect(Collectors.toList());
+        return authorities;
+    }
+
+
 }
