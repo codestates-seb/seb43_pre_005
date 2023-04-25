@@ -10,7 +10,6 @@ import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
-import javax.xml.transform.sax.SAXResult;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -38,11 +37,11 @@ public class Answer {
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @ManyToOne
-    @JoinColumn(name = "question_id")
+    @JoinColumn(name = "questionId")
     private Question question;
 
     @ManyToOne
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "memberId")
     private Member member;
 
 

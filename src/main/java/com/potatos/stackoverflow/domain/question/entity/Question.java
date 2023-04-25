@@ -55,4 +55,8 @@ public class Question {
         this.questionTags = questionTag;
     }
 
+    public void setAnswers(List<Answer> answers){
+        this.answers = answers;
+    }
+
 }

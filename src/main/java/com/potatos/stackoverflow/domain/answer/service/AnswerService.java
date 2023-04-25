@@ -2,9 +2,13 @@ package com.potatos.stackoverflow.domain.answer.service;
 
 import com.potatos.stackoverflow.domain.answer.entity.Answer;
 import com.potatos.stackoverflow.domain.answer.repository.AnswerRepository;
+import com.potatos.stackoverflow.domain.question.entity.Question;
+import com.potatos.stackoverflow.domain.question.service.QuestionService;
+import org.aspectj.weaver.patterns.TypePatternQuestions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,10 +16,12 @@ import java.util.Optional;
 public class AnswerService {
 
     private final AnswerRepository answerRepository;
+    private final QuestionService questionService;
 
     @Autowired
-    public AnswerService(AnswerRepository answerRepository){
+    public AnswerService(AnswerRepository answerRepository, QuestionService questionService){
         this.answerRepository = answerRepository;
+        this.questionService = questionService;
     }
 
 
@@ -35,7 +41,11 @@ public class AnswerService {
      */
     public List<Answer> findAnswers(Long questionId){
 
-        return answerRepository.findAnswersByQuestionId(questionId);
+        Question question = questionService.findVerifiedQuestion(questionId);
+
+        List<Answer> answers = question.getAnswers();
+
+        return answers;
     }
 
     /*
@@ -60,8 +70,8 @@ public class AnswerService {
 
 
 
-    public Answer findVerifiedAnswer(Long anwerId){
-        Optional<Answer> optionalAnswer = answerRepository.findById(anwerId);
+    public Answer findVerifiedAnswer(Long answerId){
+        Optional<Answer> optionalAnswer = answerRepository.findById(answerId);
 
         return optionalAnswer.orElseThrow();
     }
