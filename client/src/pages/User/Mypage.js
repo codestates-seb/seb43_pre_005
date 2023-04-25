@@ -77,6 +77,19 @@ const ContentBox = styled.div`
       align-items: center;
       display: flex;
       justify-content: center;
+
+      > .status-in {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid gray;
+        border-radius: 20px;
+        width: 20vw;
+        height: 10vh;
+        font-size: large;
+        word-spacing: 1rem;
+        padding: 0.3rem;
+      }
     }
 
     > .about-box {
@@ -112,7 +125,11 @@ const MyPage = () => {
         </div>
         <ContentBox>
           <div className="second-box">
-            <div className="status-box">STATUS</div>
+            <div className="status-box">
+              <div className="status-in">
+                answer : 0<br></br> questions: 0
+              </div>
+            </div>
             <div className="about-box">ABOUT</div>
           </div>
         </ContentBox>

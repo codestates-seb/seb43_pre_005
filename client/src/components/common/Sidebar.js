@@ -10,7 +10,6 @@ const Menu = {
   month: "/tab=month",
   week: "/tab=week",
 };
-
 const LeftSidebar = styled.nav`
   padding-inline-start: 1px;
   box-sizing: border-box;

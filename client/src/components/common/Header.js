@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import logo from "../../assets/images/logo.png";
-
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -76,7 +75,6 @@ const Header = () => {
   const selectMenuHandler = (path) => {
     navigate(path);
   };
-
   return (
     <HeaderContainer>
       <LogoImage

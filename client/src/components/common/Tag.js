@@ -47,6 +47,9 @@ const Tag = ({ tag }) => {
   const handleOneClick = () => {
     navigate(`/questions/tag_name`);
   };
+  if (!tag) {
+    return null; // tag 객체가 없으면 null 반환
+  }
   const description =
     tag.description.length > 100
       ? tag.description.slice(0, 150) + "..."
