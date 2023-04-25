@@ -5,6 +5,7 @@ import com.potatos.stackoverflow.domain.member.repository.MemberRepository;
 import com.potatos.stackoverflow.domain.member.dto.MemberPostDto;
 import com.potatos.stackoverflow.domain.member.dto.MemberResponseDto;
 import com.potatos.stackoverflow.domain.member.entity.Member;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 //pageNation import
@@ -21,6 +22,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
+    @Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
@@ -54,5 +56,13 @@ public class MemberService {
                 .map(member -> new MembersPageDto(member.getId(), member.getDisplayName()))
                 .collect(Collectors.toList());
 
+    }
+
+    public Member findMember(Long memberId){
+        return findVerifiedMember(memberId);
+    }
+
+    private Member findVerifiedMember(Long memberId) {
+        return memberRepository.findById(memberId).orElseThrow();
     }
 }

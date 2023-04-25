@@ -70,8 +70,7 @@ public class QuestionController{
 
         QuestionResponseDto responseDto = new QuestionResponseDto(savedQuestion);
 
-        //return new ResponseEntity<>(new SingleResponseDto<>(responseDto), HttpStatus.CREATED);
-        return null;
+        return new ResponseEntity<>(new SingleResponseDto<>(responseDto), HttpStatus.CREATED);
     }
 
 
