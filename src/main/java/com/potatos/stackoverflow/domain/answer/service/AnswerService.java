@@ -43,9 +43,7 @@ public class AnswerService {
 
         Question question = questionService.findVerifiedQuestion(questionId);
 
-        List<Answer> answers = question.getAnswers();
-
-        return answers;
+        return question.getAnswers();
     }
 
     /*
