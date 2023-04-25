@@ -1,6 +1,7 @@
 package com.potatos.stackoverflow.domain.answer.controller;
 
 
+import com.potatos.stackoverflow.domain.answer.dto.AnswerPatchDto;
 import com.potatos.stackoverflow.domain.answer.dto.AnswerPostDto;
 import com.potatos.stackoverflow.domain.answer.dto.AnswerResponseDto;
 import com.potatos.stackoverflow.domain.answer.entity.Answer;
@@ -65,10 +66,13 @@ public class AnswerController {
      */
     @GetMapping
     public ResponseEntity<SingleResponseDto<List<AnswerResponseDto>>> getAnswers(@Positive @PathVariable Long questionId){
+
         List<Answer> answers = answerService.findAnswersByQuestionId(questionId);
+
         List<AnswerResponseDto> answerResponseDtoList = answers.stream()
                 .map(AnswerResponseDto::new)
                 .collect(Collectors.toList());
+
         return new ResponseEntity<>(new SingleResponseDto<>(answerResponseDtoList), HttpStatus.OK);
     }
 
@@ -77,9 +81,13 @@ public class AnswerController {
      * 필요값 : questionId, answerId
      * 출력값 : SingleResponseDto-AnswerResponseDto, 200.OK
      */
-    @GetMapping("{answerId}")
-    public ResponseEntity<SingleResponseDto<AnswerResponseDto>> getAnswer(@Positive @PathVariable Long answerId){
-        Answer answer = answerService.findVerifiedAnswer(answerId);
+    @GetMapping("/{answerInt}")
+    public ResponseEntity<SingleResponseDto<AnswerResponseDto>> getAnswer(@Positive @PathVariable Integer answerInt, @Positive @PathVariable Long questionId){
+
+        List<Answer> answers = answerService.findAnswersByQuestionId(questionId);
+
+        Answer answer = answers.get(answerInt-1);
+
         AnswerResponseDto answerResponseDto = new AnswerResponseDto(answer);
 
         return new ResponseEntity<>(new SingleResponseDto<>(answerResponseDto), HttpStatus.OK);
@@ -87,15 +95,36 @@ public class AnswerController {
 
 
 
-    /* Delete
+    /* DELETE
      * 답변 하나를 삭제하는 메서드 입니다.
      * 필요값 : answerId
      * 출력값 : 200.OK
      */
-    @DeleteMapping("{answerId}")
+    @DeleteMapping("/{answerId}")
     public ResponseEntity deleteAnswer(@Positive @PathVariable Long answerId){
+
         answerService.deleteAnswer(answerId);
+
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+    /* PATCH
+     * 답변 하나를 수정하는 메서드 입니다.
+     * 필요값 : answerId, AnswerPatchDto
+     * 출력값 : 200.OK
+     */
+    @PatchMapping("/{answerId}/edit")
+    public ResponseEntity<SingleResponseDto<AnswerResponseDto>> patchAnswer(@Positive @PathVariable Long answerId,
+                                      @RequestBody AnswerPatchDto answerPatchDto){
+        Answer updatedAnswer = answerService.findVerifiedAnswer(answerId);
+            updatedAnswer.setContent(answerPatchDto.getContent());
+
+        answerService.updateAnswer(updatedAnswer);
+
+        AnswerResponseDto answerResponseDto = new AnswerResponseDto(updatedAnswer);
+
+        return new ResponseEntity<>(new SingleResponseDto<>(answerResponseDto), HttpStatus.OK);
     }
 
 }

@@ -127,6 +127,7 @@ public class QuestionController{
         question.setTitle(questionPatchDto.getTitle());
         question.setContent(questionPatchDto.getContent());
 
+        // tag 매핑 작업을 다시 해줌.
         Question updatedQuestion = setQuestionTag(questionPatchDto, question);
 
         //매핑된 QuestionTags 를 이용하여 tagName 을 부여.
