@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -111,16 +112,18 @@ public class QuestionService {
         //PageRequest pageRequest = PageRequest.of(page, size, Sort.by("questionId").descending());
         List<QuestionTag> searchList = questionTagRepo.findAllByTagId(tagId);
 
-        List qustionsId = searchList.stream().map(questionTag -> questionTag.getQuestion().getQuestionId()).collect(Collectors.toList());
-
-        //List<Question> response = questionRepository.findById()
-                //.stream().map(e -> qustionsId).collect(Collectors.toList());
+        // questionIds를 얻기 위한 스트림 작업
+        List<Long> questionIds = searchList.stream().map(questionTag -> questionTag.getQuestion().getQuestionId()).collect(Collectors.toList());
 
 
+        // questionIds를 이용하여 Question 객체를 얻기 위한 스트림 작업
+        List<Question> response = questionIds.stream()
+                .map(questionId -> questionRepository.findById(questionId).orElse(null))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
 
+        //List<Question> response = questionRepository.findById().stream().map(e -> qustionsId).collect(Collectors.toList());
 
-
-
-        return null;
+        return response;
     }
 }
