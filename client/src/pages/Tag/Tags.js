@@ -98,7 +98,7 @@ const Tags = () => {
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       const fetchData = async () => {
-        const result = await axios.get("http://localhost:3001/dummydata");
+        const result = await axios.get("http://localhost:3001/tagdummydata");
         setTags(result.data);
       };
       fetchData();
