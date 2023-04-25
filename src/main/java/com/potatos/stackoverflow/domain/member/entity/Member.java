@@ -83,4 +83,16 @@ public class Member {
         return member;
     }
 
+    //최소한의 데이터는 뭐가 필요하지?
+    //
+    public static Member of(String email){
+        Member member = new Member();
+        member.displayName = "oauth_member";
+        member.email = email;
+        member.password = "oauth_pwd";
+        member.memberStatus = MemberStatus.fromString("활동");
+
+        return member;
+    }
+
 }

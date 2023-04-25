@@ -26,6 +26,7 @@ import java.util.Map;
 @Slf4j
 public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
+    // SimpleUrlAuthenticationSuccessHandler  >> redirect API 사용가능
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
     private final MemberService memberService;
@@ -42,17 +43,22 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         var oAuth2User = (OAuth2User)authentication.getPrincipal();
-        String email = String.valueOf(oAuth2User.getAttributes().get("email")); // (3)
-        List<String> authorities = authorityUtils.createRoles(email);           // (4)
+        //Authentication -> OAuth2User -> 이메일 주소 접근
+        String email = String.valueOf(oAuth2User.getAttributes().get("email"));
+        List<String> authorities = authorityUtils.createRoles(email);
+        //CustomAuthorityUtils > 권한 정보 생성
 
-        saveMember(email);  // (5)
-        redirect(request, response, email, authorities);  // (6)
+        saveMember(email);
+        // 애플리케이션쪽에서 일부 데이터로 관리해야 한다.
+        redirect(request, response, email, authorities);
+        // 리다이렉트
     }
 
     private void saveMember(String email) {
-//        Member member = new Member(email);
-//        member.setStamp(new Stamp());
-//        memberService.createMember(member);
+        Member member = Member.of(email);
+        //필요한 최소한의 데이터가 뭘까
+        //어느정보까지 스프링 컨텍스트에 저장될까?
+        memberService.saveOAuthMember(member);
     }
 
     private void redirect(HttpServletRequest request, HttpServletResponse response, String username, List<String> authorities) throws IOException {

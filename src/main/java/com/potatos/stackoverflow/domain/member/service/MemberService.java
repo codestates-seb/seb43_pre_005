@@ -5,6 +5,7 @@ import com.potatos.stackoverflow.domain.member.repository.MemberRepository;
 import com.potatos.stackoverflow.domain.member.dto.MemberPostDto;
 import com.potatos.stackoverflow.domain.member.dto.MemberResponseDto;
 import com.potatos.stackoverflow.domain.member.entity.Member;
+import com.potatos.stackoverflow.domain.question.dto.QuestionPostDto;
 import org.springframework.stereotype.Service;
 
 //pageNation import
@@ -44,6 +45,13 @@ public class MemberService {
     }
 
 
+    public void saveOAuthMember(Member member) {
+        System.out.println("service > save oauth member");
+
+        memberRepository.save(member);
+    }
+
+
     public List<MembersPageDto> getMembersPage(int page) {
         Pageable pageable = PageRequest.of(page, 10);
 
@@ -53,5 +61,16 @@ public class MemberService {
                 .map(member -> new MembersPageDto(member.getId(), member.getDisplayName()))
                 .collect(Collectors.toList());
 
+    }
+
+    public Member findMember(long memberId) {
+
+        return new Member();
+    }
+
+    public void deleteMember(long memberId) {
+        System.out.println("service > delete member");
+
+        memberRepository.deleteById(memberId);
     }
 }

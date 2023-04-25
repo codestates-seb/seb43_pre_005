@@ -19,16 +19,16 @@ public class UserManagerController {
     public UserManagerController(OAuth2AuthorizedClientService auth2AuthorizedClientService) {
         this.auth2AuthorizedClientService = auth2AuthorizedClientService;
     }
-
-    @GetMapping("/google-oauth2")
-    public String loginMain(){
-
-        System.out.println("login-main");
-
-        var oAuth2User= (OAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(oAuth2User.getAttributes().get("email"));
-        return "login-page";
-    }
+//
+//    @GetMapping("/google-oauth2")
+//    public String loginMain(){
+//
+//        System.out.println("login-main");
+//
+//        var oAuth2User= (OAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        System.out.println(oAuth2User.getAttributes().get("email"));
+//        return "login-page";
+//    }
 
 //    @GetMapping("/login2")
 //    public String loginHome(Authentication authentication){
@@ -59,6 +59,12 @@ public class UserManagerController {
         System.out.println("Access Token Expires At: " + accessToken.getExpiresAt());  // (3-5)
 
         return "login-oauth";
+    }
+
+    @GetMapping("/users/login")
+    public String loadLoginPage() {
+        System.out.println("유저 로그인 페이지 로드");
+        return "login-page";
     }
 
 }
