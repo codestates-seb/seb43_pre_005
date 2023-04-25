@@ -1,7 +1,11 @@
 package com.potatos.stackoverflow.domain.question.service;
 
 import com.potatos.stackoverflow.domain.question.entity.Question;
+import com.potatos.stackoverflow.domain.question.entity.QuestionTag;
 import com.potatos.stackoverflow.domain.question.repository.QuestionRepository;
+import com.potatos.stackoverflow.domain.question.repository.QuestionTagRepository;
+import com.potatos.stackoverflow.domain.tags.entity.Tag;
+import com.potatos.stackoverflow.domain.tags.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.data.domain.Page;
@@ -12,14 +16,21 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class QuestionService {
 
     private final QuestionRepository questionRepository;
+
+    //filter-Tag
+    private final TagRepository tagRepository;
+    private final QuestionTagRepository questionTagRepo;
     @Autowired
-    public QuestionService(QuestionRepository questionRepository){
+    public QuestionService(QuestionRepository questionRepository, QuestionTagRepository questionTagRepo, TagRepository tagRepository){
         this.questionRepository = questionRepository;
+        this.questionTagRepo = questionTagRepo;
+        this.tagRepository = tagRepository;
     }
 
 
@@ -94,4 +105,22 @@ public class QuestionService {
     }
 
 
+    //tagFilterQuestion
+    public List<Question> getSearchTest(Long tagId){
+
+        //PageRequest pageRequest = PageRequest.of(page, size, Sort.by("questionId").descending());
+        List<QuestionTag> searchList = questionTagRepo.findAllByTagId(tagId);
+
+        List qustionsId = searchList.stream().map(questionTag -> questionTag.getQuestion().getQuestionId()).collect(Collectors.toList());
+
+        //List<Question> response = questionRepository.findById()
+                //.stream().map(e -> qustionsId).collect(Collectors.toList());
+
+
+
+
+
+
+        return null;
+    }
 }

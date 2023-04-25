@@ -41,8 +41,11 @@ public class Question {
     @ElementCollection
     private List<String> tagNames = new ArrayList<>();
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
+
+    //@OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<QuestionTag> questionTags = new ArrayList<>();
+    //ㄴ> db 저장 이슈로 cascade 변경 / 해결함 !
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<Answer> answers = new ArrayList<>();

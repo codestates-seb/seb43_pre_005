@@ -6,6 +6,7 @@ import com.potatos.stackoverflow.domain.member.service.MemberService;
 import com.potatos.stackoverflow.domain.question.dto.QuestionPatchDto;
 import com.potatos.stackoverflow.domain.question.entity.QuestionTag;
 import com.potatos.stackoverflow.domain.question.repository.QuestionRepository;
+import com.potatos.stackoverflow.domain.question.repository.QuestionTagRepository;
 import com.potatos.stackoverflow.domain.response.MultiResponseDto;
 import com.potatos.stackoverflow.domain.question.dto.QuestionPostDto;
 import com.potatos.stackoverflow.domain.question.dto.QuestionResponseDto;
@@ -41,6 +42,9 @@ public class QuestionController{
 
     private final QuestionRepository questionRepository;
     private final TagRepository tagRepository;
+
+    //tag-filter
+    private final QuestionTagRepository questionTagRepository;
 
 
     /* POST
@@ -175,6 +179,7 @@ public class QuestionController{
             questionTag.setTag(optionalTag.get());
             questionTag.setQuestion(question);
             questionTags.add(questionTag);
+
         }
         question.setQuestionTags(questionTags);
 
@@ -192,10 +197,43 @@ public class QuestionController{
             questionTag.setTag(optionalTag.get());
             questionTag.setQuestion(question);
             questionTags.add(questionTag);
+
         }
         question.setQuestionTags(questionTags);
 
         return question;
     }
 
+
+    //searchFilter
+//    @GetMapping("/test/{tag_id}")
+//    public ResponseEntity<MultiResponseDto<List<QuestionResponseDto>>> getQuestions(@Positive @RequestParam(required = false, defaultValue = "1") int page,
+//                                                                                    @Positive @RequestParam(required = false, defaultValue = "10") int size,
+//                                                                                    @PathVariable("tag_id") Long tagId){
+//
+//        Page<Question> questionPage = questionService.getSearchTest(page-1, size, tagId);
+//        List<Question> questionList = questionPage.getContent();
+//
+//        List<QuestionResponseDto> questionResponseDtoList = questionList.stream()
+//                .map(QuestionResponseDto::new)
+//                .collect(Collectors.toList());
+//
+//        MultiResponseDto<List<QuestionResponseDto>> multiResponseDto =
+//                new MultiResponseDto<>(questionResponseDtoList, questionPage);
+//
+//        return new ResponseEntity<>(multiResponseDto, HttpStatus.OK);
+//
+//    }
+
+    //searchFilter
+    @GetMapping("/test/{tag_id}")
+    public ResponseEntity<List<Question>> getFilterTest( @PathVariable("tag_id") Long tagId){
+
+        List<Question> questionPage = questionService.getSearchTest(tagId);
+
+
+
+        return new ResponseEntity<>(questionPage, HttpStatus.OK);
+
+    }
 }
