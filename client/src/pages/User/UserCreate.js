@@ -1,7 +1,7 @@
 import { FcGoogle } from "react-icons/fc";
 import { AiFillGithub } from "react-icons/ai";
 import styled from "styled-components";
-import Header from "../components/common/Header";
+import Header from "../../components/common/Header";
 
 const UserCreateDesign = styled.div`
   background-color: #ececec;

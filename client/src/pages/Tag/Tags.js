@@ -1,10 +1,10 @@
-import Layout from "../components/common/Layout";
+import Layout from "../../components/common/Layout";
 import { useState } from "react";
 import { useCallback } from "react";
 import styled from "styled-components";
-import Tag from "../components/common/Tag";
-import dummyData from "../data/dummyData";
-import Pagination from "../components/Pagination";
+import Tag from "../../components/common/Tag";
+import tagdummyData from "../../data/tagdummyData";
+import Pagination from "../../components/Pagination";
 
 const HeadContainer = styled.div`
   .header-content {
@@ -42,7 +42,7 @@ const HeadContainer = styled.div`
   }
 `;
 const Tags = () => {
-  const [tags, setTags] = useState(dummyData);
+  const [tags, setTags] = useState(tagdummyData);
   const [inputValue, setInputValue] = useState("");
   const [count, setCount] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
@@ -81,7 +81,7 @@ const Tags = () => {
     const inputValue = e.target.value;
     setInputValue(inputValue);
     // Get the filtered tags array
-    const filteredTags = dummyData.filter((tag) => {
+    const filteredTags = tagdummyData.filter((tag) => {
       const words = inputValue.toLowerCase().split(" ");
       return words.every((word) => {
         return tag.name.toLowerCase().includes(word);
@@ -130,6 +130,13 @@ const Tags = () => {
 };
 
 export default Tags;
+
+//onchange의 e.target.value값이 들어올 때마다 api를 요청해야한다
+//검색했을 때 순서와 상관없이 스펠링이 있으면 검색 되어야 한다
+
+//페이지네이션으로 구현해야 하기 때문에
+//dummydata로 tag 내용이 들어오는 지 확인 후
+//우선 페이지네이션 없이 map으로 뿌리는것
 
 //onchange의 e.target.value값이 들어올 때마다 api를 요청해야한다
 //검색했을 때 순서와 상관없이 스펠링이 있으면 검색 되어야 한다
