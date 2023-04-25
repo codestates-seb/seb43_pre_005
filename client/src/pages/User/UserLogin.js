@@ -1,8 +1,8 @@
 import { FcGoogle } from "react-icons/fc";
 import { AiFillGithub } from "react-icons/ai";
 import styled from "styled-components";
-import Header from "../components/common/Header";
-import logo from "../assets/images/logo_notext.png";
+import Header from "../../components/common/Header";
+import logo from "../../assets/images/logo_notext.png";
 
 const UserLoginDesgin = styled.div`
   background-color: #ececec;

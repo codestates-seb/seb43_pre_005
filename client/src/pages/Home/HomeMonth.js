@@ -1,8 +1,8 @@
-import Layout from "../components/common/Layout";
+import Layout from "../../components/common/Layout";
 import styled from "styled-components";
-import qsdummydata from "../data/qsdummyData";
+import qsdummydata from "../../data/qsdummyData";
 import { useState } from "react";
-import Question from "../components/Question";
+import Question from "../../components/Question";
 
 const HeadContainer = styled.div`
   .header-content {
@@ -42,6 +42,7 @@ const HeadContainer = styled.div`
     display: flex;
     justify-content: right;
     margin-right: 5rem;
+
     button {
       color: white;
       border: none;
@@ -51,22 +52,13 @@ const HeadContainer = styled.div`
       border-radius: 5px;
       cursor: pointer;
     }
-    button:first-child {
-      &:hover {
-        opacity: 0.8;
-        background-color: #7878ff;
-      }
-    }
-
-    button:nth-child(2) {
+    button:nth-child(3) {
       background-color: #7878ff;
     }
 
-    button:nth-child(3) {
-      &:hover {
-        opacity: 0.8;
-        background-color: #7878ff;
-      }
+    button:not(:nth-child(3)):hover {
+      opacity: 0.8;
+      background-color: #a696cd;
     }
   }
 
@@ -77,7 +69,7 @@ const HeadContainer = styled.div`
   }
 `;
 
-const HomeWeek = () => {
+const HomeMonth = () => {
   const [questions, setQuestions] = useState(qsdummydata);
 
   return (
@@ -95,14 +87,14 @@ const HomeWeek = () => {
           >
             Hot
           </button>
-          <button>Week</button>
           <button
             onClick={() => {
-              window.location.href = "/tab=month";
+              window.location.href = "/tab=week";
             }}
           >
-            Month
+            Week
           </button>
+          <button>Month</button>
         </div>
 
         <div className="questions-box">
@@ -115,4 +107,4 @@ const HomeWeek = () => {
   );
 };
 
-export default HomeWeek;
+export default HomeMonth;

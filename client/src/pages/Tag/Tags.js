@@ -1,10 +1,10 @@
-import Layout from "../components/common/Layout";
+import Layout from "../../components/common/Layout";
 import { useState } from "react";
 import { useCallback } from "react";
 import styled from "styled-components";
-import Tag from "../components/common/Tag";
-import dummyData from "../data/dummyData";
-import Pagination from "../components/Pagination";
+import Tag from "../../components/common/Tag";
+import tagdummyData from "../../data/tagdummyData";
+import Pagination from "../../components/Pagination";
 
 const HeadContainer = styled.div`
   .header-content {
@@ -42,7 +42,7 @@ const HeadContainer = styled.div`
   }
 `;
 const Tags = () => {
-  const [tags, setTags] = useState(dummyData);
+  const [tags, setTags] = useState(tagdummyData);
   const [inputValue, setInputValue] = useState("");
   const [count, setCount] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
@@ -81,7 +81,7 @@ const Tags = () => {
     const inputValue = e.target.value;
     setInputValue(inputValue);
     // Get the filtered tags array
-    const filteredTags = dummyData.filter((tag) => {
+    const filteredTags = tagdummyData.filter((tag) => {
       const words = inputValue.toLowerCase().split(" ");
       return words.every((word) => {
         return tag.name.toLowerCase().includes(word);
