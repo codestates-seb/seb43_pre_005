@@ -1,6 +1,6 @@
 package com.potatos.stackoverflow.domain.search.controller;
 
-import com.potatos.stackoverflow.domain.question.entity.Question;
+import com.potatos.stackoverflow.domain.question.mapper.entity.Question;
 import com.potatos.stackoverflow.domain.search.service.SearchService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;

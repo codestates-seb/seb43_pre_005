@@ -1,4 +1,4 @@
-package com.potatos.stackoverflow.domain.question.entity;
+package com.potatos.stackoverflow.domain.question.mapper.entity;
 
 
 import com.potatos.stackoverflow.domain.tags.entity.Tag;
