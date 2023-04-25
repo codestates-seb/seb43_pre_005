@@ -67,4 +67,10 @@ public class UserManagerController {
         return "login-page";
     }
 
+    @GetMapping("/users/login-success")
+    public String loginSuccessPage() {
+        System.out.println("로그인 성공");
+        return "login-oauth";
+    }
+
 }

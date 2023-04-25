@@ -35,8 +35,6 @@ public class CustomAuthorityUtils {
         return USER_ROLES_STRING;
     }
 
-    // 위에 이거 다 필요없는 거 같은데?
-
 
     // DB에 저장된 Role을 기반으로 권한 정보 생성
     public List<GrantedAuthority> createAuthorities(List<String> roles) {
