@@ -1,10 +1,12 @@
 import Layout from "../../components/common/Layout";
 import { useState } from "react";
 import { useCallback } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import Tag from "../../components/common/Tag";
 import tagdummyData from "../../data/tagdummyData";
 import Pagination from "../../components/Pagination";
+import axios from "axios";
 
 const HeadContainer = styled.div`
   .header-content {
@@ -77,20 +79,33 @@ const Tags = () => {
   //   setCount(count + 1);
   // };
 
-  const handleChangeInput = (e) => {
-    const inputValue = e.target.value;
-    setInputValue(inputValue);
-    // Get the filtered tags array
-    const filteredTags = tagdummyData.filter((tag) => {
-      const words = inputValue.toLowerCase().split(" ");
-      return words.every((word) => {
-        return tag.name.toLowerCase().includes(word);
+  const handleChangeInput = useCallback(
+    (e) => {
+      const inputValue = e.target.value;
+      setInputValue(inputValue);
+      // Get the filtered tags array
+      const filteredTags = tagdummyData.filter((tag) => {
+        const words = inputValue.toLowerCase().split(" ");
+        return words.every((word) => {
+          return tag.name.toLowerCase().includes(word);
+        });
       });
-    });
 
-    setTags(filteredTags);
-  };
+      setTags(filteredTags);
+    },
+    [setInputValue]
+  );
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      const fetchData = async () => {
+        const result = await axios.get("http://localhost:3001/dummydata");
+        setTags(result.data);
+      };
+      fetchData();
+    }, 1000);
 
+    return () => clearTimeout(delayDebounceFn);
+  }, [inputValue]);
   console.log(tags);
 
   return (
@@ -100,7 +115,7 @@ const Tags = () => {
         <div className="main-content">
           A tag is a keyword or label that categorizes your question with other,
           similar questions.<br></br> Using the right tags makes it easier for
-          others to find and answer your question.
+          others to find and answer question.
         </div>
         <input
           type="text"
