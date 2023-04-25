@@ -1,10 +1,12 @@
 import Layout from "../components/common/Layout";
 import { useState } from "react";
+import { useEffect } from "react";
 import { useCallback } from "react";
 import styled from "styled-components";
 import Tag from "../components/common/Tag";
 import dummyData from "../data/dummyData";
 import Pagination from "../components/Pagination";
+import axios from "axios";
 
 const HeadContainer = styled.div`
   .header-content {
@@ -42,7 +44,7 @@ const HeadContainer = styled.div`
   }
 `;
 const Tags = () => {
-  const [tags, setTags] = useState(dummyData);
+  const [tags, setTags] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [count, setCount] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
@@ -77,22 +79,36 @@ const Tags = () => {
   //   setCount(count + 1);
   // };
 
-  const handleChangeInput = (e) => {
-    const inputValue = e.target.value;
-    setInputValue(inputValue);
-    // Get the filtered tags array
-    const filteredTags = dummyData.filter((tag) => {
-      const words = inputValue.toLowerCase().split(" ");
-      return words.every((word) => {
-        return tag.name.toLowerCase().includes(word);
+  const handleChangeInput = useCallback(
+    (e) => {
+      const inputValue = e.target.value;
+      setInputValue(inputValue);
+      // Get the filtered tags array
+      const filteredTags = dummyData.filter((tag) => {
+        const words = inputValue.toLowerCase().split(" ");
+        return words.every((word) => {
+          return tag.name.toLowerCase().includes(word);
+        });
       });
-    });
 
-    setTags(filteredTags);
-  };
+      setTags(filteredTags);
+    },
+    [setInputValue]
+  );
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      const fetchData = async () => {
+        const result = await axios.get("http://localhost:3001/dummydata");
+        setTags(result.data);
+      };
+      fetchData();
+    }, 1000);
 
+    return () => clearTimeout(delayDebounceFn);
+  }, [inputValue]);
   console.log(tags);
 
+  console.log(tags);
   return (
     <Layout>
       <HeadContainer>

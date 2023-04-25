@@ -9,7 +9,7 @@ export const Menu = {
   users: "/users",
   month: "/tab=month",
   week: "/tab=week",
-
+};
 const LeftSidebar = styled.nav`
   padding-inline-start: 1px;
   box-sizing: border-box;

@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import Layout from "../components/common/Layout";
 import SearchBox from "./UserSearchbox.js";
-import { dummydata } from "../data/Userdummydata.js";
+import userdummydata from "../data/userdummydata";
 import { useState } from "react";
 // import axios from "axios";
+import { useEffect } from "react";
 
 const UserDesign = styled.div`
   padding: 24px;
@@ -17,23 +18,21 @@ const UserDesign = styled.div`
 `;
 
 const Users = () => {
-  /*   const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios(
-        'https://localhost:3000',
-      );
-      setData(result.data);
-    };
-    fetchData();
-  }, []); */
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const result = await axios("https://localhost:3000/users");
+  //     setData(result.data);
+  //   };
+  //   fetchData();
+  // }, []);
 
   return (
     <Layout>
       <UserDesign>
         <h1>Users</h1>
-        <SearchBox data={dummydata} />
+        <SearchBox data={userdummydata} />
       </UserDesign>
     </Layout>
   );

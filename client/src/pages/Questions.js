@@ -2,7 +2,6 @@ import Layout from "../components/common/Layout";
 import styled from "styled-components";
 import Question from "../components/Question";
 import qsdummydata from "../data/qsdummyData";
-import QuestionCreate from "./QuestionCreate";
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
