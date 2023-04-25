@@ -5,7 +5,7 @@ import com.potatos.stackoverflow.domain.member.repository.MemberRepository;
 import com.potatos.stackoverflow.domain.member.dto.MemberPostDto;
 import com.potatos.stackoverflow.domain.member.dto.MemberResponseDto;
 import com.potatos.stackoverflow.domain.member.entity.Member;
-import com.potatos.stackoverflow.domain.question.dto.QuestionPostDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 //pageNation import
@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,6 +22,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
+    @Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
@@ -63,10 +65,14 @@ public class MemberService {
 
     }
 
-    public Member findMember(long memberId) {
-
-        return new Member();
+    public Member findMember(Long memberId){
+        return findVerifiedMember(memberId);
     }
+
+    private Member findVerifiedMember(Long memberId) {
+        return memberRepository.findById(memberId).orElseThrow();
+    }
+
 
     public void deleteMember(long memberId) {
         System.out.println("service > delete member");
