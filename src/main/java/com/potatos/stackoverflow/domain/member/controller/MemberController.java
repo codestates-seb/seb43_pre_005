@@ -43,6 +43,16 @@ public class MemberController {
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
+    @GetMapping("/users/{userId}")
+    public ResponseEntity getUserById(@PathVariable long userId) {
+
+        System.out.println("controller > get one member");
+
+        MemberResponseDto responseDto=memberService.findMemberOne(userId);
+
+        return new ResponseEntity(responseDto, HttpStatus.OK);
+    }
+
     @DeleteMapping("/users/{userId}")
     public ResponseEntity deleteMember(@PathVariable long userId){
 

@@ -27,6 +27,7 @@ import java.util.Map;
 public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     // SimpleUrlAuthenticationSuccessHandler  >> redirect API 사용가능
+
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
     private final MemberService memberService;

@@ -73,6 +73,20 @@ public class MemberService {
         return memberRepository.findById(memberId).orElseThrow();
     }
 
+    public MemberResponseDto findMemberOne(Long memberId) {
+
+        Member member=memberRepository.findById(memberId).orElseThrow();
+
+        MemberResponseDto responseDto = new MemberResponseDto(
+                member.getDisplayName(),
+                member.getEmail(),
+                member.getPassword(),
+                member.getMemberStatus().getStrStatus()
+        );
+
+        return responseDto;
+    }
+
 
     public void deleteMember(long memberId) {
         System.out.println("service > delete member");

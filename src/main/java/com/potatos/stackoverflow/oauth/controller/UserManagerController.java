@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+@RequestMapping("/auth")
 @Controller
 public class UserManagerController {
 
@@ -46,31 +47,34 @@ public class UserManagerController {
 //        return "login-oauth";
 //    }
 
-    // 위 메서드 작업을 @RegisteredOAuth2AuthorizedClient 애너테이션으로 처리함.
-    @GetMapping("/login2")
-    public String loginHome(@RegisteredOAuth2AuthorizedClient("google") OAuth2AuthorizedClient authorizedClient){
-        System.out.println("login-home");
+//    // 위 메서드 작업을 @RegisteredOAuth2AuthorizedClient 애너테이션으로 처리함.
+//    @GetMapping("/login2")
+//    public String loginHome(@RegisteredOAuth2AuthorizedClient("google") OAuth2AuthorizedClient authorizedClient){
+//        System.out.println("login-home");
+//
+//        OAuth2AccessToken accessToken = authorizedClient.getAccessToken();
+//        System.out.println("Access Token Value: " + accessToken.getTokenValue());  // (3-1)
+//        System.out.println("Access Token Type: " + accessToken.getTokenType().getValue());  // (3-2)
+//        System.out.println("Access Token Scopes: " + accessToken.getScopes());       // (3-3)
+//        System.out.println("Access Token Issued At: " + accessToken.getIssuedAt());    // (3-4)
+//        System.out.println("Access Token Expires At: " + accessToken.getExpiresAt());  // (3-5)
+//
+//        return "login-oauth";
+//    }
 
-        OAuth2AccessToken accessToken = authorizedClient.getAccessToken();
-        System.out.println("Access Token Value: " + accessToken.getTokenValue());  // (3-1)
-        System.out.println("Access Token Type: " + accessToken.getTokenType().getValue());  // (3-2)
-        System.out.println("Access Token Scopes: " + accessToken.getScopes());       // (3-3)
-        System.out.println("Access Token Issued At: " + accessToken.getIssuedAt());    // (3-4)
-        System.out.println("Access Token Expires At: " + accessToken.getExpiresAt());  // (3-5)
-
-        return "login-oauth";
-    }
-
-    @GetMapping("/users/login")
+    @GetMapping("/login")
     public String loadLoginPage() {
         System.out.println("유저 로그인 페이지 로드");
         return "login-page";
     }
 
-    @GetMapping("/users/login-success")
+    @GetMapping("/login-success")
     public String loginSuccessPage() {
         System.out.println("로그인 성공");
+
+
         return "login-oauth";
     }
+
 
 }

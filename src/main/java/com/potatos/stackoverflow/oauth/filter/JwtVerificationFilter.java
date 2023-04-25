@@ -28,10 +28,10 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        Map<String, Object> claims = verifyJws(request); // (3)
-        setAuthenticationToContext(claims);      // (4)
+        Map<String, Object> claims = verifyJws(request);
+        setAuthenticationToContext(claims);
 
-        filterChain.doFilter(request, response); // (5)
+        filterChain.doFilter(request, response);
     }
 
     // (6)
