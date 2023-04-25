@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Layout from "../components/common/Layout";
+import Layout from "../../components/common/Layout";
 
 const Container = styled.div`
   display: flex;
@@ -65,17 +65,17 @@ const SubmitButton = styled.button`
   cursor: pointer;
 `;
 
-const QuestionCreate = () => {
+const QuestionUpdate = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [tag, setTag] = useState("");
 
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleUpdate = (event) => {
     event.preventDefault();
     console.log(title, body, tag);
-    // TODO: Submit data to API
+    // TODO: Update data to API
     navigate("/");
   };
 
@@ -83,7 +83,7 @@ const QuestionCreate = () => {
     <Layout>
       <Container>
         <Title>Ask a Question</Title>
-        <Form onSubmit={handleSubmit}>
+        <Form onUpdate={handleUpdate}>
           <Label htmlFor="title">Title</Label>
           <Input
             type="text"
@@ -105,11 +105,11 @@ const QuestionCreate = () => {
             <option value="html">HTML</option>
             <option value="css">CSS</option>
           </Select>
-          <SubmitButton type="submit">Submit</SubmitButton>
+          <SubmitButton type="submit">Update</SubmitButton>
         </Form>
       </Container>
     </Layout>
   );
 };
 
-export default QuestionCreate;
+export default QuestionUpdate;

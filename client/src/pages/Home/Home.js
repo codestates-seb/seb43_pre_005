@@ -1,8 +1,9 @@
-import Layout from "../components/common/Layout";
+import Layout from "../../components/common/Layout";
 import styled from "styled-components";
-import qsdummydata from "../data/qsdummyData";
+import qsdummydata from "../../data/qsdummyData";
 import { useState } from "react";
-import Question from "../components/Question";
+import Question from "../../components/Question";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const HeadContainer = styled.div`
   .header-content {
@@ -16,7 +17,7 @@ const HeadContainer = styled.div`
 
     button {
       height: 5vh;
-      background-color: #0995ff;
+      background-color: #1e82ff;
       color: white;
       border: none;
       padding: 0.5rem 1rem;
@@ -51,22 +52,14 @@ const HeadContainer = styled.div`
       border-radius: 5px;
       cursor: pointer;
     }
-    button:first-child {
-      &:hover {
-        opacity: 0.8;
-        background-color: #7878ff;
-      }
-    }
 
-    button:nth-child(2) {
+    button:first-child {
       background-color: #7878ff;
     }
 
-    button:nth-child(3) {
-      &:hover {
-        opacity: 0.8;
-        background-color: #7878ff;
-      }
+    button:not(:first-child):hover {
+      opacity: 0.8;
+      background-color: #a696cd;
     }
   }
 
@@ -77,25 +70,32 @@ const HeadContainer = styled.div`
   }
 `;
 
-const HomeWeek = () => {
+const Home = () => {
   const [questions, setQuestions] = useState(qsdummydata);
+  const navigate = useNavigate();
+
+  const selectMenuHandler = (path) => {
+    navigate(path);
+  };
 
   return (
     <Layout>
       <HeadContainer>
         <div className="header-content">
           Top Questions
-          <button>Ask Question</button>
+          <button onClick={() => selectMenuHandler("/questions/create")}>
+            Ask Question
+          </button>
         </div>
         <div className="button-box">
+          <button>Hot</button>
           <button
             onClick={() => {
-              window.location.href = "/";
+              window.location.href = "/tab=week";
             }}
           >
-            Hot
+            Week
           </button>
-          <button>Week</button>
           <button
             onClick={() => {
               window.location.href = "/tab=month";
@@ -107,7 +107,7 @@ const HomeWeek = () => {
 
         <div className="questions-box">
           {questions.map((el) => (
-            <Question key={el.id} question={el} />
+            <Question key={el.id} question={el}></Question>
           ))}
         </div>
       </HeadContainer>
@@ -115,4 +115,4 @@ const HomeWeek = () => {
   );
 };
 
-export default HomeWeek;
+export default Home;

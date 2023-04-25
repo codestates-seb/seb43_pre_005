@@ -59,6 +59,7 @@ const Tag = ({ tag }) => {
       <div className="tag-id">
         <div className="tag-name">{tag.name}</div>
         <div className="tag-content">{description}</div>
+        <div>{tag.description || "No description available"}</div>
       </div>
     </TagContainer>
   );

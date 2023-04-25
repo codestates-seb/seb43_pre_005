@@ -1,9 +1,9 @@
-import Layout from "../components/common/Layout";
+import Layout from "../../components/common/Layout";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import QuestionButton from "./QuestionButton";
-import userimg from "../assets/images/logo_notext.png";
+import userimg from "../../assets/images/logo_notext.png";
 
 const QuestionsReadDesign = styled.div`
   width: calc(100vw - 167px);

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Layout from "../components/common/Layout";
+import Layout from "../../components/common/Layout";
+import { usePostData } from "../../customhook/useDataPost";
 
 const Container = styled.div`
   display: flex;
@@ -65,17 +66,25 @@ const SubmitButton = styled.button`
   cursor: pointer;
 `;
 
-const QuestionUpdate = () => {
+const QuestionCreate = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [tag, setTag] = useState("");
+  const [postData, setPostData] = useState({ title: "", body: "" });
+  const {
+    loading,
+    error,
+    postData: sendPostData,
+  } = usePostData("http://localhost:3001/qsdummyData");
 
   const navigate = useNavigate();
 
-  const handleUpdate = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     console.log(title, body, tag);
-    // TODO: Update data to API
+    sendPostData(postData).then((data) => {
+      console.log("Post data sent:", data);
+    });
     navigate("/");
   };
 
@@ -83,33 +92,47 @@ const QuestionUpdate = () => {
     <Layout>
       <Container>
         <Title>Ask a Question</Title>
-        <Form onUpdate={handleUpdate}>
+        <Form onSubmit={handleSubmit}>
           <Label htmlFor="title">Title</Label>
           <Input
             type="text"
             id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={postData.title}
+            onChange={(event) =>
+              setPostData({ ...postData, title: event.target.value })
+            }
           />
           <Label htmlFor="body">Body</Label>
           <TextArea
             id="body"
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
+            value={postData.content}
+            onChange={(event) =>
+              setPostData({ ...postData, content: event.target.value })
+            }
           />
           <Label htmlFor="tag">Tag</Label>
-          <Select id="tag" value={tag} onChange={(e) => setTag(e.target.value)}>
+          <Select
+            id="tag"
+            value={postData.tag}
+            onChange={(event) =>
+              setPostData({ ...postData, tag: event.target.value })
+            }
+          >
             <option value="">Select a tag</option>
             <option value="react">React</option>
             <option value="javascript">JavaScript</option>
             <option value="html">HTML</option>
             <option value="css">CSS</option>
           </Select>
-          <SubmitButton type="submit">Update</SubmitButton>
+          <SubmitButton type="submit" disabled={loading}>
+            {" "}
+            {loading ? "Loading..." : "Submit"}
+          </SubmitButton>
+          {error && <p>Error: {error.message}</p>}
         </Form>
       </Container>
     </Layout>
   );
 };
 
-export default QuestionUpdate;
+export default QuestionCreate;
