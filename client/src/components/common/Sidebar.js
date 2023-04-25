@@ -2,14 +2,14 @@ import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { IoEarth } from "react-icons/io5";
 
-export const Menu = {
+const Menu = {
   home: "/",
   questions: "/questions",
   tags: "/tags",
   users: "/users",
   month: "/tab=month",
   week: "/tab=week",
-
+};
 const LeftSidebar = styled.nav`
   padding-inline-start: 1px;
   box-sizing: border-box;
@@ -41,7 +41,7 @@ const LeftSidebar = styled.nav`
   }
 `;
 
-const Sidebar = () => {
+export const Sidebar = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const currentTab = pathname;
