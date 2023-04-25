@@ -25,7 +25,7 @@ public class SearchService {
 
         PageRequest pageRequest = PageRequest.of(page, size, Sort.by("questionId").descending());
         Page<Question> searchList = questionRepository.findByTitleContaining(pageRequest, searchWord);
-
+//
         return searchList;
     }
 
