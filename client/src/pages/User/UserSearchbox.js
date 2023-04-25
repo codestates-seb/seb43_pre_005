@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import logoimg from "../assets/images/logo.png";
+import logoimg from "../../assets/images/logo_notext.png";
 import { Link } from "react-router-dom";
+import useDataFetch from "../../customhook/useDataFetch";
 
 const SearchBoxDesign = styled.div`
   .userdata {
@@ -62,46 +63,56 @@ const SearchBoxDesign = styled.div`
   }
 `;
 
-const SearchBox = ({ data }) => {
+const SearchBox = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  const filteredData = data.filter((item) =>
-    item.name
-      .replace(" ", "")
-      .toLocaleLowerCase()
-      .includes(searchTerm.toLocaleLowerCase().replace(" ", ""))
+  const { data, isLoading, error } = useDataFetch(
+    "http://localhost:3001/userdummydata"
   );
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  const filteredData =
+    data &&
+    data.filter((item) =>
+      item.name
+        .replace(" ", "")
+        .toLocaleLowerCase()
+        .includes(searchTerm.toLocaleLowerCase().replace(" ", ""))
+    );
 
   return (
     <SearchBoxDesign>
       <div>
         <input type="text" onChange={handleChange} placeholder="search" />
         <div className="userdata">
-          {filteredData.map((ele) => {
-            return (
-              <div className="userbox">
-                <div className="userimg">
-                  <Link to={`/users/${ele.id}`}>
-                    <img
-                      className="userpicture"
-                      src={logoimg}
-                      alt="profile"
-                    ></img>
-                  </Link>
+          {filteredData &&
+            filteredData.map((ele) => {
+              return (
+                <div className="userbox">
+                  <div className="userimg">
+                    <Link to={`/users/${ele.id}`}>
+                      <img
+                        className="userpicture"
+                        src={logoimg}
+                        alt="profile"
+                      ></img>
+                    </Link>
+                  </div>
+                  <div className="userinfo">
+                    <div className="username">{ele.name}</div>
+                    <span className="userlocation">{ele.location}</span>
+                    <div className="userage">{ele.age}</div>
+                    <div className="userlanguage">{ele.language}</div>
+                  </div>
                 </div>
-                <div className="userinfo">
-                  <div className="username">{ele.name}</div>
-                  <span className="userlocation">{ele.location}</span>
-                  <div className="userage">{ele.age}</div>
-                  <div className="userlanguage">{ele.language}</div>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
       </div>
     </SearchBoxDesign>
