@@ -1,7 +1,7 @@
 package com.potatos.stackoverflow.domain.question.dto;
 
 
-import com.potatos.stackoverflow.domain.question.mapper.entity.Question;
+import com.potatos.stackoverflow.domain.question.entity.Question;
 import lombok.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
