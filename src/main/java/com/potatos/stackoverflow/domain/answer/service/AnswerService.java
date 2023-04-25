@@ -39,7 +39,7 @@ public class AnswerService {
      * 입력값 : questionId
      * 출력값 : List<Answer>
      */
-    public List<Answer> findAnswers(Long questionId){
+    public List<Answer> findAnswersByQuestionId(Long questionId){
 
         Question question = questionService.findVerifiedQuestion(questionId);
 

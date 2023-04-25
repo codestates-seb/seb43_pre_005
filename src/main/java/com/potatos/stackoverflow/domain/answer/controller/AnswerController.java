@@ -34,7 +34,7 @@ public class AnswerController {
 
     /* POST
      * 답변 생성하는 메서드 입니다.
-     * 필요값 : AnswerPostDto
+     * 필요값 : questionId, AnswerPostDto
      * 출력값 : SingleResponseDto-AnswerResponseDto, 201.CREATED
      */
     @PostMapping
@@ -61,15 +61,41 @@ public class AnswerController {
     /* GET
      * 답변 전체 조회 메서드 입니다.
      * 필요값 : questionId
-     * 출력값 : SingleResponseDto-AnswerResponseDto, 200.OK
+     * 출력값 : SingleResponseDto-List<AnswerResponseDto>, 200.OK
      */
     @GetMapping
-    public ResponseEntity<SingleResponseDto<List<AnswerResponseDto>>> getAnswer(@Positive @PathVariable Long questionId){
-        List<Answer> answers = answerService.findAnswers(questionId);
+    public ResponseEntity<SingleResponseDto<List<AnswerResponseDto>>> getAnswers(@Positive @PathVariable Long questionId){
+        List<Answer> answers = answerService.findAnswersByQuestionId(questionId);
         List<AnswerResponseDto> answerResponseDtoList = answers.stream()
                 .map(AnswerResponseDto::new)
                 .collect(Collectors.toList());
         return new ResponseEntity<>(new SingleResponseDto<>(answerResponseDtoList), HttpStatus.OK);
+    }
+
+    /* GET
+     * 답변 하나를 조회하는 메서드 입니다.
+     * 필요값 : questionId, answerId
+     * 출력값 : SingleResponseDto-AnswerResponseDto, 200.OK
+     */
+    @GetMapping("{answerId}")
+    public ResponseEntity<SingleResponseDto<AnswerResponseDto>> getAnswer(@Positive @PathVariable Long answerId){
+        Answer answer = answerService.findVerifiedAnswer(answerId);
+        AnswerResponseDto answerResponseDto = new AnswerResponseDto(answer);
+
+        return new ResponseEntity<>(new SingleResponseDto<>(answerResponseDto), HttpStatus.OK);
+    }
+
+
+
+    /* Delete
+     * 답변 하나를 삭제하는 메서드 입니다.
+     * 필요값 : answerId
+     * 출력값 : 200.OK
+     */
+    @DeleteMapping("{answerId}")
+    public ResponseEntity deleteAnswer(@Positive @PathVariable Long answerId){
+        answerService.deleteAnswer(answerId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
