@@ -1,7 +1,7 @@
-import Layout from "../components/common/Layout";
+import Layout from "../../components/common/Layout";
 import styled from "styled-components";
-import Question from "../components/Question";
-import qsdummydata from "../data/qsdummyData";
+import Question from "../../components/Question";
+import qsdummydata from "../../data/qsdummyData";
 import { useState } from "react";
 
 const HeadContainer = styled.div`
