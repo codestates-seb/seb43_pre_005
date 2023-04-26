@@ -43,16 +43,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
 
-        // 클라이언트 -> 서버 역직렬화(json->object)
         ObjectMapper objectMapper = new ObjectMapper();    // (3-1)
         LoginDto loginDto = objectMapper.readValue(request.getInputStream(), LoginDto.class); // (3-2)
-        // ServletInputStream -> LoginDto(역직렬화)
-
-        // (3-3) username/password 정보를 포함한 usernamePasswordAuthenticationToken 생성
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
 
-        // authenticationManger에게 전달하고 인증처리 위임
         return authenticationManager.authenticate(authenticationToken);  // (3-4)
     }
 
@@ -64,23 +59,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             FilterChain chain,
                                             Authentication authResult) throws ServletException, IOException {
         Member member = (Member) authResult.getPrincipal();
-        // AuthenticationManager가 내부에서 인증 성공하면
-        // 인증된 Authentication 객체의 principal 필드에 Member객체가 할당된다.
-        // 그래서 해당 필드에서 Member객체를 얻어오는 코드다.
-
         String accessToken = delegateAccessToken(member);   //밑에 함수 선언되어 있다.
         String refreshToken = delegateRefreshToken(member); //밑에 함수 선언되어 있다.
 
         log.info("하늘:Bearer " + accessToken);
         response.setHeader("Authorization", "Bearer " + accessToken);
-        // response header(Authorization)에 access token을 추가한다. (첫인증 후 응답할때만)
-        // 클라이언트는 이후에 request할때마다 request header에 해당 토큰을 추가해서 클라이언트 측의 자격을 증명한다.
         response.setHeader("Refresh", refreshToken);
-        // response header(Refresh)에 refresh token을 추가한다.
-        // 제공할지는 애플리케이션마다 다르다.
-
-        //Security Configuration에서 .setAuthenticationSuccessHandler 핸들러를 설정한다.
-        //핸들러의 메서드 호출한다.
         this.getSuccessHandler().onAuthenticationSuccess(request, response, authResult);  // (1) 추가
     }
 
