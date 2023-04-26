@@ -13,6 +13,7 @@ import qsdummyData from "./data/qsdummyData";
 import QuestionsRead from "./pages/Question/QuestionsRead";
 import QuestionCreate from "./pages/Question/QuestionCreate";
 import MyPage from "./pages/User/Mypage";
+import SearchResult from "./components/common/SearchResult";
 
 function App() {
   return (
@@ -30,11 +31,12 @@ function App() {
           path="/questions/:id"
           element={<QuestionsRead dummydata={qsdummyData} />}
         />
-        <Route path="/questions/create" element={<QuestionCreate />} />
+        <Route path="/questions/ask" element={<QuestionCreate />} />
 
         <Route path="/members" element={<MyPage />} />
 
         <Route path="/questions/tag_name" element={<TagSearch />}></Route>
+        <Route path="/search" element={<SearchResult />}></Route>
       </Routes>
     </BrowserRouter>
   );
