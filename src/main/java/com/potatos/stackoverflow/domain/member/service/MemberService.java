@@ -27,7 +27,7 @@ public class MemberService {
         this.memberRepository = memberRepository;
     }
 
-    public MemberResponseDto saveMember(MemberPostDto memberPostDto) {
+    public Member saveMember(MemberPostDto memberPostDto) {
         System.out.println("service > save member");
         Member member = Member.of(
                 memberPostDto.getDisplayName(),
@@ -35,18 +35,17 @@ public class MemberService {
                 memberPostDto.getPassword(),
                 memberPostDto.getMemberStatus());
 
-        memberRepository.save(member);
+        Member savedMember=memberRepository.save(member);
+        //Member savedMember=memberRepository.findById()
+
+        System.out.println("service > save member:"+savedMember.getId());
 
         //@@@@@@@@@@@@password 인코더 작업 필요함!!!!!!!!!!!!!
         //pwd:{bcrypt}$2a$10$SpS3yu/W/h75eSl6qZrSce593CuiJKmxNcWEdZJxlwBMFY/VNSblq
 
-        MemberResponseDto memberResponseDto = new MemberResponseDto(
-                member.getDisplayName(),
-                member.getEmail(),
-                member.getPassword(),
-                member.getMemberStatus().getStrStatus());
 
-        return memberResponseDto;
+
+        return savedMember;
     }
 
 
@@ -76,7 +75,7 @@ public class MemberService {
         return memberRepository.findById(memberId).orElseThrow();
     }
 
-    public MemberResponseDto findMemberOne(Long memberId) {
+    public MemberResponseDto readMyPage(Long memberId) {
 
         Member member=memberRepository.findById(memberId).orElseThrow();
 
