@@ -1,6 +1,7 @@
-package com.potatos.stackoverflow.domain.question.mapper.entity;
+package com.potatos.stackoverflow.domain.question.entity;
 
 
+import com.potatos.stackoverflow.domain.answer.entity.Answer;
 import com.potatos.stackoverflow.domain.member.entity.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,12 +44,19 @@ public class Question {
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<QuestionTag> questionTags = new ArrayList<>();
 
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
+    private List<Answer> answers = new ArrayList<>();
+
     public void setMember(Member member) {
         this.member = member;
     }
 
     public void setQuestionTags(List<QuestionTag> questionTag) {
         this.questionTags = questionTag;
+    }
+
+    public void setAnswers(List<Answer> answers){
+        this.answers = answers;
     }
 
 }

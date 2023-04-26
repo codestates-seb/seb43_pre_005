@@ -4,12 +4,12 @@ package com.potatos.stackoverflow.domain.question.controller;
 import com.potatos.stackoverflow.domain.member.entity.Member;
 import com.potatos.stackoverflow.domain.member.service.MemberService;
 import com.potatos.stackoverflow.domain.question.dto.QuestionPatchDto;
-import com.potatos.stackoverflow.domain.question.mapper.entity.QuestionTag;
+import com.potatos.stackoverflow.domain.question.entity.QuestionTag;
 import com.potatos.stackoverflow.domain.question.repository.QuestionRepository;
 import com.potatos.stackoverflow.domain.response.MultiResponseDto;
 import com.potatos.stackoverflow.domain.question.dto.QuestionPostDto;
 import com.potatos.stackoverflow.domain.question.dto.QuestionResponseDto;
-import com.potatos.stackoverflow.domain.question.mapper.entity.Question;
+import com.potatos.stackoverflow.domain.question.entity.Question;
 import com.potatos.stackoverflow.domain.question.service.QuestionService;
 import com.potatos.stackoverflow.domain.response.SingleResponseDto;
 import com.potatos.stackoverflow.domain.tags.entity.Tag;
@@ -45,7 +45,7 @@ public class QuestionController{
 
     /* POST
      * 게시물 생성하는 메서드 입니다.
-     * 필요값 : memberId, QuestionPostDto
+     * 필요값 : QuestionPostDto
      * 출력값 : SingleResponseDto-QuestionResponseDto, 201.CREATED
      */
     @PostMapping("/ask")
@@ -127,6 +127,7 @@ public class QuestionController{
         question.setTitle(questionPatchDto.getTitle());
         question.setContent(questionPatchDto.getContent());
 
+        // tag 매핑 작업을 다시 해줌.
         Question updatedQuestion = setQuestionTag(questionPatchDto, question);
 
         //매핑된 QuestionTags 를 이용하여 tagName 을 부여.
