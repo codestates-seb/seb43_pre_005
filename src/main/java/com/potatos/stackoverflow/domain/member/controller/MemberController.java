@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
-@RequestMapping("/users")
+//@RequestMapping("/users")
 @RestController
 public class MemberController {
 
@@ -23,7 +23,7 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    @PostMapping
+    @PostMapping("/users")
     public ResponseEntity createMember(@RequestBody MemberPostDto memberPostDto){
 
         System.out.println("controller > create member");
@@ -35,11 +35,31 @@ public class MemberController {
     }
 
 
-    @GetMapping("/group")
+    @GetMapping("/users/group")
     public ResponseEntity getUsers(@RequestParam(value = "page", defaultValue = "0") int page) {
 
         List<MembersPageDto> response = this.memberService.getMembersPage(page);
 
         return new ResponseEntity(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/users/{userId}")
+    public ResponseEntity getUserById(@PathVariable long userId) {
+
+        System.out.println("controller > get one member");
+
+        MemberResponseDto responseDto=memberService.findMemberOne(userId);
+
+        return new ResponseEntity(responseDto, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/users/{userId}")
+    public ResponseEntity deleteMember(@PathVariable long userId){
+
+        System.out.println("controller > delete member");
+
+        memberService.deleteMember(userId);
+
+        return new ResponseEntity(HttpStatus.OK);
     }
 }
