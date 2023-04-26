@@ -47,6 +47,17 @@ public class AnswerService {
     }
 
     /*
+     * answer list 를 반환하는 method - haneul
+     */
+
+    public int getAnswersCountByMemberId(long memberID) {
+
+        int count = answerRepository.countByMemberId(memberID);
+
+        return count;
+    }
+
+    /*
      * 답변 수정하는 method 입니다.
      * 입력값 : Answer
      * 출력값 : Answer

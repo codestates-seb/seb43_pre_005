@@ -1,10 +1,15 @@
 package com.potatos.stackoverflow.domain.member.service;
 
+import com.potatos.stackoverflow.domain.answer.entity.Answer;
+import com.potatos.stackoverflow.domain.answer.service.AnswerService;
 import com.potatos.stackoverflow.domain.member.dto.MembersPageDto;
+import com.potatos.stackoverflow.domain.member.dto.MyPageResponseDto;
 import com.potatos.stackoverflow.domain.member.repository.MemberRepository;
 import com.potatos.stackoverflow.domain.member.dto.MemberPostDto;
 import com.potatos.stackoverflow.domain.member.dto.MemberResponseDto;
 import com.potatos.stackoverflow.domain.member.entity.Member;
+import com.potatos.stackoverflow.domain.question.entity.Question;
+import com.potatos.stackoverflow.domain.question.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +26,15 @@ import java.util.stream.Collectors;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final QuestionService questionService;
+    private final AnswerService answerService;
 
-    @Autowired
-    public MemberService(MemberRepository memberRepository) {
+
+    public MemberService(MemberRepository memberRepository, QuestionService questionService, AnswerService answerService) {
         this.memberRepository = memberRepository;
+        this.questionService = questionService;
+        this.answerService = answerService;
+
     }
 
     public Member saveMember(MemberPostDto memberPostDto) {
@@ -75,16 +85,18 @@ public class MemberService {
         return memberRepository.findById(memberId).orElseThrow();
     }
 
-    public MemberResponseDto readMyPage(Long memberId) {
+    /*
+     * 마이페이지 조회
+     */
+    public MyPageResponseDto readMyPage(Long memberId) {
 
         Member member=memberRepository.findById(memberId).orElseThrow();
 
-        MemberResponseDto responseDto = new MemberResponseDto(
-                member.getDisplayName(),
-                member.getEmail(),
-                member.getPassword(),
-                member.getMemberStatus().getStrStatus()
-        );
+        List<Question> questionList=questionService.getQuestionListByMember(member);
+        int answerCount = answerService.getAnswersCountByMemberId(member.getId());
+
+        MyPageResponseDto responseDto=MyPageResponseDto.of(member.getDisplayName(),member.getTitle(), member.getIntroduce(),
+                member.getEmail(),questionList, answerCount);
 
         return responseDto;
     }

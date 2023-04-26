@@ -1,6 +1,7 @@
 package com.potatos.stackoverflow.domain.member.controller;
 
 import com.potatos.stackoverflow.domain.member.dto.MembersPageDto;
+import com.potatos.stackoverflow.domain.member.dto.MyPageResponseDto;
 import com.potatos.stackoverflow.domain.member.entity.Member;
 import com.potatos.stackoverflow.domain.member.service.MemberService;
 import com.potatos.stackoverflow.domain.member.dto.MemberPostDto;
@@ -48,7 +49,7 @@ public class MemberController {
 
         System.out.println("controller > get one member");
 
-        MemberResponseDto responseDto=memberService.readMyPage(memberId);
+        MyPageResponseDto responseDto=memberService.readMyPage(memberId);
 
         return new ResponseEntity(responseDto, HttpStatus.OK);
     }
