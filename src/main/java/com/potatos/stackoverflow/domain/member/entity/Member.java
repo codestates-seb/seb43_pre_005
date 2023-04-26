@@ -23,6 +23,7 @@ public class Member {
 
     @Column(nullable = false)
     private String password;
+    //이거 encoder 작업 필요함.
 
     @Enumerated(value = EnumType.STRING)
     @Column
@@ -79,6 +80,18 @@ public class Member {
         member.email=email;
         member.password=password;
         member.memberStatus = MemberStatus.fromString(memberStatus);
+
+        return member;
+    }
+
+    //최소한의 데이터는 뭐가 필요하지?
+    //
+    public static Member of(String email){
+        Member member = new Member();
+        member.displayName = "oauth_member";
+        member.email = email;
+        member.password = "oauth_pwd";
+        member.memberStatus = MemberStatus.fromString("활동");
 
         return member;
     }

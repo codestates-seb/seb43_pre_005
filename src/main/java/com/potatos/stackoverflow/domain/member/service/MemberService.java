@@ -37,6 +37,9 @@ public class MemberService {
 
         memberRepository.save(member);
 
+        //@@@@@@@@@@@@password 인코더 작업 필요함!!!!!!!!!!!!!
+        //pwd:{bcrypt}$2a$10$SpS3yu/W/h75eSl6qZrSce593CuiJKmxNcWEdZJxlwBMFY/VNSblq
+
         MemberResponseDto memberResponseDto = new MemberResponseDto(
                 member.getDisplayName(),
                 member.getEmail(),
@@ -44,6 +47,13 @@ public class MemberService {
                 member.getMemberStatus().getStrStatus());
 
         return memberResponseDto;
+    }
+
+
+    public void saveOAuthMember(Member member) {
+        System.out.println("service > save oauth member");
+
+        memberRepository.save(member);
     }
 
 
@@ -64,5 +74,26 @@ public class MemberService {
 
     private Member findVerifiedMember(Long memberId) {
         return memberRepository.findById(memberId).orElseThrow();
+    }
+
+    public MemberResponseDto findMemberOne(Long memberId) {
+
+        Member member=memberRepository.findById(memberId).orElseThrow();
+
+        MemberResponseDto responseDto = new MemberResponseDto(
+                member.getDisplayName(),
+                member.getEmail(),
+                member.getPassword(),
+                member.getMemberStatus().getStrStatus()
+        );
+
+        return responseDto;
+    }
+
+
+    public void deleteMember(long memberId) {
+        System.out.println("service > delete member");
+
+        memberRepository.deleteById(memberId);
     }
 }
