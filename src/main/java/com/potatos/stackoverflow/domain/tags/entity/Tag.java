@@ -10,7 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Entity
+@Entity(name = "tags")
 @Component
 public class Tag{
 
@@ -23,6 +23,14 @@ public class Tag{
 
     @Column(nullable = false)
     private String description;
+
+    public static Tag of(String name, String description){
+        Tag tag = new Tag();
+        tag.name = name;
+        tag.description = description;
+
+        return tag;
+    }
 
 
 
