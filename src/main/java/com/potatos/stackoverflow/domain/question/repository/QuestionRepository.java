@@ -14,5 +14,7 @@ public interface QuestionRepository  extends JpaRepository<Question, Long> {
     //search
     Page<Question> findByTitleContaining(Pageable pageable, String searchWord);
 
-    //List<Question> findAllById(Long questionId);
+    //fitlerTagQuestion
+    //List<Question> findById(Pageable pageable, Long questionId);
+
 }

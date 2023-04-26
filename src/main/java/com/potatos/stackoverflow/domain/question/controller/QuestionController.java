@@ -226,14 +226,37 @@ public class QuestionController{
 //    }
 
     //searchFilter
+//    @GetMapping("/test/{tag_id}")
+//    public ResponseEntity getFilterTest(@Positive @RequestParam(required = false, defaultValue = "1") int page,
+//                                        @Positive @RequestParam(required = false, defaultValue = "10") int size,
+//            @PathVariable("tag_id") Long tagId){
+//
+//        Page<Question> questionPage = questionService.getSearchTest(tagId);
+//
+//
+//
+//        return new ResponseEntity(questionPage, HttpStatus.OK);
+//
+//    }
+
+
     @GetMapping("/test/{tag_id}")
-    public ResponseEntity<List<Question>> getFilterTest( @PathVariable("tag_id") Long tagId){
+    public ResponseEntity<MultiResponseDto<List<QuestionResponseDto>>> getFilterTest(@Positive @RequestParam(required = false, defaultValue = "1") int page,
+                                                                                    @Positive @RequestParam(required = false, defaultValue = "10") int size,
+                                                                                     @PathVariable("tag_id") Long tagId){
 
-        List<Question> questionPage = questionService.getSearchTest(tagId);
+//        Page<Question> questionPage = questionService.getQuestions(page-1, size);
+        Page<Question> questionPage = questionService.getSearchTest(page-1, size, tagId);
+        List<Question> questionList = questionPage.getContent();
+
+        List<QuestionResponseDto> questionResponseDtoList = questionList.stream()
+                .map(QuestionResponseDto::new)
+                .collect(Collectors.toList());
 
 
+        MultiResponseDto<List<QuestionResponseDto>> multiResponseDto =
+                new MultiResponseDto<>(questionResponseDtoList, questionPage);
 
-        return new ResponseEntity<>(questionPage, HttpStatus.OK);
-
+        return new ResponseEntity<>(multiResponseDto, HttpStatus.OK);
     }
 }

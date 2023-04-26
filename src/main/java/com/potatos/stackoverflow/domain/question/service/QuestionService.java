@@ -1,5 +1,6 @@
 package com.potatos.stackoverflow.domain.question.service;
 
+import com.potatos.stackoverflow.domain.question.dto.QuestionResponseDto;
 import com.potatos.stackoverflow.domain.question.entity.Question;
 import com.potatos.stackoverflow.domain.question.entity.QuestionTag;
 import com.potatos.stackoverflow.domain.question.repository.QuestionRepository;
@@ -9,6 +10,7 @@ import com.potatos.stackoverflow.domain.tags.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -107,7 +109,7 @@ public class QuestionService {
 
 
     //tagFilterQuestion
-    public List<Question> getSearchTest(Long tagId){
+    public Page<Question> getSearchTest(int page, int size, Long tagId){
 
         //PageRequest pageRequest = PageRequest.of(page, size, Sort.by("questionId").descending());
         List<QuestionTag> searchList = questionTagRepo.findAllByTagId(tagId);
@@ -116,14 +118,31 @@ public class QuestionService {
         List<Long> questionIds = searchList.stream().map(questionTag -> questionTag.getQuestion().getQuestionId()).collect(Collectors.toList());
 
 
+        //백업
+//        List<Optional<Question>> optionalList = questionIds.stream()
+//                .map(questionId -> questionRepository.findById(questionId)).collect(Collectors.toList());
+        //백업
+
+
+        //page 처리
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by("questionId").descending());
+
+
         // questionIds를 이용하여 Question 객체를 얻기 위한 스트림 작업
-        List<Question> response = questionIds.stream()
-                .map(questionId -> questionRepository.findById(questionId).orElse(null))
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+        List<Optional<Question>> optionalList = questionIds.stream()
+                .map(questionId -> questionRepository.findById(questionId)).collect(Collectors.toList());
+        //repo에서 꺼내는 값 자체가 Optional이라서 question이 Optional로 감싸져야하지 List<Question>을 Optional로 감싸면 ide가 곤란해함
+
+
+        //optional 꺼내기 ....
+        List<Question> questionResponse = optionalList.stream().map(e -> e.get()).collect(Collectors.toList());
+
+        //페이지네이션 밖에서 하는걸로
 
         //List<Question> response = questionRepository.findById().stream().map(e -> qustionsId).collect(Collectors.toList());
 
-        return response;
+        return null;
     }
+
+
 }
