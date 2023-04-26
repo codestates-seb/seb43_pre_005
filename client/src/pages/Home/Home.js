@@ -1,8 +1,9 @@
-import Layout from "../components/common/Layout";
+import Layout from "../../components/common/Layout";
 import styled from "styled-components";
-import qsdummydata from "../data/qsdummyData";
+import qsdummydata from "../../data/qsdummyData";
 import { useState } from "react";
-import Question from "../components/Question";
+import Question from "../../components/Question";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const HeadContainer = styled.div`
   .header-content {
@@ -71,13 +72,20 @@ const HeadContainer = styled.div`
 
 const Home = () => {
   const [questions, setQuestions] = useState(qsdummydata);
+  const navigate = useNavigate();
+
+  const selectMenuHandler = (path) => {
+    navigate(path);
+  };
 
   return (
     <Layout>
       <HeadContainer>
         <div className="header-content">
           Top Questions
-          <button>Ask Question</button>
+          <button onClick={() => selectMenuHandler("/questions/create")}>
+            Ask Question
+          </button>
         </div>
         <div className="button-box">
           <button>Hot</button>
@@ -99,7 +107,7 @@ const Home = () => {
 
         <div className="questions-box">
           {questions.map((el) => (
-            <Question key={el.id} question={el} />
+            <Question key={el.id} question={el}></Question>
           ))}
         </div>
       </HeadContainer>

@@ -1,8 +1,11 @@
-import Layout from "../components/common/Layout";
+import Layout from "../../components/common/Layout";
 import styled from "styled-components";
-import Question from "../components/Question";
-import qsdummydata from "../data/qsdummyData";
-import { useState } from "react";
+import Question from "../../components/Question";
+import qsdummydata from "../../data/qsdummyData";
+import QuestionCreate from "./QuestionCreate";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import useDataFetch from "../../customhook/useDataFetch";
 
 const HeadContainer = styled.div`
   .header-content {
@@ -48,19 +51,31 @@ const HeadContainer = styled.div`
 
 const Questions = () => {
   const [questions, setQuestions] = useState(qsdummydata);
+  const navigate = useNavigate();
+
+  const selectMenuHandler = (path) => {
+    navigate(path);
+  };
+
+  const { data, isLoading, error } = useDataFetch(
+    "http://localhost:3001/qsdummyData"
+  );
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <Layout>
       <HeadContainer>
         <div className="header-content">
           All Questions
-          <button>Ask Question</button>
+          <button onClick={() => selectMenuHandler("/questions/create")}>
+            Ask Question
+          </button>
         </div>
         <div className="questions-number">{qsdummydata.length} questions</div>
         <div className="questions-box">
-          {questions.map((el) => (
-            <Question key={el.id} question={el} />
-          ))}
+          {data && data.map((el) => <Question key={el.id} question={el} />)}
         </div>
       </HeadContainer>
     </Layout>

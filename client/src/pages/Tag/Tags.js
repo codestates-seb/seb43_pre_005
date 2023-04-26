@@ -1,20 +1,25 @@
-import Layout from "../components/common/Layout";
+import Layout from "../../components/common/Layout";
 import { useState } from "react";
 import { useCallback } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
-import Tag from "../components/common/Tag";
-import dummyData from "../data/dummyData";
-import Pagination from "../components/Pagination";
+import Tag from "../../components/common/Tag";
+import tagdummyData from "../../data/tagdummyData";
+import Pagination from "../../components/Pagination";
+import axios from "axios";
 
 const HeadContainer = styled.div`
   .header-content {
     font-size: 34px;
     margin: 0.5rem;
+    margin-left: 2rem;
+    margin-bottom: 1rem;
   }
 
   .main-content {
     font-size: 14px;
     margin: 0.4rem;
+    margin-left: 2rem;
   }
 
   .content-all {
@@ -33,14 +38,15 @@ const HeadContainer = styled.div`
 
   > input {
     margin-top: 1rem;
-    margin-left: 0.4rem;
+    margin-left: 2rem;
     height: 1.5rem;
+    height: 2rem;
   }
 `;
 const Tags = () => {
-  const [tags, setTags] = useState(dummyData);
+  const [tags, setTags] = useState(tagdummyData);
   const [inputValue, setInputValue] = useState("");
-  const [count, setCount] = useState(14);
+  const [count, setCount] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
   const [tagsPerPage, setTagsPerPage] = useState(12);
   //tagsPerPage는 tagbox기준! 페이지 버튼아님
@@ -48,7 +54,7 @@ const Tags = () => {
   // Calculate the index of the last tag on the current page
   //마지막 페이지 계산 //9
   const indexOfLastTag = currentPage * tagsPerPage;
-
+  // 12 0
   // Calculate the index of the first tag on the current page
   //첫 번째 페이지 : 마지막 페이지에서 tagsPerPage뺌 //0
   const indexOfFirstTag = indexOfLastTag - tagsPerPage;
@@ -61,21 +67,45 @@ const Tags = () => {
     setCurrentPage(pageNumber);
   };
 
-  const handleChangeInput = (e) => {
-    const inputValue = e.target.value;
-    setInputValue(inputValue);
+  // const handleChangeInput = (e) => {
+  //   setInputValue(e.target.value);
+  //   const tag = {
+  //     id: count,
+  //     name: "di",
+  //     questions: 1223,
+  //     asked: 1111,
+  //   };
+  //   setTags([...tags, tag]);
+  //   setCount(count + 1);
+  // };
 
-    // Get the filtered tags array
-    const filteredTags = dummyData.filter((tag) => {
-      const words = inputValue.toLowerCase().split(" ");
-      return words.every((word) => {
-        return tag.name.toLowerCase().includes(word);
+  const handleChangeInput = useCallback(
+    (e) => {
+      const inputValue = e.target.value;
+      setInputValue(inputValue);
+      // Get the filtered tags array
+      const filteredTags = tagdummyData.filter((tag) => {
+        const words = inputValue.toLowerCase().split(" ");
+        return words.every((word) => {
+          return tag.name.toLowerCase().includes(word);
+        });
       });
-    });
 
-    setTags(filteredTags);
-  };
+      setTags(filteredTags);
+    },
+    [setInputValue]
+  );
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      const fetchData = async () => {
+        const result = await axios.get("http://localhost:3001/tagdummydata");
+        setTags(result.data);
+      };
+      fetchData();
+    }, 1000);
 
+    return () => clearTimeout(delayDebounceFn);
+  }, [inputValue]);
   console.log(tags);
 
   return (
@@ -85,7 +115,7 @@ const Tags = () => {
         <div className="main-content">
           A tag is a keyword or label that categorizes your question with other,
           similar questions.<br></br> Using the right tags makes it easier for
-          others to find and answer your question.
+          others to find and answer question.
         </div>
         <input
           type="text"
@@ -115,6 +145,13 @@ const Tags = () => {
 };
 
 export default Tags;
+
+//onchange의 e.target.value값이 들어올 때마다 api를 요청해야한다
+//검색했을 때 순서와 상관없이 스펠링이 있으면 검색 되어야 한다
+
+//페이지네이션으로 구현해야 하기 때문에
+//dummydata로 tag 내용이 들어오는 지 확인 후
+//우선 페이지네이션 없이 map으로 뿌리는것
 
 //onchange의 e.target.value값이 들어올 때마다 api를 요청해야한다
 //검색했을 때 순서와 상관없이 스펠링이 있으면 검색 되어야 한다
