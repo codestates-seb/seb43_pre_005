@@ -36,7 +36,7 @@ public class MemberController {
 
 
     @GetMapping("/users/group")
-    public ResponseEntity getUsers(@RequestParam(value = "page", defaultValue = "0") int page) {
+    public ResponseEntity getUsers(@RequestParam(value = "page", defaultValue = "1") int page) {
 
         List<MembersPageDto> response = this.memberService.getMembersPage(page);
 

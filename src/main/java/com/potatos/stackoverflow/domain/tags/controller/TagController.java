@@ -40,7 +40,7 @@ public class TagController {
     }
 
     @GetMapping
-    public ResponseEntity getTagsPage(@RequestParam(value = "page", defaultValue = "0")int page){
+    public ResponseEntity getTagsPage(@RequestParam(value = "page", defaultValue = "1")int page){
         Page<Tag> paging = this.tagService.getTags(page);
 
         List<Tag> response = paging.getContent();
