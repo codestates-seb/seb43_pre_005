@@ -2,6 +2,7 @@ import { FcGoogle } from "react-icons/fc";
 import { AiFillGithub } from "react-icons/ai";
 import styled from "styled-components";
 import Header from "../../components/common/Header";
+import axios from "axios";
 
 const UserCreateDesign = styled.div`
   background-color: #ececec;
@@ -96,6 +97,22 @@ const UserCreateDesign = styled.div`
 `;
 
 const UserCreate = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const displayName = e.target.displayName.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    try {
+      const response = await axios.post("http://localhost:8080/users/signup", {
+        displayName,
+        email,
+        password,
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <UserCreateDesign>
       <Header></Header>
@@ -126,7 +143,9 @@ const UserCreate = () => {
           </div>
         </div>
         <div className="logincenter">
-          <button className="loginbutton">sign up</button>
+          <button className="loginbutton" onClick={handleSubmit}>
+            sign up
+          </button>
         </div>
       </div>
     </UserCreateDesign>

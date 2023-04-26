@@ -135,9 +135,16 @@ const QuestionsReadDesign = styled.div`
 `;
 
 const Content = styled.div`
-  width: 100%;
   grid-column: 2 / 20;
   grid-row: 1 / 2;
+
+  textarea {
+    border: none;
+    width: 700px;
+    height: 200px;
+    font-size: x-large;
+    word-spacing: 1rem;
+  }
 `;
 
 const QuestionButtonDesign = styled(QuestionButton)`
@@ -154,18 +161,38 @@ function QuestionsRead({ dummydata }) {
   //답변이 등록될 div
   const [content, setContent] = useState([]);
   const [data, setData] = useState([]);
+  const [answerId, setAnswerId] = useState(1);
+  const [edited, setEdited] = useState(false);
+  const [editInputValue, setEditInputValue] = useState(question.content);
 
+  const countUp = () => {
+    setAnswerId(answerId + 1);
+  };
+
+  const onEditBtn = () => {
+    setEdited(!edited);
+  };
+
+  const onSaveBtn = () => {
+    setEdited(!edited);
+    handleEditValue(editInputValue);
+  };
+
+  const handleEditValue = (value) => {
+    setEditInputValue(value);
+  };
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/qsdummydata/${id}`)
+      .get(`http://localhost:8080/questions/${id}`)
       .then((response) => setData(response.data))
       .catch((error) => console.log(error));
-  }, [id]);
+    console.log("get");
+  }, []);
   //질문삭제 부분 API
   const handleDelete = async () => {
     try {
       const response = await axios.delete(
-        `http://localhost:3001/qsdummydata/${id}`
+        `http://localhost:8080/questions/${id}`
       );
       if (response.status === 200) {
         navigate("/");
@@ -178,7 +205,7 @@ function QuestionsRead({ dummydata }) {
   const handleAnswerDelete = async (questionId, answerId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:3001/questions/${questionId}/answers/${answerId}`
+        `http://localhost:8080/questions/${questionId}/answers/${answerId}`
       );
       if (response.status === 200) {
         navigate("/");
@@ -187,6 +214,12 @@ function QuestionsRead({ dummydata }) {
       console.error(error);
     }
   };
+  //eventhandler를 눌렀을 때, content의 내용을 수정할 수 있게 focus를 맞춰야함
+  //question.content의 내용을 수정 한 후
+  //수정한 내용을 patch로 보내야함
+
+  const handleEditPatch = () => {};
+
   const handleonChange = (e) => {
     setMsg(e.target.value);
     console.log(e.target.value);
@@ -207,7 +240,7 @@ function QuestionsRead({ dummydata }) {
           answers: data.answers,
         }
       );
-
+      countUp();
       setContent(patchResponse.data.answers);
       setMsg("");
       console.log(patchResponse);
@@ -228,7 +261,13 @@ function QuestionsRead({ dummydata }) {
             Viewed <span>{question.look} times</span>
           </div>
           <div class="spacer"></div>
-          <button className="questionretouch">질문수정</button>
+          {edited ? (
+            <button onClick={onSaveBtn}>확인</button>
+          ) : (
+            <button className="questionretouch" onClick={onEditBtn}>
+              질문수정
+            </button>
+          )}
           <button className="questiondelete" onClick={handleDelete}>
             질문삭제
           </button>
@@ -236,7 +275,16 @@ function QuestionsRead({ dummydata }) {
         <hr></hr>
         <div className="questioncontent">
           <QuestionButtonDesign />
-          <Content>{question.content}</Content>
+          <Content>
+            <textarea
+              value={editInputValue}
+              onChange={(e) => {
+                if (edited) {
+                  setEditInputValue(e.target.value);
+                }
+              }}
+            />
+          </Content>
           <div className="questiontags">tags</div>
           <img className="userimg" src={userimg} alt="userimg"></img>
           <div className="questionperson">{question.person}</div>
@@ -247,6 +295,7 @@ function QuestionsRead({ dummydata }) {
           <div className="questionanswer" id={id}>
             {el}
             <button onClick={() => handleAnswerDelete(id, index)}>
+              {index}
               delete
             </button>
           </div>
