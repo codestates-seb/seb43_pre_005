@@ -3,7 +3,6 @@ package com.potatos.stackoverflow.domain.tags.controller;
 
 import com.potatos.stackoverflow.domain.tags.dto.TagPostDto;
 import com.potatos.stackoverflow.domain.tags.entity.Tag;
-import com.potatos.stackoverflow.domain.tags.mapper.TagMapper;
 import com.potatos.stackoverflow.domain.tags.service.TagService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,23 +23,20 @@ import org.springframework.data.domain.Page;
 public class TagController {
 
     private TagService tagService;
-    private TagMapper mapper;
 
-    public TagController(TagService tagService, TagMapper mapper){
-        this.mapper = mapper;
+    public TagController(TagService tagService){
         this.tagService = tagService;
     }
 
 
     //테스트 API로 실제로 사용하지 않습니다(POST), DB에 테스트 데이터 적재용입니다.
-    @PostMapping
+   @PostMapping
     public ResponseEntity postTag(@RequestBody TagPostDto tagDto){
 
-        Tag tag = mapper.postTagDtoToEntity(tagDto);
+        Tag responseDto = tagService.createTag(tagDto);
 
-        Tag response = tagService.createTag(tag);
 
-        return new ResponseEntity<>(mapper.tagResponseToDto(response), HttpStatus.CREATED);
+        return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
     }
 
     @GetMapping
