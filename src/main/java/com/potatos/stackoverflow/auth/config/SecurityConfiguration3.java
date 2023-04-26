@@ -54,16 +54,16 @@ public class SecurityConfiguration3 {
                 .apply(new CustomFilterConfigurer())
                 .and()
                 .authorizeHttpRequests(authorize->authorize
-                        .antMatchers(HttpMethod.GET, "/**/users/**").hasRole("USER") //유저 1명 조회 (본인)
-                                .antMatchers(HttpMethod.DELETE, "/**/users/**").hasRole("USER") //유저 삭제 (본인)
-                                .antMatchers(HttpMethod.POST, "/**/logout/**").hasRole("USER") //유저 로그아웃 (본인)
-                                .antMatchers(HttpMethod.POST, "/**/members/edit/**").hasRole("USER") //마이페이지 수정 (본인)
-                                .antMatchers(HttpMethod.POST, "/**/questions/**").hasRole("USER") //질문/답변 작성 (본인)
-                                .antMatchers(HttpMethod.PATCH, "/**/questions/**").hasRole("USER") //질문 수정 (본인)
-                                .antMatchers(HttpMethod.DELETE, "/**/questions/**").hasRole("USER") //질문 삭제 (본인)
-                                .antMatchers(HttpMethod.GET, "/**/users/**").hasRole("ADMIN") //유저 1명 조회 (본인)
-                                //이거 오류났음 고쳐야함.
-                                .anyRequest().permitAll()
+//                        .antMatchers(HttpMethod.GET, "/**/users/**").hasRole("USER") //유저 1명 조회 (본인)
+//                        .antMatchers(HttpMethod.DELETE, "/**/users/**").hasRole("USER") //유저 삭제 (본인)
+//                        .antMatchers(HttpMethod.POST, "/**/logout/**").hasRole("USER") //유저 로그아웃 (본인)
+//                        .antMatchers(HttpMethod.POST, "/**/members/edit/**").hasRole("USER") //마이페이지 수정 (본인)
+//                        .antMatchers(HttpMethod.POST, "/**/questions/**").hasRole("USER") //질문/답변 작성 (본인)
+//                        .antMatchers(HttpMethod.PATCH, "/**/questions/**").hasRole("USER") //질문 수정 (본인)
+//                        .antMatchers(HttpMethod.DELETE, "/**/questions/**").hasRole("USER") //질문 삭제 (본인)
+//                        .antMatchers(HttpMethod.GET, "/**/users/**").hasRole("ADMIN") //유저 1명 조회 (본인)
+//                                //이거 오류났음 고쳐야함.
+                        .anyRequest().permitAll()
                 );
         return http.build();
     }
