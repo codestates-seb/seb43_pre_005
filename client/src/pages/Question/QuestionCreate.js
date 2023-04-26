@@ -125,7 +125,6 @@ const QuestionCreate = () => {
             <option value="css">CSS</option>
           </Select>
           <SubmitButton type="submit" disabled={loading}>
-            {" "}
             {loading ? "Loading..." : "Submit"}
           </SubmitButton>
           {error && <p>Error: {error.message}</p>}
