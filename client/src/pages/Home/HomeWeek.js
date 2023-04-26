@@ -1,8 +1,10 @@
 import Layout from "../../components/common/Layout";
 import styled from "styled-components";
 import qsdummydata from "../../data/qsdummyData";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Question from "../../components/Question";
+import axios from "axios";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const HeadContainer = styled.div`
   .header-content {
@@ -78,14 +80,33 @@ const HeadContainer = styled.div`
 `;
 
 const HomeWeek = () => {
-  const [questions, setQuestions] = useState(qsdummydata);
+  // const [questions, setQuestions] = useState(qsdummydata);
+  const [questions, setQuestions] = useState([]);
+  const navigate = useNavigate();
+
+  const selectMenuHandler = (path) => {
+    navigate(path);
+  };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080?tab=week")
+      .then((response) => {
+        setQuestions(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return (
     <Layout>
       <HeadContainer>
         <div className="header-content">
           Top Questions
-          <button>Ask Question</button>
+          <button onClick={() => selectMenuHandler("/questions/ask")}>
+            Ask Question
+          </button>
         </div>
         <div className="button-box">
           <button
