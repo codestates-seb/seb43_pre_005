@@ -1,7 +1,7 @@
-package com.potatos.stackoverflow.oauth.handler;
+package com.potatos.stackoverflow.auth.handler;
 
 import com.google.gson.Gson;
-import com.potatos.stackoverflow.oauth.utils.ErrorResponse;
+import com.potatos.stackoverflow.auth.utils.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

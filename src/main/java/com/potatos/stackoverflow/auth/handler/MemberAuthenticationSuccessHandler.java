@@ -1,4 +1,4 @@
-package com.potatos.stackoverflow.oauth.handler;
+package com.potatos.stackoverflow.auth.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;

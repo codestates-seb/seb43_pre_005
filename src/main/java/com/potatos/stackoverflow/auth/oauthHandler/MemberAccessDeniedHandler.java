@@ -1,6 +1,6 @@
-package com.potatos.stackoverflow.oauth.handler;
+package com.potatos.stackoverflow.auth.oauthHandler;
 
-import com.potatos.stackoverflow.oauth.utils.ErrorResponder;
+import com.potatos.stackoverflow.auth.utils.ErrorResponder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;

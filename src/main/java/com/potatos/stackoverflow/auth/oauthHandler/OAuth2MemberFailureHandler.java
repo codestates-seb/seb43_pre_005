@@ -1,4 +1,4 @@
-package com.potatos.stackoverflow.oauth.handler;
+package com.potatos.stackoverflow.auth.oauthHandler;
 
 
 

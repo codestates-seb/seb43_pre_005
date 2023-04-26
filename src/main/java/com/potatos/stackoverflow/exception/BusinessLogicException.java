@@ -1,6 +1,6 @@
-package com.potatos.stackoverflow.domain.exception;
+package com.potatos.stackoverflow.exception;
 
-import com.potatos.stackoverflow.oauth.exception.ExceptionCode;
+import com.potatos.stackoverflow.auth.exception.ExceptionCode;
 import lombok.Getter;
 
 public class BusinessLogicException extends RuntimeException {

@@ -1,4 +1,4 @@
-package com.potatos.stackoverflow.oauth.utils;
+package com.potatos.stackoverflow.auth.utils;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;

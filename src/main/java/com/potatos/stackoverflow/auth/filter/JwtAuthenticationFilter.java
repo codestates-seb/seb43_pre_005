@@ -1,9 +1,9 @@
-package com.potatos.stackoverflow.oauth.filter;
+package com.potatos.stackoverflow.auth.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.potatos.stackoverflow.domain.member.entity.Member;
-import com.potatos.stackoverflow.oauth.dto.LoginDto;
-import com.potatos.stackoverflow.oauth.token.JwtTokenizer;
+import com.potatos.stackoverflow.auth.dto.LoginDto;
+import com.potatos.stackoverflow.auth.token.JwtTokenizer;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -88,7 +89,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         //access token 생성시 필요1
         Map<String, Object> claims = new HashMap<>();
         claims.put("username", member.getEmail());
-        //claims.put("roles", member.getRoles());
+        claims.put("roles", List.of("USER"));
         //여기까지 claims 구성...
 
 

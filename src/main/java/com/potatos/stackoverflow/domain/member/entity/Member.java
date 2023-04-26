@@ -23,6 +23,7 @@ public class Member {
 
     @Column(nullable = false)
     private String password;
+    //이거 encoder 작업 필요함.
 
     @Enumerated(value = EnumType.STRING)
     @Column

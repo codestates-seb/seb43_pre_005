@@ -1,7 +1,7 @@
-package com.potatos.stackoverflow.oauth.filter;
+package com.potatos.stackoverflow.auth.filter;
 
-import com.potatos.stackoverflow.oauth.token.JwtTokenizer;
-import com.potatos.stackoverflow.oauth.utils.CustomAuthorityUtils;
+import com.potatos.stackoverflow.auth.token.JwtTokenizer;
+import com.potatos.stackoverflow.auth.utils.CustomAuthorityUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

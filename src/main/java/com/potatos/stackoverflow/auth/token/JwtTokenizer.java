@@ -1,4 +1,4 @@
-package com.potatos.stackoverflow.oauth.token;
+package com.potatos.stackoverflow.auth.token;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;

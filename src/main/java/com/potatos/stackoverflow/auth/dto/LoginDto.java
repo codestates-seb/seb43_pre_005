@@ -1,4 +1,4 @@
-package com.potatos.stackoverflow.oauth.dto;
+package com.potatos.stackoverflow.auth.dto;
 import lombok.Getter;
 
 @Getter

@@ -37,6 +37,9 @@ public class MemberService {
 
         memberRepository.save(member);
 
+        //@@@@@@@@@@@@password 인코더 작업 필요함!!!!!!!!!!!!!
+        //pwd:{bcrypt}$2a$10$SpS3yu/W/h75eSl6qZrSce593CuiJKmxNcWEdZJxlwBMFY/VNSblq
+
         MemberResponseDto memberResponseDto = new MemberResponseDto(
                 member.getDisplayName(),
                 member.getEmail(),

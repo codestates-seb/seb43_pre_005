@@ -1,4 +1,4 @@
-package com.potatos.stackoverflow.domain.exception;
+package com.potatos.stackoverflow.exception;
 
 
 import lombok.Getter;

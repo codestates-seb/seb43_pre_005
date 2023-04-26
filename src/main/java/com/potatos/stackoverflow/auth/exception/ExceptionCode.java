@@ -1,4 +1,4 @@
-package com.potatos.stackoverflow.oauth.exception;
+package com.potatos.stackoverflow.auth.exception;
 
 import lombok.Getter;
 

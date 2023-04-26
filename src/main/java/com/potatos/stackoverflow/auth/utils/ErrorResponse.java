@@ -1,10 +1,9 @@
-package com.potatos.stackoverflow.oauth.utils;
+package com.potatos.stackoverflow.auth.utils;
 
-import com.potatos.stackoverflow.oauth.exception.ExceptionCode;
+import com.potatos.stackoverflow.auth.exception.ExceptionCode;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 
 import javax.validation.ConstraintViolation;
 import java.util.List;

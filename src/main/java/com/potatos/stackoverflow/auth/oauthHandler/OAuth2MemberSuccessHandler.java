@@ -1,9 +1,9 @@
-package com.potatos.stackoverflow.oauth.handler;
+package com.potatos.stackoverflow.auth.oauthHandler;
 
 import com.potatos.stackoverflow.domain.member.entity.Member;
 import com.potatos.stackoverflow.domain.member.service.MemberService;
-import com.potatos.stackoverflow.oauth.token.JwtTokenizer;
-import com.potatos.stackoverflow.oauth.utils.CustomAuthorityUtils;
+import com.potatos.stackoverflow.auth.token.JwtTokenizer;
+import com.potatos.stackoverflow.auth.utils.CustomAuthorityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;

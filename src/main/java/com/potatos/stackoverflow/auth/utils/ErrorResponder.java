@@ -1,4 +1,4 @@
-package com.potatos.stackoverflow.oauth.utils;
+package com.potatos.stackoverflow.auth.utils;
 
 import com.google.gson.Gson;
 import org.springframework.http.HttpStatus;
