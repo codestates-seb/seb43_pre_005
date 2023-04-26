@@ -2,21 +2,23 @@ package com.potatos.stackoverflow.domain.question.entity;
 
 
 import com.potatos.stackoverflow.domain.tags.entity.Tag;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity(name = "question_tags")
-@NoArgsConstructor
+//@Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class QuestionTag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long questionTagId;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "question_id")
@@ -25,5 +27,4 @@ public class QuestionTag {
     @ManyToOne
     @JoinColumn(name = "tag_id")
     private Tag tag;
-
 }

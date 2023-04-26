@@ -5,14 +5,10 @@ import com.potatos.stackoverflow.domain.tags.entity.Tag;
 import com.potatos.stackoverflow.domain.tags.response.TagResponse;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Component
 public class TagMapper {
 
     public Tag postTagDtoToEntity(TagPostDto tagPostDto){
-
         return new Tag(
                 0L, //jpa의 indentity는 0부터 시작해야 자동으로 1씩 오르는 구조를 가짐
                 tagPostDto.getName(),
