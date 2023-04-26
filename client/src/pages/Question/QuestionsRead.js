@@ -154,6 +154,11 @@ function QuestionsRead({ dummydata }) {
   //답변이 등록될 div
   const [content, setContent] = useState([]);
   const [data, setData] = useState([]);
+  const [answerId, setAnswerId] = useState(1);
+
+  const countUp = () => {
+    setAnswerId(answerId + 1);
+  };
 
   useEffect(() => {
     axios
@@ -178,7 +183,7 @@ function QuestionsRead({ dummydata }) {
   const handleAnswerDelete = async (questionId, answerId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:3001/questions/${questionId}/answers/${answerId}`
+        `http://localhost:3001/qsdummydata/${questionId}/answers/${answerId}`
       );
       if (response.status === 200) {
         navigate("/");
@@ -207,7 +212,7 @@ function QuestionsRead({ dummydata }) {
           answers: data.answers,
         }
       );
-
+      countUp();
       setContent(patchResponse.data.answers);
       setMsg("");
       console.log(patchResponse);
@@ -247,6 +252,7 @@ function QuestionsRead({ dummydata }) {
           <div className="questionanswer" id={id}>
             {el}
             <button onClick={() => handleAnswerDelete(id, index)}>
+              {index}
               delete
             </button>
           </div>

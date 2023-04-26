@@ -22,12 +22,7 @@
         "fruit",
         "watermelon"
       ],
-      "answers": [
-        "dd",
-        "aa",
-        "asdf",
-        ""
-      ]
+      "answers": []
     },
     {
       "id": 19,
@@ -42,7 +37,13 @@
       "answers": [
         "dd",
         "aa",
-        "asdf"
+        "",
+        "",
+        "aa",
+        "",
+        "",
+        "ㅇㅇ",
+        ""
       ]
     },
     {
