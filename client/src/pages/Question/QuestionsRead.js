@@ -181,7 +181,7 @@ function QuestionsRead() {
   };
   useEffect(() => {
     axios
-      .get(`http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`)
+      .get(`/questions/${questionId}`)
       .then((response) => setData(response.data))
       .catch((error) => console.log(error));
   }, [id]);
@@ -189,7 +189,7 @@ function QuestionsRead() {
   const handleDelete = async () => {
     try {
       const response = await axios.delete(
-        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`
+        `/questions/${questionId}`
       );
       if (response.status === 200) {
         navigate("/");
@@ -203,7 +203,7 @@ function QuestionsRead() {
     try {
       const response = await axios.delete(
 
-        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/answers/${answerId}`
+        `/questions/${questionId}/answers/${answerId}`
 
       );
       if (response.status === 200) {
