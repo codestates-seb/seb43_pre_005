@@ -71,7 +71,12 @@ const QuestionCreate = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [tag, setTag] = useState("");
-  const [postData, setPostData] = useState({ title: "", body: "" });
+  const [postData, setPostData] = useState({
+    title: "",
+    content: "",
+    tagIds: ["tag", "react"],
+    memberId: 33,
+  });
   const {
     loading,
     error,

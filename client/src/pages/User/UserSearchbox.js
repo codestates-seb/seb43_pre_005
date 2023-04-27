@@ -48,16 +48,6 @@ const SearchBoxDesign = styled.div`
           text-decoration: none;
           font-size: 20px;
         }
-        .userlocation {
-          margin-right: 2px;
-        }
-        .userage {
-          margin-right: 2px;
-        }
-        .userlanguage {
-          font-size: 11px;
-          font-weight: 700;
-        }
       }
     }
   }
@@ -105,10 +95,7 @@ const SearchBox = () => {
                     </Link>
                   </div>
                   <div className="userinfo">
-                    <div className="username">{ele.name}</div>
-                    <span className="userlocation">{ele.location}</span>
-                    <div className="userage">{ele.age}</div>
-                    <div className="userlanguage">{ele.language}</div>
+                    <div className="username">{ele.displayName}</div>
                   </div>
                 </div>
               );
