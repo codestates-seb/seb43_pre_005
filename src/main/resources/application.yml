@@ -7,7 +7,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: create # create 일때   sql.init.mode 바꾸기 (하단에 적어둠)
     show-sql: true
     database: mysql
     properties:

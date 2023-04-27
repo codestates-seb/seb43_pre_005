@@ -32,6 +32,13 @@ public class Member {
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    //mypage
+    @Column(nullable = true)
+    private String title="마이페이지에 오신 것을 환영합니다!";
+
+    @Column(nullable = true)
+    private String introduce="자기소개를 작성합니다";
+
     public enum MemberStatus{
         ACTIVE("활동",0),
         DORMANCY("휴면",1),

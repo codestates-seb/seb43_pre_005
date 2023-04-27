@@ -1,5 +1,6 @@
 package com.potatos.stackoverflow.domain.question.service;
 
+import com.potatos.stackoverflow.domain.member.entity.Member;
 import com.potatos.stackoverflow.domain.question.entity.Question;
 import com.potatos.stackoverflow.domain.question.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,16 @@ public class QuestionService {
         PageRequest pageRequest = PageRequest.of(page, size, Sort.by("questionId").descending());
 
         return questionRepository.findAll(pageRequest);
+    }
+
+    /*
+     * 특정 멤버가 작성한 게시글 리스트 조회하는 method - haneul
+     */
+    public List<Question> getQuestionListByMember(Member member) {
+
+        List<Question> questionList = questionRepository.findAllByMemberId(member.getId());
+
+        return questionList;
     }
 
     /*

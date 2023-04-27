@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface AnswerRepository extends JpaRepository<Answer, Long> {
 
+
+    int countByMemberId(long memberId);
 }
