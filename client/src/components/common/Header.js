@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import logo from "../../assets/images/logo.png";
+import { useNavigate } from "react-router-dom";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -13,6 +14,7 @@ const HeaderContainer = styled.div`
 
 const LogoImage = styled.img`
   height: 30px;
+  cursor: pointer;
 `;
 
 const SearchContainer = styled.div`
@@ -69,16 +71,62 @@ const ActionButton = styled.button`
 `;
 
 const Header = () => {
+  const navigate = useNavigate();
+  const selectMenuHandler = (path) => {
+    navigate(path);
+  };
+  const [searchWord, setSearchWord] = useState("");
+
+  const handleSearchChange = (event) => {
+    setSearchWord(event.target.value);
+  };
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    navigate(`/search?page=1&word=${searchWord}`);
+  };
+
   return (
     <HeaderContainer>
-      <LogoImage src={logo} alt="Stack Overflow Logo" />
-      <SearchContainer>
-        <SearchBar type="text" placeholder="Search..." />
-        <SearchButton type="submit">Search</SearchButton>
-      </SearchContainer>
+      <LogoImage
+        src={logo}
+        alt="Stack Overflow Logo"
+        onClick={() => selectMenuHandler("/")}
+      />
+      <form onSubmit={handleSearchSubmit}>
+        <SearchContainer>
+          <SearchBar
+            type="text"
+            placeholder="Search..."
+            value={searchWord}
+            onChange={handleSearchChange}
+          />
+          <SearchButton
+            type="submit"
+            searchWord={searchWord}
+            onClick={() => {
+              navigate("/search");
+            }}
+          >
+            Search
+          </SearchButton>
+        </SearchContainer>
+      </form>
       <ActionContainer>
-        <ActionButton>Log in</ActionButton>
-        <ActionButton>Sign in</ActionButton>
+        <ActionButton
+          onClick={() => {
+            window.location.href = "/users/login";
+          }}
+        >
+          Log in
+        </ActionButton>
+        <ActionButton
+          onClick={() => {
+            window.location.href = "/users/signup";
+          }}
+        >
+          Sign in
+        </ActionButton>
       </ActionContainer>
     </HeaderContainer>
   );

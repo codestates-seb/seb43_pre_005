@@ -18,7 +18,7 @@ public class QuestionPostDto {
     private String content;
 
     @Size(max = 5)
-    private List<Long> tagIds = new ArrayList<>();
+    private List<Long> tagIds;
 
     private Long memberId;
 

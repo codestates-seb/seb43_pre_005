@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const TagContainer = styled.div`
   border: solid 1px gray;
@@ -6,6 +7,7 @@ const TagContainer = styled.div`
   margin: 1rem;
   width: 21vw;
   height: 20vh;
+  cursor: pointer;
 
   .tag-name {
     border-radius: 10px;
@@ -38,16 +40,26 @@ const TagContainer = styled.div`
 `;
 
 const Tag = ({ tag }) => {
-  //   const parsedDate = new Date(tag.createdAt).toLocaleDateString("ko-kr");
+  // const parsedDate = new Date(tag.createdAt).toLocaleDateString("ko-kr");
+
+  const navigate = useNavigate();
+
+  const handleOneClick = () => {
+    navigate(`/questions/tag_name`);
+  };
+  if (!tag) {
+    return null; // tag 객체가 없으면 null 반환
+  }
   const description =
     tag.description.length > 100
       ? tag.description.slice(0, 150) + "..."
       : tag.description;
   return (
-    <TagContainer>
+    <TagContainer onClick={handleOneClick}>
       <div className="tag-id">
         <div className="tag-name">{tag.name}</div>
         <div className="tag-content">{description}</div>
+        <div>{tag.description || "No description available"}</div>
       </div>
     </TagContainer>
   );

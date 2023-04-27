@@ -1,8 +1,12 @@
-import Layout from "../components/common/Layout";
+import Layout from "../../components/common/Layout";
 import styled from "styled-components";
-import Question from "../components/Question";
-import qsdummydata from "../data/qsdummyData";
-import { useState } from "react";
+import Question from "../../components/Question";
+import qsdummydata from "../../data/qsdummyData";
+import QuestionCreate from "./QuestionCreate";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import useDataFetch from "../../customhook/useDataFetch";
+import axios from "axios";
 
 const HeadContainer = styled.div`
   .header-content {
@@ -47,16 +51,34 @@ const HeadContainer = styled.div`
 `;
 
 const Questions = () => {
-  const [questions, setQuestions] = useState(qsdummydata);
+  const [questions, setQuestions] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions")
+      .then((response) => {
+        setQuestions(response.data.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  const navigate = useNavigate();
+
+  const selectMenuHandler = (path) => {
+    navigate(path);
+  };
 
   return (
     <Layout>
       <HeadContainer>
         <div className="header-content">
           All Questions
-          <button>Ask Question</button>
+          <button onClick={() => selectMenuHandler("/ask")}>
+            Ask Question
+          </button>
         </div>
-        <div className="questions-number">{qsdummydata.length} questions</div>
+        <div className="questions-number">{questions.length} questions</div>
         <div className="questions-box">
           {questions.map((el) => (
             <Question key={el.id} question={el} />

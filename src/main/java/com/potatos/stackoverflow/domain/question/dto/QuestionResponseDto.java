@@ -29,7 +29,7 @@ public class QuestionResponseDto {
     private String memberName;
 
     public QuestionResponseDto(Question question){
-        this.questionId = question.getQuestionId();
+        this.questionId = question.getId();
         this.title = question.getTitle();
         this.content = question.getContent();
         this.memberId = question.getMember().getId();

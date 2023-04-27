@@ -1,8 +1,10 @@
-import Layout from "../components/common/Layout";
+import Layout from "../../components/common/Layout";
 import styled from "styled-components";
-import qsdummydata from "../data/qsdummyData";
-import { useState } from "react";
-import Question from "../components/Question";
+import qsdummydata from "../../data/qsdummyData";
+import { useState, useEffect } from "react";
+import Question from "../../components/Question";
+import axios from "axios";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const HeadContainer = styled.div`
   .header-content {
@@ -42,6 +44,7 @@ const HeadContainer = styled.div`
     display: flex;
     justify-content: right;
     margin-right: 5rem;
+
     button {
       color: white;
       border: none;
@@ -51,22 +54,13 @@ const HeadContainer = styled.div`
       border-radius: 5px;
       cursor: pointer;
     }
-    button:first-child {
-      &:hover {
-        opacity: 0.8;
-        background-color: #7878ff;
-      }
-    }
-
-    button:nth-child(2) {
+    button:nth-child(3) {
       background-color: #7878ff;
     }
 
-    button:nth-child(3) {
-      &:hover {
-        opacity: 0.8;
-        background-color: #7878ff;
-      }
+    button:not(:nth-child(3)):hover {
+      opacity: 0.8;
+      background-color: #a696cd;
     }
   }
 
@@ -77,32 +71,51 @@ const HeadContainer = styled.div`
   }
 `;
 
-const HomeWeek = () => {
-  const [questions, setQuestions] = useState(qsdummydata);
+const HomeMonth = () => {
+  // const [questions, setQuestions] = useState(qsdummydata);
+  const [questions, setQuestions] = useState([]);
+  const navigate = useNavigate();
+
+  const selectMenuHandler = (path) => {
+    navigate(path);
+  };
+
+  useEffect(() => {
+    axios
+      .get("http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions")
+      .then((response) => {
+        setQuestions(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return (
     <Layout>
       <HeadContainer>
         <div className="header-content">
           Top Questions
-          <button>Ask Question</button>
+          <button onClick={() => selectMenuHandler("questions/ask")}>
+            Ask Question
+          </button>
         </div>
         <div className="button-box">
           <button
             onClick={() => {
-              window.location.href = "/";
+              window.location.href = "http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/";
             }}
           >
             Hot
           </button>
-          <button>Week</button>
           <button
             onClick={() => {
-              window.location.href = "/tab=month";
+              window.location.href = "http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080?tab=week";
             }}
           >
-            Month
+            Week
           </button>
+          <button>Month</button>
         </div>
 
         <div className="questions-box">
@@ -115,4 +128,4 @@ const HomeWeek = () => {
   );
 };
 
-export default HomeWeek;
+export default HomeMonth;
