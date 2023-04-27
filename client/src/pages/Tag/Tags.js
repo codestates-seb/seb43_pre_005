@@ -98,8 +98,8 @@ const Tags = () => {
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       const fetchData = async () => {
-        const result = await axios.get("/tags");
-        setTags(result.data);
+        const result = await axios.get("http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/stackOverflow/tags");
+        setTags(result.data.data);
       };
       fetchData();
     }, 1000);
@@ -125,7 +125,8 @@ const Tags = () => {
           autoFocus
         />
         <div className="tag-container">
-          {currentTags.map((el) => (
+          {Array.isArray(currentTags) &&
+          currentTags.map((el) => (
             <Tag key={el.id} tag={el} />
           ))}
         </div>

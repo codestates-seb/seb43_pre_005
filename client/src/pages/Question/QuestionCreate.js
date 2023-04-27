@@ -75,15 +75,14 @@ const QuestionCreate = () => {
     title: "",
     content: "",
     tagIds: ["tag", "react"],
-    memberId: 33,
+    memberId: 1,
   });
   const {
     loading,
     error,
     postData: sendPostData,
-
   } = usePostData(
-    "/qusetions/ask"
+    "http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/qusetions/ask"
   );
 
   const navigate = useNavigate();

@@ -103,7 +103,7 @@ const UserCreate = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     try {
-      const response = await axios.post("/users/signup", {
+      const response = await axios.post("http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/users/signup", {
         displayName,
         email,
         password,

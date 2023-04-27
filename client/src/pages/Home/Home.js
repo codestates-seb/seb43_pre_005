@@ -78,7 +78,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get("/questions")
+      .get("http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions")
       .then((response) => {
         setQuestions(response.data.data);
       })
@@ -96,7 +96,7 @@ const Home = () => {
       <HeadContainer>
         <div className="header-content">
           Top Questions
-          <button onClick={() => selectMenuHandler("/questions/ask")}>
+          <button onClick={() => selectMenuHandler("questions/ask")}>
             Ask Question
           </button>
         </div>
