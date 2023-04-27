@@ -93,6 +93,7 @@ const HomeWeek = () => {
       .get(
         "http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/?tab=week"
       )
+
       .then((response) => {
         setQuestions(response.data);
       })

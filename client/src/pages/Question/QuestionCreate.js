@@ -81,6 +81,7 @@ const QuestionCreate = () => {
     loading,
     error,
     postData: sendPostData,
+
   } = usePostData(
     "http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/qusetions/ask"
   );

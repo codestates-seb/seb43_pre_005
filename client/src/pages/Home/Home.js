@@ -81,6 +81,7 @@ const Home = () => {
       .get(
         "http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/"
       )
+
       .then((response) => {
         setQuestions(response.data);
       })

@@ -181,7 +181,8 @@ function QuestionsRead() {
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/qsdummydata/${id}`)
+
+      .get(`http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/questions/${id}`)
       .then((response) => setData(response.data))
       .catch((error) => console.log(error));
   }, [id]);
@@ -189,7 +190,7 @@ function QuestionsRead() {
   const handleDelete = async () => {
     try {
       const response = await axios.delete(
-        `http://localhost:8080/questions/${id}`
+        `http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/questions/${id}`
       );
       if (response.status === 200) {
         navigate("/");
@@ -202,7 +203,9 @@ function QuestionsRead() {
   const handleAnswerDelete = async (questionId, answerId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:3001/questions/${questionId}/answers/${answerId}`
+
+        `http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/questions/${questionId}/answers/${answerId}`
+
       );
       if (response.status === 200) {
         navigate("/");
@@ -225,14 +228,14 @@ function QuestionsRead() {
   const handleButtonClick = async (e) => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/qsdummydata/${id}`
+        `http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/questions/${id}`
       );
       const data = response.data;
 
       data.answers.push(msg);
 
       const patchResponse = await axios.patch(
-        `http://localhost:3001/qsdummydata/${id}`,
+        `http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/questions/${id}`,
         {
           answers: data.answers,
         }
