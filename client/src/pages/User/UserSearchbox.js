@@ -71,7 +71,7 @@ const SearchBox = () => {
   };
 
   const { data, isLoading, error } = useDataFetch(
-    "http://localhost:3001/userdummydata"
+    "http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/users/group"
   );
 
   if (isLoading) return <div>Loading...</div>;
