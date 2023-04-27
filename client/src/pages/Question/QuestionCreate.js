@@ -75,15 +75,14 @@ const QuestionCreate = () => {
     title: "",
     content: "",
     tagIds: ["tag", "react"],
-    memberId: 33,
+    memberId: 1,
   });
   const {
     loading,
     error,
     postData: sendPostData,
-
   } = usePostData(
-    "http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/qusetions/ask"
+    "http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/qusetions/ask"
   );
 
   const navigate = useNavigate();
@@ -95,7 +94,7 @@ const QuestionCreate = () => {
       console.log("Post data sent:", data);
     });
     navigate(
-      "http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/"
+      "/"
     );
   };
 

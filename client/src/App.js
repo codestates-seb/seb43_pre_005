@@ -22,7 +22,7 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="/tab=week" element={<HomeWeek />}></Route>
         <Route path="/tab=month" element={<HomeMonth />}></Route>
-        <Route path="/tags" element={<Tags />}></Route>
+        <Route path="/stackOverflow/tags" element={<Tags />}></Route>
         <Route path="/users" element={<Users />}></Route>
         <Route path="/users/signup" element={<UserCreate />}></Route>
         <Route path="/users/login" element={<UserLogin />}></Route>

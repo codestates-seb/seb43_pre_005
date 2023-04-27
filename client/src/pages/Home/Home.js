@@ -78,12 +78,9 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get(
-        "http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/"
-      )
-
+      .get("http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions")
       .then((response) => {
-        setQuestions(response.data);
+        setQuestions(response.data.data);
       })
       .catch((error) => {
         console.error(error);
@@ -99,13 +96,7 @@ const Home = () => {
       <HeadContainer>
         <div className="header-content">
           Top Questions
-          <button
-            onClick={() =>
-              selectMenuHandler(
-                "http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/questions/ask"
-              )
-            }
-          >
+          <button onClick={() => selectMenuHandler("questions/ask")}>
             Ask Question
           </button>
         </div>
@@ -113,16 +104,14 @@ const Home = () => {
           <button>Hot</button>
           <button
             onClick={() => {
-              window.location.href =
-                "http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com?tab=week";
+              window.location.href = "?tab=week";
             }}
           >
             Week
           </button>
           <button
             onClick={() => {
-              window.location.href =
-                "http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/?tab=month";
+              window.location.href = "?tab=month";
             }}
           >
             Month
@@ -130,7 +119,8 @@ const Home = () => {
         </div>
 
         <div className="questions-box">
-          {questions.map((el) => (
+          {Array.isArray(questions) &&
+          questions.map((el) => (
             <Question key={el.id} question={el}></Question>
           ))}
         </div>
