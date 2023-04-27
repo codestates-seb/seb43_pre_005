@@ -81,7 +81,10 @@ const QuestionCreate = () => {
     loading,
     error,
     postData: sendPostData,
-  } = usePostData("http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/ask");
+
+  } = usePostData(
+    "/qusetions/ask"
+  );
 
   const navigate = useNavigate();
 
@@ -91,7 +94,9 @@ const QuestionCreate = () => {
     sendPostData(postData).then((data) => {
       console.log("Post data sent:", data);
     });
-    navigate("/");
+    navigate(
+      "/"
+    );
   };
 
   return (

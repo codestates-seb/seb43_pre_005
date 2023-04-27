@@ -153,7 +153,6 @@ const QuestionButtonDesign = styled(QuestionButton)`
 function QuestionsRead() {
   const { id } = useParams();
   const navigate = useNavigate(); // useNavigate hook 추가
-  const question = dummydata.find((q) => q.id === parseInt(id));
   //답변을 작성할 input에 들어갈 msg
   const [msg, setMsg] = useState("");
   //답변이 등록될 div
@@ -182,7 +181,8 @@ function QuestionsRead() {
   };
   useEffect(() => {
     axios
-      .get(`http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`)
+
+      .get(`/questions/${id}`)
       .then((response) => setData(response.data))
       .catch((error) => console.log(error));
   }, [id]);
@@ -190,7 +190,7 @@ function QuestionsRead() {
   const handleDelete = async () => {
     try {
       const response = await axios.delete(
-        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`
+        `/questions/${id}`
       );
       if (response.status === 200) {
         navigate("/");
@@ -203,7 +203,9 @@ function QuestionsRead() {
   const handleAnswerDelete = async (questionId, answerId) => {
     try {
       const response = await axios.delete(
-        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/answers/${answerId}`
+
+        `/questions/${questionId}/answers/${answerId}`
+
       );
       if (response.status === 200) {
         navigate("/");
@@ -226,14 +228,14 @@ function QuestionsRead() {
   const handleButtonClick = async (e) => {
     try {
       const response = await axios.get(
-        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`
+        `/questions/${id}`
       );
       const data = response.data;
 
       data.answers.push(msg);
 
       const patchResponse = await axios.patch(
-        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`,
+        `/questions/${id}`,
         {
           answers: data.answers,
         }
