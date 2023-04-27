@@ -44,7 +44,7 @@ const HeadContainer = styled.div`
   }
 `;
 const Tags = () => {
-  const [tags, setTags] = useState(tagdummyData);
+  const [tags, setTags] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [count, setCount] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
@@ -84,7 +84,7 @@ const Tags = () => {
       const inputValue = e.target.value;
       setInputValue(inputValue);
       // Get the filtered tags array
-      const filteredTags = tagdummyData.filter((tag) => {
+      const filteredTags = tags.filter((tag) => {
         const words = inputValue.toLowerCase().split(" ");
         return words.every((word) => {
           return tag.name.toLowerCase().includes(word);
@@ -98,7 +98,7 @@ const Tags = () => {
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       const fetchData = async () => {
-        const result = await axios.get("http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/tags");
+        const result = await axios.get("/tags");
         setTags(result.data);
       };
       fetchData();

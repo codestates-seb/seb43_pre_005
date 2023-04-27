@@ -54,9 +54,9 @@ const Questions = () => {
   const [questions, setQuestions] = useState([]);
   useEffect(() => {
     axios
-      .get("http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/questions")
+      .get("http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions")
       .then((response) => {
-        setQuestions(response.data);
+        setQuestions(response.data.data);
       })
       .catch((error) => {
         console.error(error);

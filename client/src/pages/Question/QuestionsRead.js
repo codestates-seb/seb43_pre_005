@@ -183,7 +183,7 @@ function QuestionsRead({ dummydata }) {
   };
   useEffect(() => {
     axios
-      .get(`http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/questions/${id}`)
+      .get(`http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`)
       .then((response) => setData(response.data))
       .catch((error) => console.log(error));
     console.log("get");
@@ -192,7 +192,7 @@ function QuestionsRead({ dummydata }) {
   const handleDelete = async () => {
     try {
       const response = await axios.delete(
-        `http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/questions/${id}`
+        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`
       );
       if (response.status === 200) {
         navigate("/");
@@ -205,7 +205,7 @@ function QuestionsRead({ dummydata }) {
   const handleAnswerDelete = async (questionId, answerId) => {
     try {
       const response = await axios.delete(
-        `http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/questions/${questionId}/answers/${answerId}`
+        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/answers/${answerId}`
       );
       if (response.status === 200) {
         navigate("/");
@@ -228,14 +228,14 @@ function QuestionsRead({ dummydata }) {
   const handleButtonClick = async (e) => {
     try {
       const response = await axios.get(
-        `http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/questions/${id}`
+        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`
       );
       const data = response.data;
 
       data.answers.push(msg);
 
       const patchResponse = await axios.patch(
-        `http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/questions/${id}`,
+        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`,
         {
           answers: data.answers,
         }

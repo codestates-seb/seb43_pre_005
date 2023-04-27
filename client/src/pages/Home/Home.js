@@ -78,9 +78,9 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get("http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com")
+      .get("/questions")
       .then((response) => {
-        setQuestions(response.data);
+        setQuestions(response.data.data);
       })
       .catch((error) => {
         console.error(error);
@@ -104,14 +104,14 @@ const Home = () => {
           <button>Hot</button>
           <button
             onClick={() => {
-              window.location.href = "/tab=week";
+              window.location.href = "?tab=week";
             }}
           >
             Week
           </button>
           <button
             onClick={() => {
-              window.location.href = "/tab=month";
+              window.location.href = "?tab=month";
             }}
           >
             Month
@@ -119,7 +119,8 @@ const Home = () => {
         </div>
 
         <div className="questions-box">
-          {questions.map((el) => (
+          {Array.isArray(questions) &&
+          questions.map((el) => (
             <Question key={el.id} question={el}></Question>
           ))}
         </div>

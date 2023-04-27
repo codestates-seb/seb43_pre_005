@@ -82,7 +82,7 @@ const HomeMonth = () => {
 
   useEffect(() => {
     axios
-      .get("http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/?tab=month")
+      .get("http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080?tab=month")
       .then((response) => {
         setQuestions(response.data);
       })
@@ -110,7 +110,7 @@ const HomeMonth = () => {
           </button>
           <button
             onClick={() => {
-              window.location.href = "/tab=week";
+              window.location.href = "?tab=week";
             }}
           >
             Week

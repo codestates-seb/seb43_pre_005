@@ -76,7 +76,7 @@ const QuestionCreate = () => {
     loading,
     error,
     postData: sendPostData,
-  } = usePostData("http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/questions/ask");
+  } = usePostData("http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/ask");
 
   const navigate = useNavigate();
 
