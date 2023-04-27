@@ -82,7 +82,7 @@ const HomeMonth = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080?tab=month")
+      .get("http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/?tab=month")
       .then((response) => {
         setQuestions(response.data);
       })
