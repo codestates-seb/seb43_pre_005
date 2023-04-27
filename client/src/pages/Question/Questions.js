@@ -54,6 +54,7 @@ const Questions = () => {
   const [questions, setQuestions] = useState([]);
   useEffect(() => {
     axios
+
       .get("http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/questions")
       .then((response) => {
         setQuestions(response.data);
@@ -74,7 +75,13 @@ const Questions = () => {
       <HeadContainer>
         <div className="header-content">
           All Questions
-          <button onClick={() => selectMenuHandler("/questions/ask")}>
+          <button
+            onClick={() =>
+              selectMenuHandler(
+                "http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/questions/ask"
+              )
+            }
+          >
             Ask Question
           </button>
         </div>

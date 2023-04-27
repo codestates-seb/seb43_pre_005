@@ -82,7 +82,9 @@ const HomeMonth = () => {
 
   useEffect(() => {
     axios
-      .get("http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/?tab=month")
+      .get(
+        "http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/?tab=month"
+      )
       .then((response) => {
         setQuestions(response.data);
       })
@@ -96,7 +98,13 @@ const HomeMonth = () => {
       <HeadContainer>
         <div className="header-content">
           Top Questions
-          <button onClick={() => selectMenuHandler("/questions/ask")}>
+          <button
+            onClick={() =>
+              selectMenuHandler(
+                "http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/questions/ask"
+              )
+            }
+          >
             Ask Question
           </button>
         </div>
@@ -110,7 +118,8 @@ const HomeMonth = () => {
           </button>
           <button
             onClick={() => {
-              window.location.href = "/tab=week";
+              window.location.href =
+                "http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/?tab=week";
             }}
           >
             Week

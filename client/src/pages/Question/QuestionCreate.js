@@ -71,12 +71,20 @@ const QuestionCreate = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [tag, setTag] = useState("");
-  const [postData, setPostData] = useState({ title: "", body: "" });
+  const [postData, setPostData] = useState({
+    title: "",
+    content: "",
+    tagIds: ["tag", "react"],
+    memberId: 33,
+  });
   const {
     loading,
     error,
     postData: sendPostData,
-  } = usePostData("http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/questions/ask");
+
+  } = usePostData(
+    "http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/qusetions/ask"
+  );
 
   const navigate = useNavigate();
 
@@ -86,7 +94,9 @@ const QuestionCreate = () => {
     sendPostData(postData).then((data) => {
       console.log("Post data sent:", data);
     });
-    navigate("/");
+    navigate(
+      "http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/"
+    );
   };
 
   return (

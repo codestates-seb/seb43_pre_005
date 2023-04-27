@@ -74,10 +74,9 @@ const Question = ({ question }) => {
 
   const navigate = useNavigate();
   function handleDummyClick(id) {
-    const newUrl = `/questions/${id}`; // 경로와 id 값을 조합하여 새로운 URL 생성
+    const newUrl = `http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/questions/${id}`; // 경로와 id 값을 조합하여 새로운 URL 생성
     navigate(newUrl); // useNavigate Hook을 사용하여 새로운 URL로 이동
   }
-
 
   // const handleOneClick = () => {
   //   navigate(`/questions/question_id`);
@@ -91,7 +90,6 @@ const Question = ({ question }) => {
         className="question-id"
         onClick={() => handleDummyClick(question.id)}
       >
-
         <div className="question-title">{title}</div>
         <div className="question-content">{content}</div>
         <div className="name-box">

@@ -90,7 +90,10 @@ const HomeWeek = () => {
 
   useEffect(() => {
     axios
-      .get("http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/?tab=week")
+      .get(
+        "http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/?tab=week"
+      )
+
       .then((response) => {
         setQuestions(response.data);
       })
@@ -104,14 +107,21 @@ const HomeWeek = () => {
       <HeadContainer>
         <div className="header-content">
           Top Questions
-          <button onClick={() => selectMenuHandler("/questions/ask")}>
+          <button
+            onClick={() =>
+              selectMenuHandler(
+                "http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/questions/ask"
+              )
+            }
+          >
             Ask Question
           </button>
         </div>
         <div className="button-box">
           <button
             onClick={() => {
-              window.location.href = "/";
+              window.location.href =
+                "http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/";
             }}
           >
             Hot
@@ -119,7 +129,8 @@ const HomeWeek = () => {
           <button>Week</button>
           <button
             onClick={() => {
-              window.location.href = "/tab=month";
+              window.location.href =
+                "http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/?tab=month";
             }}
           >
             Month

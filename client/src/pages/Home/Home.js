@@ -78,7 +78,10 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get("http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com")
+      .get(
+        "http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/"
+      )
+
       .then((response) => {
         setQuestions(response.data);
       })
@@ -96,7 +99,13 @@ const Home = () => {
       <HeadContainer>
         <div className="header-content">
           Top Questions
-          <button onClick={() => selectMenuHandler("/questions/ask")}>
+          <button
+            onClick={() =>
+              selectMenuHandler(
+                "http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/questions/ask"
+              )
+            }
+          >
             Ask Question
           </button>
         </div>
@@ -104,14 +113,16 @@ const Home = () => {
           <button>Hot</button>
           <button
             onClick={() => {
-              window.location.href = "/tab=week";
+              window.location.href =
+                "http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com?tab=week";
             }}
           >
             Week
           </button>
           <button
             onClick={() => {
-              window.location.href = "/tab=month";
+              window.location.href =
+                "http://seb-pre-project-005.s3-website.ap-northeast-2.amazonaws.com/?tab=month";
             }}
           >
             Month
