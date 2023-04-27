@@ -53,23 +53,23 @@ public class SecurityConfiguration3 {
                 .httpBasic().disable()
                 .apply(new CustomFilterConfigurer())
                 .and()
-                .authorizeHttpRequests(authorize->authorize
-                        .antMatchers(HttpMethod.DELETE, "/**/questions/**").hasRole("ADMIN")
-                        .antMatchers(HttpMethod.POST, "**/logout/**").hasRole("USER")
-                        .anyRequest().permitAll()
+                .authorizeHttpRequests()
+                .antMatchers("/**").permitAll()
+        ;
 
-                );
         return http.build();
     }
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PATCH", "DELETE"));
+        configuration.addAllowedOriginPattern("*");
+        configuration.addAllowedHeader("*");
+        configuration.addAllowedMethod("*");
+        configuration.setAllowCredentials(true);
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
-
         return source;
     }
 

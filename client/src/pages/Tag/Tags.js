@@ -44,7 +44,7 @@ const HeadContainer = styled.div`
   }
 `;
 const Tags = () => {
-  const [tags, setTags] = useState(null);
+  const [tags, setTags] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [count, setCount] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
@@ -98,8 +98,8 @@ const Tags = () => {
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       const fetchData = async () => {
-        const result = await axios.get("http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/stackOverflow/tags");
-        setTags(result.data.data);
+        const result = await axios.get("http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/stackOverflow/tags",{},{withCredentials:true});
+        setTags(result.data);
       };
       fetchData();
     }, 1000);
@@ -124,12 +124,12 @@ const Tags = () => {
           value={inputValue}
           autoFocus
         />
-        <div className="tag-container">
-          {Array.isArray(currentTags) &&
-          currentTags.map((el) => (
-            <Tag key={el.id} tag={el} />
-          ))}
-        </div>
+      {tags !== null && (
+                  <div className="tag-container">
+                    {Array.isArray(currentTags) &&
+                      currentTags.map((el) => <Tag key={el.id} tag={el} />)}
+                  </div>
+                )}
         <div>
           {tags.length > tagsPerPage && (
             <Pagination

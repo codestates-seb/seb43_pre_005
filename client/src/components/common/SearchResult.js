@@ -14,9 +14,7 @@ const SearchResult = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/search?page=${page}&word=${searchWord}`
-        );
+        const response = await axios.get(`http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/search?page=${page}&word=${searchWord}`,{},{withCredentials:true});
         setSearchResults(response.data);
       } catch (error) {
         console.error(error);
