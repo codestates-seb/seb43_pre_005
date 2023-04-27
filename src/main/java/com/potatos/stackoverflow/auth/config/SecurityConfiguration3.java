@@ -54,7 +54,8 @@ public class SecurityConfiguration3 {
                 .apply(new CustomFilterConfigurer())
                 .and()
                 .authorizeHttpRequests(authorize->authorize
-
+                        .antMatchers(HttpMethod.GET, "/**/users/**").hasRole("ADMIN")
+                        .antMatchers(HttpMethod.POST, "**/logout/**").hasRole("USER")
                         .anyRequest().permitAll()
 
                 );
@@ -84,7 +85,7 @@ public class SecurityConfiguration3 {
 
             //JwtAuthenticationFilter 생성하고 DI해주기
             JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenizer);  //
-            jwtAuthenticationFilter.setFilterProcessesUrl("/auth/login");
+            jwtAuthenticationFilter.setFilterProcessesUrl("/users/login");
             jwtAuthenticationFilter.setAuthenticationSuccessHandler(new MemberAuthenticationSuccessHandler());  //인증 성공시 핸들러 적용
             jwtAuthenticationFilter.setAuthenticationFailureHandler(new MemberAuthenticationFailureHandler());  // 인증 실패시 핸들러 적용
 

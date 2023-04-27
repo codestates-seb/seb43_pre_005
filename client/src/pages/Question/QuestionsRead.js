@@ -6,8 +6,6 @@ import QuestionButton from "./QuestionButton";
 import userimg from "../../assets/images/logo_notext.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import qsdummyData from "../../data/qsdummyData";
-import InputContent from "../../components/InputContent";
 
 const QuestionsReadDesign = styled.div`
   width: calc(100vw - 167px);
@@ -152,18 +150,18 @@ const QuestionButtonDesign = styled(QuestionButton)`
   grid-row: 1 / 2;
 `;
 
-function QuestionsRead({ dummydata }) {
+function QuestionsRead() {
   const { id } = useParams();
   const navigate = useNavigate(); // useNavigate hook 추가
-  const question = dummydata.find((q) => q.id === parseInt(id));
   //답변을 작성할 input에 들어갈 msg
   const [msg, setMsg] = useState("");
   //답변이 등록될 div
   const [content, setContent] = useState([]);
   const [data, setData] = useState([]);
+
   const [answerId, setAnswerId] = useState(1);
   const [edited, setEdited] = useState(false);
-  const [editInputValue, setEditInputValue] = useState(question.content);
+  const [editInputValue, setEditInputValue] = useState(data && data.content);
 
   const countUp = () => {
     setAnswerId(answerId + 1);
@@ -183,16 +181,15 @@ function QuestionsRead({ dummydata }) {
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/questions/${id}`)
+      .get(`http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`)
       .then((response) => setData(response.data))
       .catch((error) => console.log(error));
-    console.log("get");
-  }, []);
+  }, [id]);
   //질문삭제 부분 API
   const handleDelete = async () => {
     try {
       const response = await axios.delete(
-        `http://localhost:8080/questions/${id}`
+        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`
       );
       if (response.status === 200) {
         navigate("/");
@@ -205,7 +202,9 @@ function QuestionsRead({ dummydata }) {
   const handleAnswerDelete = async (questionId, answerId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:8080/questions/${questionId}/answers/${answerId}`
+
+        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/answers/${answerId}`
+
       );
       if (response.status === 200) {
         navigate("/");
@@ -228,14 +227,14 @@ function QuestionsRead({ dummydata }) {
   const handleButtonClick = async (e) => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/qsdummydata/${id}`
+        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`
       );
       const data = response.data;
 
       data.answers.push(msg);
 
       const patchResponse = await axios.patch(
-        `http://localhost:3001/qsdummydata/${id}`,
+        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`,
         {
           answers: data.answers,
         }
@@ -252,13 +251,13 @@ function QuestionsRead({ dummydata }) {
   return (
     <Layout>
       <QuestionsReadDesign>
-        <h2 className="questiontitle">{question.title}</h2>
+        <h2 className="questiontitle">{data && data.title}</h2>
         <div className="infobox">
           <div className="questioncreatedat">
-            Asked <span>{question.createdAt}</span>
+            Asked <span>{data && data.createdAt}</span>
           </div>
           <div className="questionlook">
-            Viewed <span>{question.look} times</span>
+            Viewed <span>{data && data.look} times</span>
           </div>
           <div class="spacer"></div>
           {edited ? (
@@ -287,8 +286,15 @@ function QuestionsRead({ dummydata }) {
           </Content>
           <div className="questiontags">tags</div>
           <img className="userimg" src={userimg} alt="userimg"></img>
-          <div className="questionperson">{question.person}</div>
+          <div className="questionperson">{data && data.person}</div>
           <div className="justgrid">ss</div>
+          <div>
+            {data &&
+              data.answers &&
+              data.answers.map((answer, index) => (
+                <div key={index}>{answer}</div>
+              ))}
+          </div>
         </div>
 
         {content.map((el, index) => (

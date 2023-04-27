@@ -71,12 +71,19 @@ const QuestionCreate = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [tag, setTag] = useState("");
-  const [postData, setPostData] = useState({ title: "", body: "" });
+  const [postData, setPostData] = useState({
+    title: "",
+    content: "",
+    tagIds: ["tag", "react"],
+    memberId: 1,
+  });
   const {
     loading,
     error,
     postData: sendPostData,
-  } = usePostData("http://localhost:3001/qsdummyData");
+  } = usePostData(
+    "http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/qusetions/ask"
+  );
 
   const navigate = useNavigate();
 
@@ -86,7 +93,9 @@ const QuestionCreate = () => {
     sendPostData(postData).then((data) => {
       console.log("Post data sent:", data);
     });
-    navigate("/");
+    navigate(
+      "/"
+    );
   };
 
   return (

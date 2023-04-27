@@ -48,16 +48,6 @@ const SearchBoxDesign = styled.div`
           text-decoration: none;
           font-size: 20px;
         }
-        .userlocation {
-          margin-right: 2px;
-        }
-        .userage {
-          margin-right: 2px;
-        }
-        .userlanguage {
-          font-size: 11px;
-          font-weight: 700;
-        }
       }
     }
   }
@@ -71,7 +61,7 @@ const SearchBox = () => {
   };
 
   const { data, isLoading, error } = useDataFetch(
-    "http://localhost:3001/userdummydata"
+    "http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/users/group"
   );
 
   if (isLoading) return <div>Loading...</div>;
@@ -105,10 +95,7 @@ const SearchBox = () => {
                     </Link>
                   </div>
                   <div className="userinfo">
-                    <div className="username">{ele.name}</div>
-                    <span className="userlocation">{ele.location}</span>
-                    <div className="userage">{ele.age}</div>
-                    <div className="userlanguage">{ele.language}</div>
+                    <div className="username">{ele.displayName}</div>
                   </div>
                 </div>
               );

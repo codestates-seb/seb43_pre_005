@@ -22,15 +22,12 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="/tab=week" element={<HomeWeek />}></Route>
         <Route path="/tab=month" element={<HomeMonth />}></Route>
-        <Route path="/tags" element={<Tags />}></Route>
+        <Route path="/stackOverflow/tags" element={<Tags />}></Route>
         <Route path="/users" element={<Users />}></Route>
         <Route path="/users/signup" element={<UserCreate />}></Route>
         <Route path="/users/login" element={<UserLogin />}></Route>
         <Route path="/questions" element={<Questions />}></Route>
-        <Route
-          path="/questions/:id"
-          element={<QuestionsRead dummydata={qsdummyData} />}
-        />
+        <Route path="/questions/:id" element={<QuestionsRead />} />
         <Route path="/questions/ask" element={<QuestionCreate />} />
 
         <Route path="/members" element={<MyPage />} />

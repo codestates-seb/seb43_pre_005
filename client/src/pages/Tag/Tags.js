@@ -44,7 +44,7 @@ const HeadContainer = styled.div`
   }
 `;
 const Tags = () => {
-  const [tags, setTags] = useState(tagdummyData);
+  const [tags, setTags] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [count, setCount] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
@@ -84,7 +84,7 @@ const Tags = () => {
       const inputValue = e.target.value;
       setInputValue(inputValue);
       // Get the filtered tags array
-      const filteredTags = tagdummyData.filter((tag) => {
+      const filteredTags = tags.filter((tag) => {
         const words = inputValue.toLowerCase().split(" ");
         return words.every((word) => {
           return tag.name.toLowerCase().includes(word);
@@ -98,8 +98,8 @@ const Tags = () => {
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       const fetchData = async () => {
-        const result = await axios.get("http://localhost:3001/tagdummydata");
-        setTags(result.data);
+        const result = await axios.get("http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/stackOverflow/tags");
+        setTags(result.data.data);
       };
       fetchData();
     }, 1000);
@@ -125,7 +125,8 @@ const Tags = () => {
           autoFocus
         />
         <div className="tag-container">
-          {currentTags.map((el) => (
+          {Array.isArray(currentTags) &&
+          currentTags.map((el) => (
             <Tag key={el.id} tag={el} />
           ))}
         </div>

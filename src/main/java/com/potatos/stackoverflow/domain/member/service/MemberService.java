@@ -1,10 +1,15 @@
 package com.potatos.stackoverflow.domain.member.service;
 
+import com.potatos.stackoverflow.domain.answer.entity.Answer;
+import com.potatos.stackoverflow.domain.answer.service.AnswerService;
 import com.potatos.stackoverflow.domain.member.dto.MembersPageDto;
+import com.potatos.stackoverflow.domain.member.dto.MyPageResponseDto;
 import com.potatos.stackoverflow.domain.member.repository.MemberRepository;
 import com.potatos.stackoverflow.domain.member.dto.MemberPostDto;
 import com.potatos.stackoverflow.domain.member.dto.MemberResponseDto;
 import com.potatos.stackoverflow.domain.member.entity.Member;
+import com.potatos.stackoverflow.domain.question.entity.Question;
+import com.potatos.stackoverflow.domain.question.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,13 +26,18 @@ import java.util.stream.Collectors;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final QuestionService questionService;
+    private final AnswerService answerService;
 
-    @Autowired
-    public MemberService(MemberRepository memberRepository) {
+
+    public MemberService(MemberRepository memberRepository, QuestionService questionService, AnswerService answerService) {
         this.memberRepository = memberRepository;
+        this.questionService = questionService;
+        this.answerService = answerService;
+
     }
 
-    public MemberResponseDto saveMember(MemberPostDto memberPostDto) {
+    public Member saveMember(MemberPostDto memberPostDto) {
         System.out.println("service > save member");
         Member member = Member.of(
                 memberPostDto.getDisplayName(),
@@ -35,18 +45,17 @@ public class MemberService {
                 memberPostDto.getPassword(),
                 memberPostDto.getMemberStatus());
 
-        memberRepository.save(member);
+        Member savedMember=memberRepository.save(member);
+        //Member savedMember=memberRepository.findById()
+
+        System.out.println("service > save member:"+savedMember.getId());
 
         //@@@@@@@@@@@@password 인코더 작업 필요함!!!!!!!!!!!!!
         //pwd:{bcrypt}$2a$10$SpS3yu/W/h75eSl6qZrSce593CuiJKmxNcWEdZJxlwBMFY/VNSblq
 
-        MemberResponseDto memberResponseDto = new MemberResponseDto(
-                member.getDisplayName(),
-                member.getEmail(),
-                member.getPassword(),
-                member.getMemberStatus().getStrStatus());
 
-        return memberResponseDto;
+
+        return savedMember;
     }
 
 
@@ -76,16 +85,18 @@ public class MemberService {
         return memberRepository.findById(memberId).orElseThrow();
     }
 
-    public MemberResponseDto findMemberOne(Long memberId) {
+    /*
+     * 마이페이지 조회
+     */
+    public MyPageResponseDto readMyPage(Long memberId) {
 
         Member member=memberRepository.findById(memberId).orElseThrow();
 
-        MemberResponseDto responseDto = new MemberResponseDto(
-                member.getDisplayName(),
-                member.getEmail(),
-                member.getPassword(),
-                member.getMemberStatus().getStrStatus()
-        );
+        List<Question> questionList=questionService.getQuestionListByMember(member);
+        int answerCount = answerService.getAnswersCountByMemberId(member.getId());
+
+        MyPageResponseDto responseDto=MyPageResponseDto.of(member.getDisplayName(),member.getTitle(), member.getIntroduce(),
+                member.getEmail(),questionList, answerCount);
 
         return responseDto;
     }
@@ -95,5 +106,12 @@ public class MemberService {
         System.out.println("service > delete member");
 
         memberRepository.deleteById(memberId);
+    }
+
+    public void logoutMember(long memberId) {
+        System.out.println("service > logout");
+
+        System.out.println("뭔동작하냐 uesrId:"+memberId);
+
     }
 }
