@@ -54,7 +54,7 @@ public class QuestionService {
 
         List<Question> questionList = questionRepository.findAll();
 
-        PageRequest pageRequest = PageRequest.of(page, size, Sort.by("id").descending());
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by("questionId").descending());
 
         return questionRepository.findAll(pageRequest);
     }
