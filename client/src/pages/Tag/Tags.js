@@ -44,7 +44,7 @@ const HeadContainer = styled.div`
   }
 `;
 const Tags = () => {
-  const [tags, setTags] = useState("");
+  const [tags, setTags] = useState(null);
   const [inputValue, setInputValue] = useState("");
   const [count, setCount] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
@@ -60,7 +60,7 @@ const Tags = () => {
   const indexOfFirstTag = indexOfLastTag - tagsPerPage;
 
   // Get the tags for the current page
-  const currentTags = tags.slice(indexOfFirstTag, indexOfLastTag);
+  const currentTags = tags.length > 0 ? tags.slice(indexOfFirstTag, indexOfLastTag) : [];
 
   // Change page
   const paginate = (pageNumber) => {

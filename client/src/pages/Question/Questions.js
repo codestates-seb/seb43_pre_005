@@ -74,7 +74,7 @@ const Questions = () => {
       <HeadContainer>
         <div className="header-content">
           All Questions
-          <button onClick={() => selectMenuHandler("/ask")}>
+          <button onClick={() => selectMenuHandler("/qustions/ask")}>
             Ask Question
           </button>
         </div>

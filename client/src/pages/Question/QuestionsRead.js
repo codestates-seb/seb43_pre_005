@@ -203,7 +203,7 @@ function QuestionsRead() {
     try {
       const response = await axios.delete(
 
-        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/answers/${answerId}`
+        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}/answers/${answerId}`
 
       );
       if (response.status === 200) {

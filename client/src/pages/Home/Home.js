@@ -96,7 +96,7 @@ const Home = () => {
       <HeadContainer>
         <div className="header-content">
           Top Questions
-          <button onClick={() => selectMenuHandler("questions/ask")}>
+          <button onClick={() => selectMenuHandler("/questions/ask")}>
             Ask Question
           </button>
         </div>
