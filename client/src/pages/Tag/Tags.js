@@ -44,7 +44,7 @@ const HeadContainer = styled.div`
   }
 `;
 const Tags = () => {
-  const [tags, setTags] = useState("");
+  const [tags, setTags] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [count, setCount] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);

@@ -5,8 +5,8 @@ import { IoEarth } from "react-icons/io5";
 const Menu = {
   home: "/",
   questions: "/questions",
-  tags: "/tags",
-  users: "/users",
+  tags: "/stackOverflow/tags",
+  users: "/users/group",
   month: "/tab=month",
   week: "/tab=week",
 };

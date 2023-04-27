@@ -15,7 +15,7 @@ const SearchResult = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/search?page=${page}&word=${searchWord}`
+          `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/search?page=${page}&word=${searchWord}`
         );
         setSearchResults(response.data);
       } catch (error) {
