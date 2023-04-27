@@ -107,4 +107,11 @@ public class MemberService {
 
         memberRepository.deleteById(memberId);
     }
+
+    public void logoutMember(long memberId) {
+        System.out.println("service > logout");
+
+        System.out.println("뭔동작하냐 uesrId:"+memberId);
+
+    }
 }

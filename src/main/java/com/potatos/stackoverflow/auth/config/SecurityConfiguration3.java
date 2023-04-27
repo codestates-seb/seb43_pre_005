@@ -54,7 +54,8 @@ public class SecurityConfiguration3 {
                 .apply(new CustomFilterConfigurer())
                 .and()
                 .authorizeHttpRequests(authorize->authorize
-
+                        .antMatchers(HttpMethod.GET, "/**/users/**").hasRole("ADMIN")
+                        .antMatchers(HttpMethod.POST, "**/logout/**").hasRole("USER")
                         .anyRequest().permitAll()
 
                 );

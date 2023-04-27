@@ -7,7 +7,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update # create 일때   sql.init.mode 바꾸기 (하단에 적어둠)
     show-sql: true
     database: mysql
     properties:
@@ -19,7 +19,7 @@ spring:
 
   sql:
     init:
-      mode: always
+      mode: never # jpa.hibernate.ddl-auto : create일때    never -> always 로 바꾸기
       data-locations: classpath:data-init.sql
       #schema-locations: classpath:schema-init.sql
 
@@ -34,24 +34,25 @@ spring:
               - email # resource owner의 이메일 정보
               - profile # resource owner의 프로필 정보
 
-  logging:
-    level:
-      org:
-        springframework:
-          orm:
-            jpa: DEBUG
-  server:
-    servlet:
-      encoding:
-        force-response: true
-  mail:
-    address:
-      admin: admin@gmail.com
-  jwt:
-    key:
-      secret: ${JWT_SECRET_KEY}               # 민감한 정보는 시스템 환경 변수에서 로드한다.
-    access-token-expiration-minutes: 30
-    refresh-token-expiration-minutes: 420
+logging:
+  level:
+    org:
+      springframework:
+        orm:
+          jpa: DEBUG
+server:
+  servlet:
+    encoding:
+      force-response: true
+
+mail:
+  address:
+    admin: admin@gmail.com
+jwt:
+  key:
+    secret: ${JWT_SECRET_KEY}               # 민감한 정보는 시스템 환경 변수에서 로드한다.
+  access-token-expiration-minutes: 30
+  refresh-token-expiration-minutes: 420
 
 
 
@@ -61,6 +62,7 @@ spring:
 # update : Sessionfactory가 시작될 때 엔티티 클래스(도메인 클래스)와 DB에 생성된 스키마 구조를 비교해서 DB쪽에 생성이 안된 테이블 또는 칼럼이 있다면 DB 스키마를 변경해서 생성시키지만 기 생성된 스키마 구조를 삭제하지는 않는다.
 # validate : Sessionfactory가 시작될 때 엔티티 클래스(도메인 클래스)와 DB에 생성된 스키마 구조를 비교해 같은지 확인만 할 뿐 DB 스키마 구조는 변경하지 않고 만약 다르다면 예외를 발생시킨다.
 #(validate -> schema.sql 검사)
+# update : db 컬럼이 추가되는 수정은 업데이트가 안된다.
 
 # createDatabaseIfNotExist : 데이터베이스가 존재하지 않으면 자동으로 생성
 # useUnicode : 유니코드 사용 여부 설정

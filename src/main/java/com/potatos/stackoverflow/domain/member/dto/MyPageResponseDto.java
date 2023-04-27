@@ -21,7 +21,6 @@ public class MyPageResponseDto {
     private int answersCount;
 
     List<Question> questionList;
-    List<Answer> answerList;
 
     public static MyPageResponseDto of(String displayName, String title, String introduce, String email,
                                        List<Question> questionList, int answersCount) {

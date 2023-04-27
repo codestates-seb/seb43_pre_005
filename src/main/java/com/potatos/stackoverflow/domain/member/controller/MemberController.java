@@ -63,4 +63,17 @@ public class MemberController {
 
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    //로그아웃을 여기 컨트롤러에 넣는게 맞는가?
+    @PostMapping("/logout/{userId}")
+    public ResponseEntity logOutMember(@PathVariable long userId) {
+
+        System.out.println("controller > logout member");
+
+        memberService.logoutMember(userId);
+
+
+        return new ResponseEntity(HttpStatus.OK);
+
+    }
 }
