@@ -28,6 +28,7 @@ public class MemberController {
     @PostMapping("/signup")
     public ResponseEntity createMember(@RequestBody MemberPostDto memberPostDto){
 
+        System.out.println("controller > create member");
 
         Member member=memberService.saveMember(memberPostDto);
         URI location = UriCreator.createUri("/users", member.getId());

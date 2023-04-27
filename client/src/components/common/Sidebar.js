@@ -2,13 +2,14 @@ import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { IoEarth } from "react-icons/io5";
 
-export const Menu = {
+const Menu = {
   home: "/",
   questions: "/questions",
   tags: "/tags",
   users: "/users",
+  month: "/tab=month",
+  week: "/tab=week",
 };
-
 const LeftSidebar = styled.nav`
   padding-inline-start: 1px;
   box-sizing: border-box;
@@ -40,7 +41,7 @@ const LeftSidebar = styled.nav`
   }
 `;
 
-const Sidebar = () => {
+export const Sidebar = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const currentTab = pathname;
@@ -53,26 +54,36 @@ const Sidebar = () => {
     <LeftSidebar>
       <ul className="sidebar-container">
         <li
-          className={currentTab === Menu.home ? "sidemenu-clicked" : ""}
+          className={
+            currentTab === Menu.home ||
+            currentTab === Menu.month ||
+            currentTab === Menu.week
+              ? "sidemenu-clicked"
+              : ""
+          }
           onClick={() => selectMenuHandler(Menu.home)}
         >
           <span> Home</span>
         </li>
         <li
-          className={currentTab === Menu.questions ? "sidemenu-clicked" : ""}
+          className={
+            currentTab.startsWith(Menu.questions) ? "sidemenu-clicked" : ""
+          }
           onClick={() => selectMenuHandler(Menu.questions)}
         >
           <span>Question</span>
           <IoEarth />
         </li>
         <li
-          className={currentTab === Menu.tags ? "sidemenu-clicked" : ""}
+          className={currentTab.startsWith(Menu.tags) ? "sidemenu-clicked" : ""}
           onClick={() => selectMenuHandler(Menu.tags)}
         >
           <span>Tags</span>
         </li>
         <li
-          className={currentTab === Menu.users ? "sidemenu-clicked" : ""}
+          className={
+            currentTab.startsWith(Menu.users) ? "sidemenu-clicked" : ""
+          }
           onClick={() => selectMenuHandler(Menu.users)}
         >
           <span>Users</span>
