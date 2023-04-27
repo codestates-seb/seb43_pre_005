@@ -181,7 +181,7 @@ function QuestionsRead() {
   };
   useEffect(() => {
     axios
-      .get(`http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`)
+      .get(`http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`)
       .then((response) => setData(response.data))
       .catch((error) => console.log(error));
   }, [id]);
@@ -189,7 +189,7 @@ function QuestionsRead() {
   const handleDelete = async () => {
     try {
       const response = await axios.delete(
-        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`
+        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`
       );
       if (response.status === 200) {
         navigate("/");
@@ -203,7 +203,7 @@ function QuestionsRead() {
     try {
       const response = await axios.delete(
 
-        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/answers/${answerId}`
+        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}/answers/${answerId}`
 
       );
       if (response.status === 200) {
@@ -227,14 +227,14 @@ function QuestionsRead() {
   const handleButtonClick = async (e) => {
     try {
       const response = await axios.get(
-        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`
+        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`
       );
       const data = response.data;
 
       data.answers.push(msg);
 
       const patchResponse = await axios.patch(
-        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
+        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`,
         {
           answers: data.answers,
         }

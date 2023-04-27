@@ -74,7 +74,7 @@ const Question = ({ question }) => {
 
   const navigate = useNavigate();
   function handleDummyClick(id) {
-    const newUrl = `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`; // 경로와 id 값을 조합하여 새로운 URL 생성
+    const newUrl = `/questions/${id}`; // 경로와 id 값을 조합하여 새로운 URL 생성
     navigate(newUrl); // useNavigate Hook을 사용하여 새로운 URL로 이동
   }
 

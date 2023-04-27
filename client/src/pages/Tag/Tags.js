@@ -60,7 +60,7 @@ const Tags = () => {
   const indexOfFirstTag = indexOfLastTag - tagsPerPage;
 
   // Get the tags for the current page
-  const currentTags = tags.slice(indexOfFirstTag, indexOfLastTag);
+  const currentTags = tags.length > 0 ? tags.slice(indexOfFirstTag, indexOfLastTag) : [];
 
   // Change page
   const paginate = (pageNumber) => {
