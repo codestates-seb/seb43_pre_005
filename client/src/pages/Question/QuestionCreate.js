@@ -74,7 +74,7 @@ const QuestionCreate = () => {
   const [postData, setPostData] = useState({
     title: "",
     content: "",
-    tagIds: ["tag", "react"],
+    tagIds: [1, 2],
     memberId: 1,
   });
   const {
@@ -82,7 +82,7 @@ const QuestionCreate = () => {
     error,
     postData: sendPostData,
   } = usePostData(
-    "http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/qusetions/ask"
+    "http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/ask"
   );
 
   const navigate = useNavigate();

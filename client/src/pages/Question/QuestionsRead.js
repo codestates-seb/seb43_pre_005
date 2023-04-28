@@ -151,7 +151,7 @@ const QuestionButtonDesign = styled(QuestionButton)`
 `;
 
 function QuestionsRead() {
-  const { id } = useParams();
+  const { questionId } = useParams();
   const navigate = useNavigate(); // useNavigate hook 추가
   //답변을 작성할 input에 들어갈 msg
   const [msg, setMsg] = useState("");
@@ -179,17 +179,21 @@ function QuestionsRead() {
   const handleEditValue = (value) => {
     setEditInputValue(value);
   };
+
   useEffect(() => {
-    axios
-      .get(`http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`)
-      .then((response) => setData(response.data))
-      .catch((error) => console.log(error));
-  }, [id]);
+    if (questionId) {
+      axios
+        .get(`http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,{},{withCredentials:true})
+        .then((response) => setData(response.data))
+        .catch((error) => console.log(error));
+    }
+  }, [questionId]);
+
   //질문삭제 부분 API
   const handleDelete = async () => {
     try {
       const response = await axios.delete(
-        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`
+        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,{},{withCredentials:true}
       );
       if (response.status === 200) {
         navigate("/");
@@ -203,7 +207,7 @@ function QuestionsRead() {
     try {
       const response = await axios.delete(
 
-        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}/answers/${answerId}`
+        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/answers/${answerId}`,{},{withCredentials:true}
 
       );
       if (response.status === 200) {
@@ -227,14 +231,14 @@ function QuestionsRead() {
   const handleButtonClick = async (e) => {
     try {
       const response = await axios.get(
-        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`
+        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,{},{withCredentials:true}
       );
       const data = response.data;
 
       data.answers.push(msg);
 
       const patchResponse = await axios.patch(
-        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`,
+        `http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,{},{withCredentials:true},
         {
           answers: data.answers,
         }
@@ -298,9 +302,9 @@ function QuestionsRead() {
         </div>
 
         {content.map((el, index) => (
-          <div className="questionanswer" id={id}>
+          <div className="questionanswer" questionId={questionId}>
             {el}
-            <button onClick={() => handleAnswerDelete(id, index)}>
+            <button onClick={() => handleAnswerDelete(questionId, index)}>
               {index}
               delete
             </button>

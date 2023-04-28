@@ -54,7 +54,7 @@ const Questions = () => {
   const [questions, setQuestions] = useState([]);
   useEffect(() => {
     axios
-      .get("http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions")
+      .get("http://ec2-3-34-134-67.ap-northeast-2.compute.amazonaws.com:8080/questions",{},{withCredentials:true})
       .then((response) => {
         setQuestions(response.data.data);
       })
